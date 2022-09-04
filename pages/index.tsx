@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import styled from "styled-components";
 
 const Container = styled.div`
-  color: red;
+
 `;
 
 const Home: NextPage = () => {
