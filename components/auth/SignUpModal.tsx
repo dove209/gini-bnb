@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import palette from '../../styles/palette';
 
+import { yearList, monthList, dayList } from '../../lib/staticData';
 import CloseXIcon from '../../public/static/svg/modal/modal_close_x_icon.svg';
 import MaillIcon from '../../public/static/svg/auth/mail.svg';
 import PersonIcon from '../../public/static/svg/auth/Person.svg';
@@ -10,9 +11,9 @@ import ClosedEyeIcon from '../../public/static/svg/auth/closed_eye.svg';
 
 import Input from '../common/Input';
 import Selector from '../common/Selector';
+import Button from '../common/Button';
 
-import { yearList, monthList, dayList } from '../../lib/staticData';
-
+import { signupAPI } from '../../lib/api/auth';
 
 const Container = styled.div`
     width: 568px;
@@ -54,6 +55,12 @@ const Container = styled.div`
       .selector + .selector {
         margin-left: 16px;
       }
+    }
+
+    .sign-up-submit-button-wrapper {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid ${palette.gray_eb}
     }
 `;
 
@@ -97,12 +104,31 @@ const SignUpModal: React.FC = () => {
     setBirthYear(event.target.value);
   }
   const onChangeBirthMonth = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setBirthYear(event.target.value);
+    setBirthMonth(event.target.value);
   }
   const onChangeBirthDay = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setBirthYear(event.target.value);
+    setBirthDay(event.target.value);
   }
 
+  // 회원가입 폼 제출하기
+  const onSubmitSignUp = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    try {
+      const signUpBody = {
+        email,
+        lastname,
+        firstname,
+        password,
+        birthday: new Date(`${birthYear}-${birthMonth!.replace('월','')}-${birthDay}`).toISOString()
+      }
+      const { data } = await signupAPI(signUpBody)
+      console.log(data)
+
+    } catch (error) {
+      console.log(error)
+    }
+
+
+  }
 
   return (
     <Container>
@@ -160,6 +186,10 @@ const SignUpModal: React.FC = () => {
             onChange={onChangeBirthDay}
           />
         </div>
+      </div>
+
+      <div className="sign-up-submit-button-wrapper">
+        <Button type='submit' onClick={onSubmitSignUp}>가입하기</Button>
       </div>
 
       </Container>

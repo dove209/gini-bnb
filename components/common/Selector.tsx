@@ -15,7 +15,7 @@ const Container = styled.div`
         border-radius: 4px;
         outline: none;
         -webkit-appearance: none;
-        background: url('/static/svg/common/selector/selector_down_arro.svg') no-repeat right 11px center;
+        background: url('/static/svg/common/selector/selector_down_arrow.svg') no-repeat right 11px center;
         font-size: 16px;
 
         &:focus {

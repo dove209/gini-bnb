@@ -47,10 +47,6 @@ const useModal = () => {
       }
     }, []);
 
-    useEffect(() => {
-      console.log(mounted);
-    }, [mounted]);
-
     if (ref.current && mounted && modalOpened) {
       return createPortal(
         <Container>
