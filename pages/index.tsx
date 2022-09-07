@@ -1,12 +1,13 @@
 import type { NextPage } from "next";
-import styled from "styled-components";
-
-const Container = styled.div`
-
-`;
+import React, { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 const Home: NextPage = () => {
-  return <Container>hello next 한녕 코딩</Container>;
+  const [test, setTest] = useState('test');
+  const { data: session } = useSession();
+  console.log(session)
+
+  return <div>hello next 안녕 코딩{test}</div>;
 };
 
 export default Home;

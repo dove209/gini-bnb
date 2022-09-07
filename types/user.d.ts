@@ -8,3 +8,5 @@ export type StoredUserType = {
     birthday: string;
     profileImage: string;
 }
+
+export type UserType = Omit<StoredUserType, 'password'> // 'password만 제거한 타입'

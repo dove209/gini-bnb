@@ -8,7 +8,7 @@ import { StoredUserType } from "../../../types/user";
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
         const { email, firstname, lastname, password, birthday } = req.body;
-        
+
         if (!email || !firstname || !lastname || !password || !birthday) {
             res.statusCode = 400;
             return res.send('필수 데이터가 없습니다.')
@@ -47,6 +47,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             "Set-Cookie",
             `access_token=${token}; path=/; expires=${new Date(Date.now() + 60 * 60 * 24 * 1000 * 3).toISOString()}; httponly`
         ); //3일 만료
+
+
+        const newUserWithoutPassword: Partial<Pick<StoredUserType, 'password'>> = newUser; // StoredUserType의 Password 속성을 Partial로 만듬
+
+        delete newUserWithoutPassword.password;
 
         return res.status(200).send(newUser)
     }

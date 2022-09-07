@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { AxiosError } from 'axios';
 import styled from 'styled-components'
 import palette from '../../styles/palette';
 
@@ -14,6 +15,8 @@ import Selector from '../common/Selector';
 import Button from '../common/Button';
 
 import { signupAPI } from '../../lib/api/auth';
+import { signIn } from 'next-auth/react';
+
 
 const Container = styled.div`
     width: 568px;
@@ -64,8 +67,12 @@ const Container = styled.div`
     }
 `;
 
+interface IProps {
+  closeModal: () => void;
+}
 
-const SignUpModal: React.FC = () => {
+const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
+
   const [email, setEmail] = useState('');
   const [lastname, setLastname] = useState('');
   const [firstname, setFirstname] = useState('');
@@ -75,7 +82,6 @@ const SignUpModal: React.FC = () => {
   const [birthYear, setBirthYear] = useState<string | undefined>();
   const [birthMonth, setBirthMonth] = useState<string | undefined>();
   const [birthDay, setBirthDay] = useState<string | undefined>();
-
 
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,6 +118,8 @@ const SignUpModal: React.FC = () => {
 
   // 회원가입 폼 제출하기
   const onSubmitSignUp = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
     try {
       const signUpBody = {
         email,
@@ -121,18 +129,21 @@ const SignUpModal: React.FC = () => {
         birthday: new Date(`${birthYear}-${birthMonth!.replace('월','')}-${birthDay}`).toISOString()
       }
       const { data } = await signupAPI(signUpBody)
-      console.log(data)
-
+      if (data) { 
+        alert('회원 가입이 완료 되었습니다.');
+        closeModal();
+        await signIn('credentials', { email, password })
+      }
     } catch (error) {
-      console.log(error)
+      if (error instanceof AxiosError) {
+        console.log(error.response?.data)
+      }
     }
-
-
   }
 
   return (
     <Container>
-      <CloseXIcon className={'modal-close-x-icon'} />
+      <CloseXIcon className={'modal-close-x-icon'} onClick={closeModal}/>
       <div className="input-wrapper">
         <Input placeholder='이메일 주소' name='email' type={'email'} icon={<MaillIcon />} value={email} onChange={onChangeEmail} />
       </div>
