@@ -151,10 +151,9 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
       birthMonth: '',
       birthDay: '',
     },
-    onSubmit: values => {
+    onSubmit: async (values) => {
       try {
-        (async () => {
-          const { email, name, password, birthYear, birthMonth, birthDay } = values;
+        const { email, name, password, birthYear, birthMonth, birthDay } = values;
           const signUpBody = {
             email,
             name,
@@ -170,7 +169,6 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
             })
             closeModal();
           }
-        })()
       } catch (error) {
         if (error instanceof AxiosError) {
           console.log(error.response?.data)
