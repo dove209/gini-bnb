@@ -8,12 +8,7 @@ import { StoredUserType } from "../../../types/user";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
-        const { email, firstname, lastname, password, birthday } = req.body;
-
-        if (!email || !firstname || !lastname || !password || !birthday) {
-            res.statusCode = 400;
-            return res.send('필수 데이터가 없습니다.')
-        }
+        const { email, name, password, birthday } = req.body;
 
         const userExis = Data.user.existEmail({ email });
         if (userExis) {
@@ -28,8 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const newUser: StoredUserType = {
             id: userId,
             email,
-            firstname,
-            lastname,
+            name,
             password: hashedPassword,
             birthday,
             profileImage: '/static/image/user/default_user_profile_image.jpg'

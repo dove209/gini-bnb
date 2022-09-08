@@ -4,8 +4,7 @@ import { UserType } from '../../types/user'
 // 회원가입 body
 interface SignUpAPIBody {
     email: string;
-    firstname: string;
-    lastname: string;
+    name: string;
     password: string;
     birthday: string;
 }

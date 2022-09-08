@@ -10,9 +10,9 @@ import PersonIcon from '../../public/static/svg/auth/Person.svg';
 import OpenedEyeIcon from '../../public/static/svg/auth/opened_eye.svg';
 import ClosedEyeIcon from '../../public/static/svg/auth/closed_eye.svg';
 
-import Input from '../common/Input';
-import Selector from '../common/Selector';
 import Button from '../common/Button';
+
+import { useFormik } from 'formik';
 
 import { signupAPI } from '../../lib/api/auth';
 import { signIn } from 'next-auth/react';
@@ -20,15 +20,21 @@ import { signIn } from 'next-auth/react';
 
 const Container = styled.div`
     width: 568px;
-    height: 614px;
     padding: 32px;
     background-color: white;
     z-index: 11;
-
-    .modal-close-x-icon {
-      cursor: pointer;
-      display: block;
-      margin: 0 0 40px auto;
+    .header {
+      height: 32px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      h1 {
+        font-size: 18px;
+        font-weight:bold;
+      }
+      .modal-close-x-icon {
+        cursor: pointer;
+      }
     }
 
     .input-wrapper {
@@ -67,145 +73,201 @@ const Container = styled.div`
     }
 `;
 
+
+const InputWrapper = styled.div<{ isIcon?: boolean }>`
+  position: relative;
+      height: 46px;
+      margin-bottom: 16px;
+      input {
+        width: 100%;
+        height: 100%;
+        padding: ${({ isIcon }) => isIcon ? '0 44px 0 11px' : '0 11px'};
+        border: 1px solid ${palette.gray_eb};
+        border-radius: 4px;
+        font-size: 16px;
+        outline: none;
+        ::placeholder {
+            color: ${palette.gray_76};
+        }
+        &:focus {
+            border-color: ${palette.dark_cyan} !important
+        }
+      }
+      svg {
+        position: absolute;
+        top: 50%;
+        right: 11px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        width: 22px;
+      }
+`
+
+const SelectorWrapper = styled.div`
+    width: 100%;
+    height: 46px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    select {
+      flex: 1;
+      background-color: white;
+      border: 1px solid ${palette.gray_ed};
+      padding: 0 11px;
+      border-radius: 4px;
+      outline: none;
+      -webkit-appearance: none;
+      background: url('/static/svg/common/selector/selector_down_arrow.svg') no-repeat right 11px center;
+      font-size: 16px;
+      &:focus {
+          border-color: ${palette.dark_cyan};
+      }
+    }
+    select + select {
+      margin-left: 16px;
+    }
+`
+
+
 interface IProps {
   closeModal: () => void;
 }
 
 const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
-
-  const [email, setEmail] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [password, setPassword] = useState('');
-  const [hidePassword, setHidePassword] = useState(true);
-
-  const [birthYear, setBirthYear] = useState<string | undefined>();
-  const [birthMonth, setBirthMonth] = useState<string | undefined>();
-  const [birthDay, setBirthDay] = useState<string | undefined>();
-
-
-  const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  }
-
-  const onChangeLastname = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLastname(event.target.value);
-  }
-
-  const onChangeFirstname = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFirstname(event.target.value);
-  }
-
-  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  }
+  const [hidePassword, setHidePassword] = useState(true);  
 
   // 비밀번호 숨김 토글하기
   const toggleHidePassword = () => {
     setHidePassword((prevState) => !prevState)
   }
 
-  // 생년월일 변경 시
-  const onChangeBirthYear = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setBirthYear(event.target.value);
-  }
-  const onChangeBirthMonth = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setBirthMonth(event.target.value);
-  }
-  const onChangeBirthDay = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setBirthDay(event.target.value);
-  }
 
-  // 회원가입 폼 제출하기
-  const onSubmitSignUp = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    try {
-      const signUpBody = {
-        email,
-        lastname,
-        firstname,
-        password,
-        birthday: new Date(`${birthYear}-${birthMonth!.replace('월','')}-${birthDay}`).toISOString()
-      }
-      const { data } = await signupAPI(signUpBody)
-      if (data) { 
-        alert('회원 가입이 완료 되었습니다.');
-        await signIn('credentials', { 
-          id: data.id,
-          email: data.email,
-        })
-        closeModal();
-      }
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error.response?.data)
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      name: '',
+      password: '',
+      birthYear: '',
+      birthMonth: '',
+      birthDay: '',
+    },
+    onSubmit: values => {
+      try {
+        (async () => {
+          const { email, name, password, birthYear, birthMonth, birthDay } = values;
+          const signUpBody = {
+            email,
+            name,
+            password,
+            birthday: new Date(`${birthYear}-${birthMonth!.replace('월', '')}-${birthDay}`).toISOString()
+          }
+          const { data } = await signupAPI(signUpBody)
+          if (data) {
+            alert('회원 가입이 완료 되었습니다.');
+            await signIn('credentials', {
+              id: data.id,
+              email: data.email,
+            })
+            closeModal();
+          }
+        })()
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          console.log(error.response?.data)
+        }
       }
     }
-  }
+  })
+
 
   return (
     <Container>
-      <CloseXIcon className={'modal-close-x-icon'} onClick={closeModal}/>
-      <div className="input-wrapper">
-        <Input placeholder='이메일 주소' name='email' type={'email'} icon={<MaillIcon />} value={email} onChange={onChangeEmail} />
+      <div className="header">
+        <h1>회원 가입</h1>
+        <CloseXIcon className={'modal-close-x-icon'} onClick={closeModal} />
       </div>
-
-      <div className="input-wrapper">
-        <Input placeholder='이름(예: 길동)' icon={<PersonIcon />} value={lastname} onChange={onChangeLastname} />
-      </div>
-
-      <div className="input-wrapper">
-        <Input placeholder='성(예: 홍)' icon={<PersonIcon />} value={firstname} onChange={onChangeFirstname} />
-      </div>
-
-      <div className="input-wrapper sign-up-password-input-wrapper">
-        <Input 
-          placeholder='비밀번호 설정하기'
-          type={hidePassword ? 'password' : 'text'}
-          icon={ hidePassword ? <OpenedEyeIcon onClick={toggleHidePassword} /> : <ClosedEyeIcon onClick={toggleHidePassword} />}
-          value={password}
-          onChange={onChangePassword}
-        />  
-      </div>
-
-      <p className="sign-up-birthday-label">생일</p>
-      
-
-      <div className="sign-up-birthday-selectors-wrapper">
-        <div className="selector">
-          <Selector 
-            options={yearList}
-            disabledOptions={['년']}
-            defaultValue='년'
-            value={birthYear}
-            onChange={onChangeBirthYear}
+      <form onSubmit={formik.handleSubmit}>
+        <InputWrapper isIcon={true}>
+          <input
+            placeholder='이메일 주소'
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
           />
-        </div>
-        <div className="selector">
-          <Selector 
-            options={monthList}
-            disabledOptions={['월']}
-            defaultValue='월'
-            value={birthMonth}
-            onChange={onChangeBirthMonth}
-          />
-        </div>
-        <div className="selector">
-          <Selector 
-            options={dayList}
-            disabledOptions={['일']}
-            defaultValue='일'
-            value={birthDay}
-            onChange={onChangeBirthDay}
-          />
-        </div>
-      </div>
+          <MaillIcon />
+        </InputWrapper>
 
-      <div className="sign-up-submit-button-wrapper">
-        <Button type='submit' onClick={onSubmitSignUp}>가입하기</Button>
-      </div>
+        <InputWrapper isIcon={true}>
+          <input
+            placeholder='이름'
+            name="name"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+          />
+          <PersonIcon />
+        </InputWrapper>
 
-      </Container>
+        <InputWrapper isIcon={true}>
+          <input
+            placeholder='비밀번호 설정'
+            name="password"
+            type={hidePassword ? 'password' : 'text'}
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
+          {hidePassword ? <OpenedEyeIcon onClick={toggleHidePassword} /> : <ClosedEyeIcon onClick={toggleHidePassword} />}
+        </InputWrapper>
+
+        <p className="sign-up-birthday-label">생일</p>
+
+        <SelectorWrapper>
+          <select
+            name='birthYear'
+            onChange={formik.handleChange}
+            value={formik.values.birthYear}
+          >
+            <option value='' disabled>년</option>
+            {yearList.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+
+          <select
+            name='birthMonth'
+            onChange={formik.handleChange}
+            value={formik.values.birthMonth}
+          >
+            <option value='' disabled>월</option>
+            {monthList.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+
+          <select
+            name='birthDay'
+            onChange={formik.handleChange}
+            value={formik.values.birthDay}
+          >
+            <option value='' disabled>일</option>
+            {dayList.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </SelectorWrapper>
+
+        <div className="sign-up-submit-button-wrapper">
+          <Button type='submit'>가입하기</Button>
+        </div>
+      </form>
+    </Container>
   )
 }
 
