@@ -10,8 +10,8 @@ export default NextAuth({
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials, req) {
-          console.log(credentials)
-          const user = { id: 1, name: "J Smith", email: "jsmith@example.com" }
+        const { id, email } = credentials;
+          const user = { id, email }
           return user;
       }
   }),
@@ -64,8 +64,8 @@ export default NextAuth({
   // pages is not specified for that route.
   // https://next-auth.js.org/configuration/pages
   pages: {
-    signIn: '/auth/signin',  // Displays signin buttons
-    signOut: '/', // Displays form with sign out button
+    // signIn: '/',  // Displays signin buttons
+    // signOut: '/', // Displays form with sign out button
     // error: '/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // Used for check email page
     // newUser: null // If set, new users will be directed here on first sign in
@@ -77,8 +77,14 @@ export default NextAuth({
   callbacks: {
     // async signIn({ user, account, profile, email, credentials }) { return true },
     // async redirect({ url, baseUrl }) { return baseUrl },
-    // async session({ session, token, user }) { return session },
-    // async jwt({ token, user, account, profile, isNewUser }) { return token }
+    async jwt({ token, user, account, profile, isNewUser }) { 
+      user && (token.userId = user.id);
+      return token;
+    },
+    async session({ session, token, user }) { 
+      session.user.id = token.userId
+      return session;
+    }
   },
 
   // Events are useful for logging

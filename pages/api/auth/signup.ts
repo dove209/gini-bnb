@@ -2,6 +2,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from 'bcryptjs';
 let jwt = require('jsonwebtoken');
+import uuid from 'react-uuid';
 import Data from "../../../lib/data";
 import { StoredUserType } from "../../../types/user";
 
@@ -22,13 +23,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const hashedPassword = bcrypt.hashSync(password, 8);
 
         const users = Data.user.getList();
-        let userId;
-        if (users.length === 0) {
-            userId = 1;
-        } else {
-            userId = users[users.length - 1].id + 1;
-        }
 
+        let userId = uuid();
         const newUser: StoredUserType = {
             id: userId,
             email,
@@ -41,12 +37,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         Data.user.write([...users, newUser]);
 
-        const token = jwt.sign(String(newUser.id), process.env.JWT_SECRET);
+        // const token = jwt.sign(String(newUser.id), process.env.JWT_SECRET);
 
-        res.setHeader(
-            "Set-Cookie",
-            `access_token=${token}; path=/; expires=${new Date(Date.now() + 60 * 60 * 24 * 1000 * 3).toISOString()}; httponly`
-        ); //3일 만료
+        // res.setHeader(
+        //     "Set-Cookie",
+        //     `access_token=${token}; path=/; expires=${new Date(Date.now() + 60 * 60 * 24 * 1000 * 3).toISOString()}; httponly`
+        // ); //3일 만료
 
 
         const newUserWithoutPassword: Partial<Pick<StoredUserType, 'password'>> = newUser; // StoredUserType의 Password 속성을 Partial로 만듬

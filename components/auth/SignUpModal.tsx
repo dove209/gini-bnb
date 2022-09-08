@@ -119,7 +119,6 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
   // 회원가입 폼 제출하기
   const onSubmitSignUp = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-
     try {
       const signUpBody = {
         email,
@@ -131,8 +130,11 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
       const { data } = await signupAPI(signUpBody)
       if (data) { 
         alert('회원 가입이 완료 되었습니다.');
+        await signIn('credentials', { 
+          id: data.id,
+          email: data.email,
+        })
         closeModal();
-        await signIn('credentials', { email, password })
       }
     } catch (error) {
       if (error instanceof AxiosError) {

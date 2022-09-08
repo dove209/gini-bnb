@@ -1723,6 +1723,7 @@ __metadata:
     next-auth: ^4.10.3
     react: 18.2.0
     react-dom: 18.2.0
+    react-uuid: ^1.0.3
     styled-components: ^5.3.5
     styled-reset: ^4.4.2
     typescript: 4.8.2
@@ -2791,6 +2792,13 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
+  languageName: node
+  linkType: hard
+
+"react-uuid@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "react-uuid@npm:1.0.3"
+  checksum: 364d23d07908927d0db80a8236752d7e6ee148eeccffa3e8f961410a2a2d4dd1315def0015d594775b56f9c1fbe4f2838ec08e2ae5149f992aad3ec2a3c29a62
   languageName: node
   linkType: hard
 

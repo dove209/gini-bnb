@@ -1,6 +1,6 @@
 // /data/users.json에 저장된 유저 타입
 export type StoredUserType = {
-    id: number;
+    id: string;
     email: string;
     password: string;
     firstname: string;
