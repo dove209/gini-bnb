@@ -13,6 +13,7 @@ import ClosedEyeIcon from '../../public/static/svg/auth/closed_eye.svg';
 import Button from '../common/Button';
 
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 import { signupAPI } from '../../lib/api/auth';
 import { signIn } from 'next-auth/react';
@@ -67,20 +68,27 @@ const Container = styled.div`
     }
 
     .sign-up-submit-button-wrapper {
+      margin-top: 24px;
       margin-bottom: 16px;
       padding-bottom: 16px;
       border-bottom: 1px solid ${palette.gray_eb}
+    }
+
+    .errorText {
+      margin-top: 5px;
+      color: red;
+      font-size: 12px;
     }
 `;
 
 
 const InputWrapper = styled.div<{ isIcon?: boolean }>`
-  position: relative;
-      height: 46px;
-      margin-bottom: 16px;
+      position: relative;
+      /* height: 46px; */
+      margin-top: 16px;
       input {
         width: 100%;
-        height: 100%;
+        height: 46px;
         padding: ${({ isIcon }) => isIcon ? '0 44px 0 11px' : '0 11px'};
         border: 1px solid ${palette.gray_eb};
         border-radius: 4px;
@@ -108,7 +116,6 @@ const SelectorWrapper = styled.div`
     height: 46px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 24px;
     select {
       flex: 1;
       background-color: white;
@@ -141,6 +148,14 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
     setHidePassword((prevState) => !prevState)
   }
 
+  const signUpValidationSchema = Yup.object({
+    email: Yup.string().email('* 이메일 형식이 아닙니다.').required('* 필수 입력해 주세요.'),
+    name: Yup.string().required('* 필수 입력해 주세요.'),
+    password: Yup.string().required('* 필수 입력해 주세요.').matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,'* 문자,숫자,특수문자 포함 8자 이상 입력해주세요.'),
+    birthYear: Yup.string().required('* 필수 입력해 주세요.'),
+    birthMonth: Yup.string().required('* 필수 입력해 주세요.'),
+    birthDay: Yup.string().required('* 필수 입력해 주세요.'),
+  })
 
   const formik = useFormik({
     initialValues: {
@@ -151,6 +166,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
       birthMonth: '',
       birthDay: '',
     },
+    validationSchema: signUpValidationSchema,
     onSubmit: async (values) => {
       try {
         const { email, name, password, birthYear, birthMonth, birthDay } = values;
@@ -189,12 +205,13 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
           <input
             placeholder='이메일 주소'
             name="email"
-            type="email"
+            type="text"
             onChange={formik.handleChange}
             value={formik.values.email}
           />
           <MaillIcon />
         </InputWrapper>
+        {formik.touched.email && formik.errors.email && <div className='errorText'>{formik.errors.email}</div>}
 
         <InputWrapper isIcon={true}>
           <input
@@ -206,6 +223,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
           />
           <PersonIcon />
         </InputWrapper>
+        {formik.touched.name && formik.errors.name && <div className='errorText'>{formik.errors.name}</div>}
 
         <InputWrapper isIcon={true}>
           <input
@@ -217,9 +235,10 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
           />
           {hidePassword ? <OpenedEyeIcon onClick={toggleHidePassword} /> : <ClosedEyeIcon onClick={toggleHidePassword} />}
         </InputWrapper>
+        {formik.touched.password && formik.errors.password && <div className='errorText'>{formik.errors.password}</div>}
+
 
         <p className="sign-up-birthday-label">생일</p>
-
         <SelectorWrapper>
           <select
             name='birthYear'
@@ -260,6 +279,11 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
             ))}
           </select>
         </SelectorWrapper>
+        {(formik.errors.birthYear ||
+          formik.errors.birthMonth ||
+          formik.errors.birthDay
+         ) && <div className='errorText'>{formik.errors.password}</div>
+        }
 
         <div className="sign-up-submit-button-wrapper">
           <Button type='submit'>가입하기</Button>
