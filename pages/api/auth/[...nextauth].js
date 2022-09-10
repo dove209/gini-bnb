@@ -9,8 +9,8 @@ export default NextAuth({
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials, req) {
-        const { id, email } = credentials;
-          const user = { id, email }
+        const { id, email, profileImage } = credentials;
+          const user = { id, email, profileImage }
           return user;
       }
   }),
@@ -77,11 +77,13 @@ export default NextAuth({
     // async signIn({ user, account, profile, email, credentials }) { return true },
     // async redirect({ url, baseUrl }) { return baseUrl },
     async jwt({ token, user, account, profile, isNewUser }) { 
-      user && (token.userId = user.id);
+      user && (token.userId = user.id, token.profileImage = user.profileImage);
       return token;
     },
     async session({ session, token, user }) { 
-      session.user.id = token.userId
+      session.user.id = token.userId;
+      session.user.image = token.profileImage;
+
       return session;
     }
   },

@@ -1,9 +1,13 @@
 import Link from "next/link";
 import React, { useState } from "react";
+import Image from "next/image";
 import styled from "styled-components";
+import palette from "../styles/palette";
+import { useSession } from "next-auth/react";
+
 import LogoIcon from "../public/static/svg/logo/logo.svg";
 import LogoTextIcon from "../public/static/svg/logo/logo_text.svg";
-import palette from "../styles/palette";
+import HamburgetIcon from "../public/static/svg/header/hamburger.svg";
 
 import useModal from "../hooks/useModal";
 import SignUpModal from "./auth/SignUpModal";
@@ -39,25 +43,47 @@ const Container = styled.div`
       cursor: pointer;
       outline: none;
       &.sign-up-button {
-        &:hover{
-          background-color: ${palette.gray_f7}
+        &:hover {
+          background-color: ${palette.gray_f7};
         }
       }
     }
     button + button {
       margin-left: 8px;
       &.login-button {
-        box-shadow: 0px 1px 2px rgba(0,0,0,0.18);
-        &:hover{
-          box-shadow: 0px 2px 8px rgba(0,0,0,0.12);
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);
+        &:hover {
+          box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
         }
       }
+    }
+  }
+
+  /* 유저 프로필 */
+  .header-user-profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 42px;
+    width: 70px;
+    border: transparent;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);
+    border-radius: 21px;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+    &:hover {
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
+    }
+    .header-user-profile-image {
+      border-radius: 50% !important;
     }
   }
 `;
 
 const Header: React.FC = () => {
   const { openModal, closeModal, ModalPortal } = useModal();
+  const { data: sesstion, status } = useSession();
 
   return (
     <Container>
@@ -68,19 +94,39 @@ const Header: React.FC = () => {
         </a>
       </Link>
 
-      <div className="header-auth-buttons">
-        <button type="button" className="sign-up-button" onClick={openModal}>
-          회원가입
-        </button>
-        <button type="button" className="login-button">
-          로그인
-        </button>
-      </div>
-      
+      {status !== "loading" ? (
+        status === "authenticated" ? (
+          <button className="header-user-profile" type="button">
+            <HamburgetIcon />
+            <Image
+              src={`${sesstion?.user?.image}`}
+              alt="유저 프로필 이미지"
+              width={30}
+              height={30}
+              className="header-user-profile-image"
+            />
+          </button>
+        ) : (
+          <div className="header-auth-buttons">
+            <button
+              type="button"
+              className="sign-up-button"
+              onClick={openModal}
+            >
+              회원가입
+            </button>
+            <button type="button" className="login-button">
+              로그인
+            </button>
+          </div>
+        )
+      ) : (
+        <></>
+      )}
+
       <ModalPortal>
-        <SignUpModal closeModal={closeModal}/>
+        <SignUpModal closeModal={closeModal} />
       </ModalPortal>
-      
     </Container>
   );
 };

@@ -79,12 +79,17 @@ const Container = styled.div`
       color: red;
       font-size: 12px;
     }
+
+    .sign-up-set-login {
+      color: ${palette.dark_cyan};
+      margin-left: 8px;
+      cursor: pointer;
+    }
 `;
 
 
 const InputWrapper = styled.div<{ isIcon?: boolean }>`
       position: relative;
-      /* height: 46px; */
       margin-top: 16px;
       input {
         width: 100%;
@@ -182,6 +187,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
             await signIn('credentials', {
               id: data.id,
               email: data.email,
+              profileImage: data.profileImage
             })
             closeModal();
           }
@@ -279,16 +285,22 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
             ))}
           </select>
         </SelectorWrapper>
-        {(formik.errors.birthYear ||
-          formik.errors.birthMonth ||
-          formik.errors.birthDay
-         ) && <div className='errorText'>{formik.errors.password}</div>
+
+        {(formik.touched.birthYear && formik.touched.birthMonth && formik.touched.birthDay) && (formik.errors.birthYear || formik.errors.birthMonth || formik.errors.birthDay) &&
+        <div className='errorText'>{formik.errors.birthDay}</div>
         }
 
         <div className="sign-up-submit-button-wrapper">
           <Button type='submit'>가입하기</Button>
         </div>
       </form>
+
+      <p>
+        이미 계정이 있나요?
+        <span className="sign-up-set-login" onClick={() =>{}}>
+          로그인
+        </span>
+      </p>
     </Container>
   )
 }
