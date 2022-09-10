@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { AxiosError } from 'axios';
 import styled from 'styled-components'
 import palette from '../../styles/palette';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 import { yearList, monthList, dayList } from '../../lib/staticData';
 import CloseXIcon from '../../public/static/svg/modal/modal_close_x_icon.svg';
@@ -12,11 +14,10 @@ import ClosedEyeIcon from '../../public/static/svg/auth/closed_eye.svg';
 
 import Button from '../common/Button';
 
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-
 import { signupAPI } from '../../lib/api/auth';
 import { signIn } from 'next-auth/react';
+
+import { useAuthModalStore } from "../../stores/useAuthModalStore";
 
 
 const Container = styled.div`
@@ -146,6 +147,7 @@ interface IProps {
 }
 
 const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
+  const { setAuthModalType } = useAuthModalStore();
   const [hidePassword, setHidePassword] = useState(true);  
 
   // 비밀번호 숨김 토글하기
@@ -297,7 +299,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
 
       <p>
         이미 계정이 있나요?
-        <span className="sign-up-set-login" onClick={() =>{}}>
+        <span className="sign-up-set-login" onClick={() => setAuthModalType('login')}>
           로그인
         </span>
       </p>

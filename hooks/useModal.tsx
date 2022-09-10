@@ -1,6 +1,11 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, Dispatch, SetStateAction } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
+
+import SignUpModal from "../components/auth/SignUpModal";
+import LoginModal from "../components/auth/LoginModal";
+
+import { useAuthModalStore } from "../stores/useAuthModalStore";
 
 const Container = styled.div`
   width: 100%;
@@ -31,13 +36,11 @@ const useModal = () => {
     setModalOpened(false);
   };
 
-  interface IProps {
-    children: React.ReactNode;
-  }
 
-  const ModalPortal: React.FC<IProps> = ({ children }) => {
+  const ModalPortal: React.FC = () => {
     const ref = useRef<Element | null>();
     const [mounted, setMounted] = useState(false);
+    const { authModalType } = useAuthModalStore();
 
     useEffect(() => {
       setMounted(true);
@@ -55,7 +58,8 @@ const useModal = () => {
             role={"presentation"}
             onClick={closeModal}
           />
-          {children}
+        {authModalType === 'signup' && <SignUpModal closeModal={closeModal} />}
+        {authModalType === 'login' && <LoginModal closeModal={closeModal} />}
         </Container>,
         ref.current
       );
@@ -66,7 +70,7 @@ const useModal = () => {
   return {
     openModal,
     closeModal,
-    ModalPortal,
+    ModalPortal: React.memo(ModalPortal),
   };
 };
 

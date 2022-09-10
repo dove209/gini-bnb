@@ -9,8 +9,8 @@ import LogoIcon from "../public/static/svg/logo/logo.svg";
 import LogoTextIcon from "../public/static/svg/logo/logo_text.svg";
 import HamburgetIcon from "../public/static/svg/header/hamburger.svg";
 
+import { useAuthModalStore } from "../stores/useAuthModalStore";
 import useModal from "../hooks/useModal";
-import SignUpModal from "./auth/SignUpModal";
 
 const Container = styled.div`
   position: sticky;
@@ -82,8 +82,9 @@ const Container = styled.div`
 `;
 
 const Header: React.FC = () => {
-  const { openModal, closeModal, ModalPortal } = useModal();
   const { data: sesstion, status } = useSession();
+  const { openModal, ModalPortal } = useModal();
+  const { setAuthModalType } = useAuthModalStore();
 
   return (
     <Container>
@@ -111,11 +112,21 @@ const Header: React.FC = () => {
             <button
               type="button"
               className="sign-up-button"
-              onClick={openModal}
+              onClick={() => {
+                setAuthModalType('signup');
+                openModal();
+              }}
             >
               회원가입
             </button>
-            <button type="button" className="login-button">
+            <button 
+              type="button"
+              className="login-button"
+              onClick={() => {
+                setAuthModalType('login');
+                openModal();
+              }}  
+            >
               로그인
             </button>
           </div>
@@ -124,9 +135,7 @@ const Header: React.FC = () => {
         <></>
       )}
 
-      <ModalPortal>
-        <SignUpModal closeModal={closeModal} />
-      </ModalPortal>
+      <ModalPortal />
     </Container>
   );
 };
