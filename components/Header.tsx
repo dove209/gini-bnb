@@ -1,16 +1,14 @@
 import Link from "next/link";
-import React, { useState } from "react";
-import Image from "next/image";
+import React from "react";
 import styled from "styled-components";
 import palette from "../styles/palette";
 import { useSession } from "next-auth/react";
 
 import LogoIcon from "../public/static/svg/logo/logo.svg";
 import LogoTextIcon from "../public/static/svg/logo/logo_text.svg";
-import HamburgetIcon from "../public/static/svg/header/hamburger.svg";
 
-import { useAuthModalStore } from "../stores/useAuthModalStore";
-import useModal from "../hooks/useModal";
+import HeaderAuths from "./HeaderAuths";
+import HeaderUserProfile from "./HeaderUserProfile";
 
 const Container = styled.div`
   position: sticky;
@@ -83,8 +81,8 @@ const Container = styled.div`
 
 const Header: React.FC = () => {
   const { data: sesstion, status } = useSession();
-  const { openModal, ModalPortal } = useModal();
-  const { setAuthModalType } = useAuthModalStore();
+
+  const userProfileImage = sesstion?.user?.image || '';
 
   return (
     <Container>
@@ -97,45 +95,13 @@ const Header: React.FC = () => {
 
       {status !== "loading" ? (
         status === "authenticated" ? (
-          <button className="header-user-profile" type="button">
-            <HamburgetIcon />
-            <Image
-              src={`${sesstion?.user?.image}`}
-              alt="유저 프로필 이미지"
-              width={30}
-              height={30}
-              className="header-user-profile-image"
-            />
-          </button>
+          <HeaderUserProfile userProfileImage={userProfileImage} />
         ) : (
-          <div className="header-auth-buttons">
-            <button
-              type="button"
-              className="sign-up-button"
-              onClick={() => {
-                setAuthModalType('signup');
-                openModal();
-              }}
-            >
-              회원가입
-            </button>
-            <button 
-              type="button"
-              className="login-button"
-              onClick={() => {
-                setAuthModalType('login');
-                openModal();
-              }}  
-            >
-              로그인
-            </button>
-          </div>
+          <HeaderAuths />
         )
       ) : (
         <></>
       )}
-
-      <ModalPortal />
     </Container>
   );
 };

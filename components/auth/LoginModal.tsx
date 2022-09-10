@@ -96,7 +96,7 @@ interface IProps {
 }
 
 const LoginModal: React.FC<IProps> = ({ closeModal }) => {
-    const { setAuthModalType } = useAuthModalStore();
+  const setAuthModalType = useAuthModalStore(state => state.setAuthModalType);
 
   const [hidePassword, setHidePassword] = useState(true);
 

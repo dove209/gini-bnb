@@ -1,11 +1,6 @@
-import React, { useRef, useEffect, useState, Dispatch, SetStateAction } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-
-import SignUpModal from "../components/auth/SignUpModal";
-import LoginModal from "../components/auth/LoginModal";
-
-import { useAuthModalStore } from "../stores/useAuthModalStore";
 
 const Container = styled.div`
   width: 100%;
@@ -25,6 +20,7 @@ const Container = styled.div`
   }
 `;
 
+
 const useModal = () => {
   const [modalOpened, setModalOpened] = useState<boolean>(false);
 
@@ -36,12 +32,13 @@ const useModal = () => {
     setModalOpened(false);
   };
 
+  interface IProps {
+    children: React.ReactNode;
+  }
 
-  const ModalPortal: React.FC = () => {
+  const ModalPortal: React.FC<IProps> = ({ children }) => {
     const ref = useRef<Element | null>();
     const [mounted, setMounted] = useState(false);
-    const { authModalType } = useAuthModalStore();
-
     useEffect(() => {
       setMounted(true);
       if (document) {
@@ -50,19 +47,15 @@ const useModal = () => {
       }
     }, []);
 
+
     if (ref.current && mounted && modalOpened) {
       return createPortal(
-        <Container>
-          <div
-            className="modal-background"
-            role={"presentation"}
-            onClick={closeModal}
-          />
-        {authModalType === 'signup' && <SignUpModal closeModal={closeModal} />}
-        {authModalType === 'login' && <LoginModal closeModal={closeModal} />}
-        </Container>,
-        ref.current
-      );
+          <Container>
+              <div className='modal-background' role='presentation' onClick={closeModal} />
+              {children}
+          </Container>,
+          ref.current
+        );
     }
     return null;
   };
@@ -70,7 +63,7 @@ const useModal = () => {
   return {
     openModal,
     closeModal,
-    ModalPortal: React.memo(ModalPortal),
+    ModalPortal,
   };
 };
 

@@ -147,7 +147,8 @@ interface IProps {
 }
 
 const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
-  const { setAuthModalType } = useAuthModalStore();
+  const setAuthModalType = useAuthModalStore(state => state.setAuthModalType);
+
   const [hidePassword, setHidePassword] = useState(true);  
 
   // 비밀번호 숨김 토글하기
@@ -200,7 +201,6 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
       }
     }
   })
-
 
   return (
     <Container>
