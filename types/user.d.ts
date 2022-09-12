@@ -5,7 +5,7 @@ export type StoredUserType = {
     name: string;
     password: string;
     birthday: string;
-    profileImage: string;
+    image: string;
 }
 
 export type UserType = Omit<StoredUserType, 'password'> // 'password만 제거한 타입'

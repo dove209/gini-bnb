@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 import { loginAPI } from '../../../lib/api/auth';
 
@@ -8,6 +9,10 @@ import { loginAPI } from '../../../lib/api/auth';
 export default NextAuth({
   // https://next-auth.js.org/configuration/providers
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+    }),
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials, req) {
@@ -79,7 +84,7 @@ export default NextAuth({
     // async signIn({ user, account, profile, email, credentials }) { return true },
     // async redirect({ url, baseUrl }) { return baseUrl },
     async jwt({ token, user, account, profile, isNewUser }) {
-      user && (token.id = user.id, token.image = user.profileImage);
+      user && (token.id = user.id, token.image = user.image);
       return token;
     },
     async session({ session, token, user }) { 

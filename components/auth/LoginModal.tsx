@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AxiosError } from "axios";
 import styled from "styled-components";
 import palette from "../../styles/palette";
+import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { signIn } from 'next-auth/react';
@@ -62,6 +63,23 @@ const Container = styled.div`
     color: ${palette.dark_cyan};
     margin-left: 8px;
     cursor: pointer;
+  }
+
+  .sns-login-wrapper { 
+    text-align: center;
+    color: ${palette.black};
+    margin-bottom: 20px;
+    .button-wrapper {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      span {
+        cursor: pointer !important; 
+      }
+      span + span {
+        margin-left: 20px !important;
+      }
+    }
   }
 `;
 const InputWrapper = styled.div<{ isIcon?: boolean }>`
@@ -178,6 +196,16 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
           <Button type="submit">로그인</Button>
         </div>
       </form>
+
+      
+      <div className="sns-login-wrapper">
+        <h1>SNS로 로그인하기.</h1>
+        <div className="button-wrapper">
+          <Image src={'/static/image/sns/google.png'} width={40} height={40} alt='구글 로그인 버튼' onClick={() => signIn('google')}/>
+          <Image src={'/static/image/sns/kakao.png'} width={40} height={40} alt='카카오 로그인 버튼' />
+          <Image src={'/static/image/sns/naver.png'} width={40} height={40} alt='네이버 로그인 버튼' />
+        </div>
+      </div>
 
       <p>
         계정이 없으신가요?

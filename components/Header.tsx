@@ -81,8 +81,7 @@ const Container = styled.div`
 
 const Header: React.FC = () => {
   const { data: sesstion, status } = useSession();
-  console.log(status)
-  const userProfileImage = sesstion?.user?.image || '';
+  const userProfileImage = sesstion?.user?.image || '/static/image/user/default_user_profile_image.jpg';
 
   return (
     <Container>
