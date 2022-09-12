@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import OutsideClickHandler from "react-outside-click-handler";
 import styled from "styled-components";
 import palette from "../styles/palette";
 import Image from "next/image";
+import Link from "next/link";
+import { signOut } from "next-auth/react"
+
 import HamburgetIcon from "../public/static/svg/header/hamburger.svg";
 
 const Container = styled.div`
@@ -32,9 +36,9 @@ const Container = styled.div`
   }
   .header-usermenu {
     position: absolute;
-    right: 0;
+    right: 20px;
     top: 70px;
-    width: 240px;
+    width: 200px;
     padding: 8px 0;
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
@@ -60,24 +64,58 @@ const Container = styled.div`
 `;
 
 interface IProps {
-    userProfileImage: string
+  userProfileImage: string;
 }
 const HeaderUserProfile: React.FC<IProps> = ({ userProfileImage }) => {
+  // 유저 메뉴 열고, 닫히 여부
+  const [isUserMenuOpened, setIsUserMenuOpened] = useState(false);
+
+  // 로그아웃 하기
+  const logout = () => {
+    signOut();
+    setIsUserMenuOpened(false);
+
+  }
+
   return (
     <Container>
-        <button
+      <OutsideClickHandler
+        onOutsideClick={() => {
+          if (isUserMenuOpened) {
+            setIsUserMenuOpened(false)
+          }
+        }}
+      >
+        <button 
           className="header-user-profile"
           type="button"
+          onClick={() => setIsUserMenuOpened(prevState => !prevState)}
         >
           <HamburgetIcon />
           <Image
-              src={userProfileImage}
-              alt="유저 프로필 이미지"
-              width={30}
-              height={30}
-              className="header-user-profile-image"
-            />
+            src={userProfileImage}
+            alt="유저 프로필 이미지"
+            width={30}
+            height={30}
+            className="header-user-profile-image"
+          />
         </button>
+
+        {isUserMenuOpened && (
+          <ul className="header-usermenu">
+            <li>숙소 관리</li>
+            <Link href={'/'}>
+              <a onClick={() => setIsUserMenuOpened(false)}>
+                <li>숙소 등록하기</li>
+              </a>
+            </Link>
+            <div className="header-username-divider"></div>
+            <li onClick={logout}>
+              로그아웃
+            </li>
+          </ul>
+        )}
+      </OutsideClickHandler>
     </Container>
   );
 };

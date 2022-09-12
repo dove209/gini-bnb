@@ -12,8 +12,7 @@ export default NextAuth({
       name: "Credentials",
       async authorize(credentials, req) {
         const { email, password } = credentials;
-          const { data: { id: userId, profileImage } } = await loginAPI({ email, password })
-          const user = { userId, profileImage }
+          const { data: user } = await loginAPI({ email, password })
           return user;
       }
   }),
@@ -29,7 +28,7 @@ export default NextAuth({
   // The secret should be set to a reasonably long random string.
   // It is used to sign cookies and to sign and encrypt JSON Web Tokens, unless
   // a separate secret is defined explicitly for encrypting the JWT.
-  secret: process.env.SECRET,
+  secret: process.env.JWT_SECRET,
 
   session: {
     // Use JSON Web Tokens for session instead of database sessions.
@@ -51,7 +50,7 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/options#jwt
   jwt: {
     // A secret to use for key generation (you should set this explicitly)
-    secret: process.env.SECRET,
+    secret: process.env.JWT_SECRET,
     // Set to true to use encryption (default: false)
     // encryption: true,
     // You can define your own encode/decode functions for signing and encryption
@@ -79,13 +78,13 @@ export default NextAuth({
   callbacks: {
     // async signIn({ user, account, profile, email, credentials }) { return true },
     // async redirect({ url, baseUrl }) { return baseUrl },
-    async jwt({ token, user, account, profile, isNewUser }) { 
-      user && (token.userId = user.userId, token.profileImage = user.profileImage);
+    async jwt({ token, user, account, profile, isNewUser }) {
+      user && (token.id = user.id, token.image = user.profileImage);
       return token;
     },
     async session({ session, token, user }) { 
-      session.user.id = token.userId;
-      session.user.image = token.profileImage;
+      session.user.id = token.id;
+      session.user.image = token.image;
 
       return session;
     }

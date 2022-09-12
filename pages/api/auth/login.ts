@@ -11,7 +11,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         try {
             const { email, password } = req.body;
             
-            const user = Data.user.findUserByEmail(email);
+            const user = Data.user.find({ email });
+            console.log(user)
             if (!user) {
                 return res.status(404).send('해당 이메일의 유저가 없습니다.')
             }

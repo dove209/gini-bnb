@@ -36,12 +36,12 @@ const write = (users: StoredUserType[]) => {
  * email의 유저 불러오기
  */
 
-const findUserByEmail = (email: string) => {
+const find = ({ email, id }: { email?: string, id?: string }) => {
     const users = getList();
-    return users.find(user => user.email === email);
+    return users.find(user => user.email === email || user.id === id);
 }
 
-export default { getList, existEmail, write, findUserByEmail }
+export default { getList, existEmail, write, find }
 
 
 
