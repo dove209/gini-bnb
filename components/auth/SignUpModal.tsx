@@ -188,9 +188,8 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
           if (data) {
             alert('회원 가입이 완료 되었습니다.');
             await signIn('credentials', {
-              id: data.id,
-              email: data.email,
-              profileImage: data.profileImage
+              email,
+              password
             })
             closeModal();
           }

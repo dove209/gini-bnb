@@ -1,6 +1,8 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
 
+import { loginAPI } from '../../../lib/api/auth';
+
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 export default NextAuth({
@@ -9,8 +11,9 @@ export default NextAuth({
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials, req) {
-        const { id, email, profileImage } = credentials;
-          const user = { id, email, profileImage }
+        const { email, password } = credentials;
+          const { data: { id: userId, profileImage } } = await loginAPI({ email, password })
+          const user = { userId, profileImage }
           return user;
       }
   }),
@@ -77,7 +80,7 @@ export default NextAuth({
     // async signIn({ user, account, profile, email, credentials }) { return true },
     // async redirect({ url, baseUrl }) { return baseUrl },
     async jwt({ token, user, account, profile, isNewUser }) { 
-      user && (token.userId = user.id, token.profileImage = user.profileImage);
+      user && (token.userId = user.userId, token.profileImage = user.profileImage);
       return token;
     },
     async session({ session, token, user }) { 

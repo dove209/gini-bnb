@@ -4,6 +4,7 @@ import styled from "styled-components";
 import palette from "../../styles/palette";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { signIn } from 'next-auth/react';
 
 import CloseXIcon from "../../public/static/svg/modal/modal_close_x_icon.svg";
 import MaillIcon from "../../public/static/svg/auth/mail.svg";
@@ -119,16 +120,12 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
     onSubmit: async (values) => {
       try {
         const { email, password } = values;
-        const signUpBody = {
+        const loginBody = {
           email,
           password,
         };
-        //   const { data } = await signupAPI(signUpBody)
-        //   if (data) {
-        //     alert('회원 가입이 완료 되었습니다.');
-
-        //     closeModal();
-        //   }
+          await signIn('credentials', loginBody);
+          closeModal();
       } catch (error) {
         if (error instanceof AxiosError) {
           console.log(error.response?.data);

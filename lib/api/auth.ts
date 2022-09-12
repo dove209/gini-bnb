@@ -13,3 +13,13 @@ interface SignUpAPIBody {
 export const signupAPI = (body: SignUpAPIBody) => {
     return axios.post<UserType>('/api/auth/signup', body);
 }
+
+/** 로그인 API */
+interface LoginAPIBody {
+    email: string;
+    password: string;
+}
+
+export const loginAPI = (body: LoginAPIBody) => {
+    return axios.post<UserType>('/api/auth/login', body)
+}

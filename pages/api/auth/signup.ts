@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 let jwt = require('jsonwebtoken');
 import uuid from 'react-uuid';
 import Data from "../../../lib/data";
-import { StoredUserType } from "../../../types/user";
+import { StoredUserType, UserType } from "../../../types/user";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
@@ -39,11 +39,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         // ); //3일 만료
 
 
-        const newUserWithoutPassword: Partial<Pick<StoredUserType, 'password'>> = newUser; // StoredUserType의 Password 속성을 Partial로 만듬
+        const newUserWithoutPassword: UserType = newUser; // StoredUserType의 Password 속성을 Partial로 만듬
 
-        delete newUserWithoutPassword.password;
-
-        return res.status(200).send(newUser)
+        return res.status(200).send(newUserWithoutPassword)
     }
     return res.status(405).end();
 }
