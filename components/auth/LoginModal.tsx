@@ -120,7 +120,7 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
   const setAuthModalType = useAuthModalStore(state => state.setAuthModalType);
 
   const [hidePassword, setHidePassword] = useState(true);
-  
+
   const [loginError, setLoginError] = useState('');
 
 
@@ -143,13 +143,10 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
     onSubmit: async (values) => {
       try {
         const { email, password } = values;
-        const loginBody = {
-          email,
-          password,
-        };
-          const { data } = await loginAPI(loginBody);
-          await signIn('credentials', data);
-          closeModal();
+        const loginBody = { email, password };
+        const { data } = await loginAPI(loginBody);
+        await signIn('credentials', data);
+        closeModal();
       } catch (error) {
         if (error instanceof AxiosError) {
           console.log(error.response?.data);
@@ -205,13 +202,13 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
         </div>
       </form>
 
-      
+
       <div className="sns-login-wrapper">
-        <h1>SNS로 로그인하기.</h1>
+        <h1>간편 로그인</h1>
         <div className="button-wrapper">
-          <Image src={'/static/image/sns/google.png'} width={40} height={40} alt='구글 로그인 버튼' onClick={() => signIn('google')}/>
-          <Image src={'/static/image/sns/kakao.png'} width={40} height={40} alt='카카오 로그인 버튼' />
-          <Image src={'/static/image/sns/naver.png'} width={40} height={40} alt='네이버 로그인 버튼' />
+          <Image src={'/static/image/sns/google.png'} width={40} height={40} alt='구글 로그인 버튼' onClick={() => signIn('google')} />
+          <Image src={'/static/image/sns/kakao.png'} width={40} height={40} alt='카카오 로그인 버튼' onClick={() => signIn('kakao')} />
+          <Image src={'/static/image/sns/naver.png'} width={40} height={40} alt='네이버 로그인 버튼' onClick={() => signIn('naver')} />
         </div>
       </div>
 

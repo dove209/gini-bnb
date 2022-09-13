@@ -10,7 +10,7 @@ const Home: NextPage = () => {
 export const getServerSideProps: GetServerSideProps = async ({ req, res}) => {
   const secret  = process.env.JWT_SECRET
   const token = await getToken({ req, secret })
-  console.log(token)
+  // console.log(token)
   return { props: { } }
 }
 
