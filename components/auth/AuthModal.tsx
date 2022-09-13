@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const AuthModal:React.FC<IProps> = ({ closeModal }) => {
-  const { authModalType } = useAuthModalStore(); // authModalType에 따라 재렌더링이 이뤄지는 로직이 맞음
+  const authModalType = useAuthModalStore(state => state.authModalType);
   return (
     <>
         {authModalType === 'signup' && <SignUpModal closeModal={closeModal} />}
