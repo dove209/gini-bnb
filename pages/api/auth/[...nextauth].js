@@ -16,9 +16,7 @@ export default NextAuth({
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials, req) {
-        const { email, password } = credentials;
-          const { data: user } = await loginAPI({ email, password })
-          return user;
+        return credentials;
       }
   }),
   ],
@@ -70,9 +68,9 @@ export default NextAuth({
   // pages is not specified for that route.
   // https://next-auth.js.org/configuration/pages
   pages: {
-    // signIn: '/',  // Displays signin buttons
+    signIn: '/',  // Displays signin buttons
     // signOut: '/', // Displays form with sign out button
-    // error: '/auth/error', // Error code passed in query string as ?error=
+    error: '/', // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // Used for check email page
     // newUser: null // If set, new users will be directed here on first sign in
   },

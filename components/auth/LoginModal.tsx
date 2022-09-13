@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { signIn } from 'next-auth/react';
+import { loginAPI } from "../../lib/api/auth";
 
 import CloseXIcon from "../../public/static/svg/modal/modal_close_x_icon.svg";
 import MaillIcon from "../../public/static/svg/auth/mail.svg";
@@ -15,6 +16,7 @@ import ClosedEyeIcon from "../../public/static/svg/auth/closed_eye.svg";
 import Button from "../common/Button";
 
 import { useAuthModalStore } from "../../stores/useAuthModalStore";
+import login from "../../pages/api/auth/login";
 
 const Container = styled.div`
   width: 568px;
@@ -118,6 +120,9 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
   const setAuthModalType = useAuthModalStore(state => state.setAuthModalType);
 
   const [hidePassword, setHidePassword] = useState(true);
+  
+  const [loginError, setLoginError] = useState('');
+
 
   // 비밀번호 숨김 토글하기
   const toggleHidePassword = () => {
@@ -142,11 +147,13 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
           email,
           password,
         };
-          await signIn('credentials', loginBody);
+          const { data } = await loginAPI(loginBody);
+          await signIn('credentials', data);
           closeModal();
       } catch (error) {
         if (error instanceof AxiosError) {
           console.log(error.response?.data);
+          setLoginError(error.response?.data)
         }
       }
     },
@@ -194,6 +201,7 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
 
         <div className="login-submit-button-wrapper">
           <Button type="submit">로그인</Button>
+          <div className="errorText">{loginError}</div>
         </div>
       </form>
 
