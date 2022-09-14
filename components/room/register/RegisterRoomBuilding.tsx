@@ -8,7 +8,6 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import { largeBuildingTypeList, apartmentBuildingTpyeList, houstBuildingTypeList, secondaryUnitBuildingTypeList, uniqueSpaceBuildingTypeList, bnbBuildingTypeList, boutiquesHotelBuildingTypeList, roomTypeList } from '../../../lib/staticData';
 
 const Container = styled.div`
@@ -67,15 +66,14 @@ const Container = styled.div`
             margin-bottom: 32px
         }
         .radio-wrapper {
-            display: flex;
-
-            label {
-                margin-left: 10px;
-                h1 {
-                    font-weight: bold;
-                    margin-bottom: 5px;
+            .roomType {
+                & > p {
+                    margin-left: 30px;
                 }
-            }  
+            }
+            .roomType + .roomType {
+                margin-top: 20px;
+            }
         }
         .radio-wrapper + .radio-wrapper {
             margin-top: 20px;
@@ -94,7 +92,9 @@ const Footer = styled.div`
 const RegisterRoomBuilding: React.FC = () => {
     const validationSchema = Yup.object({
         largeBuildingType: Yup.string().required('옵션을 선택하세요.'),
-        buildingType: Yup.string().required('옵션을 선택하세요.')
+        buildingType: Yup.string().required('옵션을 선택하세요.'),
+        roomType: Yup.string().required('옵션을 선택하세요.'),
+        isSetUpForGuest: Yup.string().required('옵션을 선택하세요.'),
     })
 
     const formik = useFormik({
@@ -102,11 +102,15 @@ const RegisterRoomBuilding: React.FC = () => {
             largeBuildingType: '',
             buildingType: '',
             roomType: '',
-            isSetUpForGuest: null,
+            isSetUpForGuest: '',
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-            console.log({ ...values })
+            const registerRoomStep1 = {
+                ...values,
+                isSetUpForGuest: values.isSetUpForGuest === 'yes'
+            }
+            console.log({...registerRoomStep1})
         }
     })
 
@@ -155,7 +159,7 @@ const RegisterRoomBuilding: React.FC = () => {
                 <div className="selector-wrapper">
                     <p>건물 유형을 선택하세요</p>
                     <select
-                        name='largeBuildingType'
+                        name='buildingType'
                         onChange={formik.handleChange}
                         value={formik.values.buildingType}
                         disabled={formik.values.largeBuildingType === ''}
@@ -171,20 +175,22 @@ const RegisterRoomBuilding: React.FC = () => {
 
                 <div className="etc-wrapper">
                     <p>게스트가 묵게 될 숙소 유형을 골라주세요.</p>
-                    {roomTypeList.map((roomType, index) => (
-                        <div className='radio-wrapper' key={index}>
-                            <Radio
-                                checked={roomType.value === formik.values.roomType}
-                                onChange={formik.handleChange}
-                                value={roomType.value}
+                    <div className='radio-wrapper'>
+                        <FormControl>
+                            <RadioGroup
                                 name="roomType"
-                            />
-                            <label>
-                                <h1>{roomType.label}</h1>
-                                <p>{roomType.description}</p>
-                            </label>
-                        </div>
-                    ))}
+                                value={formik.values.roomType}
+                                onChange={formik.handleChange}
+                            >
+                                {roomTypeList.map((roomType, index) => (
+                                    <div key={index} className='roomType'>
+                                        <FormControlLabel  value={roomType.value} control={<Radio />} label={roomType.label} />
+                                        <p>{roomType.description}</p>
+                                    </div>
+                                ))}
+                            </RadioGroup>
+                        </FormControl>
+                    </div>
                 </div>
 
                 <div className="etc-wrapper">
@@ -196,17 +202,16 @@ const RegisterRoomBuilding: React.FC = () => {
                                 value={formik.values.isSetUpForGuest}
                                 onChange={formik.handleChange}
                             >
-                                <FormControlLabel value={true} control={<Radio />} label="예, 게스트용으로 따로 마련된 숙소입니다." />
-                                <FormControlLabel value={false} control={<Radio />} label="아니요, 제 개인 물건이 숙소에 있습니다." />
+                                <FormControlLabel value={'yes'} control={<Radio />} label="예, 게스트용으로 따로 마련된 숙소입니다." />
+                                <FormControlLabel value={'no'} control={<Radio />} label="아니요, 제 개인 물건이 숙소에 있습니다." />
                             </RadioGroup>
                         </FormControl>
                     </div>
                 </div>
                 
                 <Footer>
-                        <button>뒤로가기</button>
-                        <button>다음</button>
-
+                    <button>뒤로가기</button>
+                    <button type='submit'>다음</button>
                 </Footer>
             </form>
         </Container>
