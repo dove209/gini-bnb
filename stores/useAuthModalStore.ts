@@ -1,11 +1,18 @@
 import create from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 
-const authModalStore = (set: any) => ({
-    authModalType: '',
-    setAuthModalType: (type: string) => set(() => ({ authModalType: type }))
-})
+interface authModalState {
+    authModalType: string;
+    setAuthModalType: (type: string) => void
+}
 
-const useAuthModalStore = create(devtools(authModalStore));
+const useAuthModalStore = create<authModalState>()(
+    devtools(
+        persist((set) => ({
+            authModalType: '',
+            setAuthModalType: (type) => set(() => ({ authModalType: type }))
+        }))
+    )
+)
 
 export { useAuthModalStore };

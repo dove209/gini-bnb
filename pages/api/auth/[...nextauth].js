@@ -104,5 +104,5 @@ export default NextAuth({
   events: {}, 
 
   // Enable debug messages in the console if you are having problems
-  debug: true,
+  debug: process.env.NODE_ENV !== "production",
 })
