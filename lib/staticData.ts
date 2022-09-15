@@ -12,12 +12,30 @@ export const yearList = Array.from(Array(123), (_, i) => String(2022 - i));
 
 /** 숙소 큰 범위의 건물 유형 */
 export const largeBuildingTypeList = [
-    '아파트',
-    '주택',
-    '별채',
-    '독특한 숙소',
-    'B&B',
-    '부티크호텔'
+    {
+        type : '아파트',
+        imgSrc: '/static/image/building/apartment.webp'
+    },
+    {
+        type : '주택',
+        imgSrc: '/static/image/building/houst.webp'
+    },
+    {
+        type : '별채',
+        imgSrc: '/static/image/building/secondary.webp'
+    },
+    {
+        type : '독특한 숙소',
+        imgSrc: '/static/image/building/uniqueSpace.webp'
+    },
+    {
+        type : 'B&B',
+        imgSrc: '/static/image/building/bnb.webp'
+    },
+    {
+        type : '부티크호텔',
+        imgSrc: '/static/image/building/boutiquesHotel.webp'
+    }
 ];
 
 // 아파트 건물 유형

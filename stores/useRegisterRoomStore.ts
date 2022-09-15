@@ -4,7 +4,7 @@ import { RegisterRoomState } from '../types/room';
 
 
 interface IRegisterRoomStore extends RegisterRoomState {
-    setRegisterRoom: () => void
+    setRegisterRoom: (registerRoom: RegisterRoomState) => void
 }
 
 const useRegisterRoomStore = create<IRegisterRoomStore>()(
@@ -14,7 +14,7 @@ const useRegisterRoomStore = create<IRegisterRoomStore>()(
             buildingType: null,
             roomType: null,
             isSetUpForGuest: null,
-            setRegisterRoom: () => set(() => ({ }))
+            setRegisterRoom: (registerRoom) => set((state) => ({ ...state,...registerRoom }))
         }))
     )
 )

@@ -16,7 +16,6 @@ import ClosedEyeIcon from "../../public/static/svg/auth/closed_eye.svg";
 import Button from "../common/Button";
 
 import { useAuthModalStore } from "../../stores/useAuthModalStore";
-import login from "../../pages/api/auth/login";
 
 const Container = styled.div`
   width: 568px;
