@@ -8,29 +8,13 @@ import shallow from 'zustand/shallow';
 import { largeBuildingTypeList } from '../../../lib/staticData';
 import { useRegisterRoomStore } from '../../../stores/useRegisterRoomStore';
 
-import RegisterRoomFooter from './RegisterRoomFooter';
+import StageInfo from './StageInfo';
+import Footer from './Footer';
 
 const Container = styled.div`
     display: flex;
     width: 100vw;
     height: calc(100vh - 80px);
-    .stage-info {
-        position: relative;
-        flex: 1;
-        height: 100%;
-        background: url('/static/image/registerRoomBackground.jpg') no-repeat center;
-        background-size: cover;
-        h1 {
-            color: white;
-            font-weight: bold;
-            font-size: 3rem;
-            position: absolute;
-            top: 50%;
-            left: 5%;
-            transform: translateY(-50%);
-        }
-    }
-
     .selector-wrapper {
         position: relative;
         flex: 1;
@@ -38,12 +22,12 @@ const Container = styled.div`
 
         ul {
             position: absolute;
-            top: 50%;
+            top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
+            width: 50%;
             li {
-                width: 464px;
-                height: 90px;
+                height: 10vh;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -53,7 +37,6 @@ const Container = styled.div`
                 font-weight: bold;
                 font-size: 18px;
                 cursor: pointer;
-
                 &:hover, &.selected {
                     border: 2px solid ${palette.black};
                 }
@@ -67,7 +50,7 @@ const Container = styled.div`
 
 
 
-const RegisterRoomBuilding: React.FC = () => {
+const Building: React.FC = () => {
     const router = useRouter();
     const { largeBuildingType: storedLargeBuildingType, setRegisterRoom } = useRegisterRoomStore(
         (state) => ({ largeBuildingType: state.largeBuildingType, setRegisterRoom: state.setRegisterRoom })
@@ -92,9 +75,12 @@ const RegisterRoomBuilding: React.FC = () => {
 
     return (
         <Container>
-            <div className='stage-info'>
-                <h1>호스팅할 숙소 유형을 알려주세요.</h1>
-            </div>
+            <StageInfo>
+                <h1>
+                    다음 중 숙소를 가장 잘<br />
+                    설명하는 문구는 무었인가요?
+                </h1>
+            </StageInfo>
             <div className='selector-wrapper'>
                 <ul>
                     {largeBuildingTypeList.map((option, index) => (
@@ -104,12 +90,12 @@ const RegisterRoomBuilding: React.FC = () => {
                         </li>
                     ))}
                 </ul>
-                <RegisterRoomFooter prevHref='/' isValid={!!largeBuildingType} >
+                <Footer prevHref='/' isValid={!!largeBuildingType} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
-                </RegisterRoomFooter>
+                </Footer>
             </div>
         </Container>
     )
 }
 
-export default RegisterRoomBuilding
+export default Building

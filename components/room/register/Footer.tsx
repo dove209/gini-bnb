@@ -61,7 +61,7 @@ interface IProps {
 }
 
 
-const RegisterRoomFooter: React.FC<IProps> = ({ prevHref = '', isValid=false, children }) => {
+const Footer: React.FC<IProps> = ({ prevHref = '', isValid=false, children }) => {
     const router = useRouter();
     return (
         <Container isValid={isValid}>
@@ -77,4 +77,4 @@ const RegisterRoomFooter: React.FC<IProps> = ({ prevHref = '', isValid=false, ch
     )
 }
 
-export default RegisterRoomFooter
+export default Footer

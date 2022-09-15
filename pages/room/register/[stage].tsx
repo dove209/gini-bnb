@@ -5,18 +5,21 @@ import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 
 import Custom404 from '../../404';
-import RegisterRoomBuilding from '../../../components/room/register/RegisterRoomBuilding';
-import RegisterRoomBedrooms from '../../../components/room/register/RegisterRoomBedrooms';
+import LargeBuilding from '../../../components/room/register/LargeBuilding';
+import Building from '../../../components/room/register/Building';
+import Bedrooms from '../../../components/room/register/Bedrooms';
 
 
 const RegisterStage: NextPage = () => {
     const router = useRouter();
     const stage = router.query.stage;
 
-    if (stage === 'building') {
-        return <RegisterRoomBuilding />
+    if (stage === 'large-building') {
+        return <LargeBuilding />
+    } else if (stage === 'building') {
+      return <Building />
     } else if (stage === 'bedrooms') {
-        return <RegisterRoomBedrooms />
+        return <Bedrooms />
     }
     return <Custom404 />
 }

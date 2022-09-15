@@ -12,7 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import { largeBuildingTypeList, apartmentBuildingTpyeList, houstBuildingTypeList, secondaryUnitBuildingTypeList, uniqueSpaceBuildingTypeList, bnbBuildingTypeList, boutiquesHotelBuildingTypeList, roomTypeList } from '../../../lib/staticData';
 
 import { useRegisterRoomStore } from '../../../stores/useRegisterRoomStore';
-import RegisterRoomFooter from './RegisterRoomFooter';
+import Footer from './Footer';
 
 const Container = styled.div`
     padding: 62px 30px 100px;
@@ -41,7 +41,7 @@ const Container = styled.div`
 `;
 
 
-const RegisterRoomBedrooms: React.FC = () => {
+const Bedrooms: React.FC = () => {
     const router = useRouter();
     const { } = useRegisterRoomStore();
 
@@ -55,12 +55,12 @@ const RegisterRoomBedrooms: React.FC = () => {
                 모든 게스트가 편안하게 숙박할 수 있도록 침대가 충분히 구비되어 있는지 확인하세요.
             </p>
 
-            <RegisterRoomFooter prevHref='/'>
+            <Footer prevHref='/'>
                     <button className='next-button' type='submit'>다음</button>
-                </RegisterRoomFooter>
+                </Footer>
 
         </Container>
     )
 }
 
-export default RegisterRoomBedrooms
+export default Bedrooms
