@@ -1,10 +1,12 @@
-import React, {  useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import shallow from 'zustand/shallow';
 
 import { largeBuildingTypeList } from '../../../lib/staticData';
+import { useRegisterRoomStore } from '../../../stores/useRegisterRoomStore';
 
 import RegisterRoomFooter from './RegisterRoomFooter';
 
@@ -67,11 +69,23 @@ const Container = styled.div`
 
 const RegisterRoomBuilding: React.FC = () => {
     const router = useRouter();
-    const [largeBuildingType, setLargeBuildingType] = useState('');
-
+    const { largeBuildingType: storedLargeBuildingType, setRegisterRoom } = useRegisterRoomStore(
+        (state) => ({ largeBuildingType: state.largeBuildingType, setRegisterRoom: state.setRegisterRoom })
+        ,shallow
+    );
     
+    const [largeBuildingType, setLargeBuildingType] = useState<string | null>(); // 숙소 유형 선택
+
+
+    useEffect(() => {
+        setLargeBuildingType(storedLargeBuildingType)
+    },[storedLargeBuildingType])
+
     const onClickNextButton = () => {
         if(!!largeBuildingType) {
+            setRegisterRoom({
+                largeBuildingType
+            })
             router.push('/room/register/bedrooms')
         }
     }

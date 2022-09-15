@@ -52,10 +52,10 @@ export type StoredRoomType = {
 }
 
 export type RegisterRoomState = {
-    largeBuildingType: string | null;
-    buildingType: string | null;
-    roomType: string | null;
-    isSetUpForGuest: boolean | null;
+    largeBuildingType?: string | null;
+    buildingType?: string | null;
+    roomType?: string | null;
+    isSetUpForGuest?: boolean | null;
     // maximumGuestCount: number;
     // bedroomCount: number;
     // bedCount: number;
