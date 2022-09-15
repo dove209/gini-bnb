@@ -1,66 +1,100 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, {  useEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import Image from 'next/image';
+import shallow from 'zustand/shallow';
 
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import { largeBuildingTypeList, apartmentBuildingTpyeList, houstBuildingTypeList, secondaryUnitBuildingTypeList, uniqueSpaceBuildingTypeList, bnbBuildingTypeList, boutiquesHotelBuildingTypeList, roomTypeList } from '../../../lib/staticData';
-
+import { largeBuildingTypeList } from '../../../lib/staticData';
 import { useRegisterRoomStore } from '../../../stores/useRegisterRoomStore';
+
+import StageInfo from './StageInfo';
 import Footer from './Footer';
 
 const Container = styled.div`
-    padding: 62px 30px 100px;
-    h2 {
-        font-size: 19px;
-        font-weight: 800;
-        margin-bottom: 56px;
-    }
-    h3 {
-        font-weight: bold;
-        color: ${palette.gray_76};
-        margin-bottom: 6px;
-        b {
-            color: ${palette.bittersweet}
+    display: flex;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    .selector-wrapper {
+        position: relative;
+        flex: 1;
+        height: 100%;
+
+        ul {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            li {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px;
+                border: 2px solid ${palette.gray_ed};
+                border-radius: 12px;
+                font-weight: bold;
+                font-size: 18px;
+                cursor: pointer;
+                &:hover, &.selected {
+                    border: 2px solid ${palette.black};
+                }
+            }
+            li + li {
+                margin-top: 10px;
+            }
         }
     }
-
-    .register-room-stage-info {
-        font-size: 14px;
-        max-width: 400px;
-        margin-bottom: 24px;
-        max-width: 400px;
-    }
-
-
 `;
+
 
 
 const Bedrooms: React.FC = () => {
     const router = useRouter();
-    const { } = useRegisterRoomStore();
+    const { largeBuildingType: storedLargeBuildingType, setRegisterRoom } = useRegisterRoomStore(
+        (state) => ({ largeBuildingType: state.largeBuildingType, setRegisterRoom: state.setRegisterRoom })
+        ,shallow
+    );
+    
+    const [largeBuildingType, setLargeBuildingType] = useState<string | null>(); // 숙소 유형 선택
 
 
+    useEffect(() => {
+        setLargeBuildingType(storedLargeBuildingType)
+    },[storedLargeBuildingType])
+
+    const onClickNextButton = () => {
+        if(!!largeBuildingType) {
+            setRegisterRoom({
+                largeBuildingType
+            })
+            router.push('/room/register/bedrooms')
+        }
+    }
 
     return (
         <Container>
-            <h2>숙소에 얼마나 많은 인원이 숙박할 수 있나요?</h2>
-            <h3><b>2단계</b> / 11단계</h3>
-            <p className="room-register-stage-info">
-                모든 게스트가 편안하게 숙박할 수 있도록 침대가 충분히 구비되어 있는지 확인하세요.
-            </p>
-
-            <Footer prevHref='/'>
-                    <button className='next-button' type='submit'>다음</button>
+            <StageInfo>
+                <h1>
+                    다음 중 숙소를 가장 잘<br />
+                    설명하는 문구는 무었인가요?
+                </h1>
+            </StageInfo>
+            <div className='selector-wrapper'>
+                <ul>
+                    {largeBuildingTypeList.map((option, index) => (
+                        <li className={option.type === largeBuildingType ? 'selected' : ''} key={index} onClick={() => setLargeBuildingType(option.type)}>
+                            <span>{option.type}</span>
+                            <Image src={option.imgSrc} width={56} height={56} alt='' />
+                        </li>
+                    ))}
+                </ul>
+                <Footer prevHref='/room/register/building' isValid={!!largeBuildingType} >
+                    <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
-
+            </div>
         </Container>
     )
 }
 
-export default Bedrooms
+export default Bedrooms;

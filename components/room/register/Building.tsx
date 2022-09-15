@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import shallow from 'zustand/shallow';
 
-import { largeBuildingTypeList } from '../../../lib/staticData';
+import { apartmentBuildingTpyeList } from '../../../lib/staticData';
 import { useRegisterRoomStore } from '../../../stores/useRegisterRoomStore';
 
 import StageInfo from './StageInfo';
@@ -19,26 +19,37 @@ const Container = styled.div`
         position: relative;
         flex: 1;
         height: 100%;
-
         ul {
             position: absolute;
             top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 50%;
+            max-height: calc(100% - 160px);
+            overflow: auto;
+            -ms-overflow-style: none; 
+            scrollbar-width: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
             li {
-                height: 10vh;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 20px;
-                border: 1px solid ${palette.gray_ed};
+                padding: 24px;
+                border: 2px solid ${palette.gray_ed};
                 border-radius: 12px;
-                font-weight: bold;
-                font-size: 18px;
+  
                 cursor: pointer;
                 &:hover, &.selected {
-                    border: 2px solid ${palette.black};
+                    border-color: ${palette.black};
+                }
+                h1 {
+                    font-weight: bold;
+                    font-size: 18px;
+                }
+                & > p {
+                    margin-top: 8px;
+                    color: ${palette.gray_aa};
+                    font-size: 14px;
+                    line-height: 20px;
                 }
             }
             li + li {
@@ -83,14 +94,14 @@ const Building: React.FC = () => {
             </StageInfo>
             <div className='selector-wrapper'>
                 <ul>
-                    {largeBuildingTypeList.map((option, index) => (
+                    {apartmentBuildingTpyeList.map((option, index) => (
                         <li className={option.type === largeBuildingType ? 'selected' : ''} key={index} onClick={() => setLargeBuildingType(option.type)}>
-                            <span>{option.type}</span>
-                            <Image src={option.imgSrc} width={56} height={56} alt='' />
+                            <h1>{option.type}</h1>
+                            {option.description && <p>{option.description}</p>}
                         </li>
                     ))}
                 </ul>
-                <Footer prevHref='/' isValid={!!largeBuildingType} >
+                <Footer prevHref='/room/register/large-building' isValid={!!largeBuildingType} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>

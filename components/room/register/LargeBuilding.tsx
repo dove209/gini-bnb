@@ -19,26 +19,34 @@ const Container = styled.div`
         position: relative;
         flex: 1;
         height: 100%;
-
+        
         ul {
             position: absolute;
             top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 50%;
+            max-height: calc(100% - 160px);
+            overflow: auto;
+            -ms-overflow-style: none; 
+            scrollbar-width: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
             li {
-                height: 10vh;
+                height: 90px;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 padding: 20px;
-                border: 1px solid ${palette.gray_ed};
+                border: 2px solid ${palette.gray_ed};
                 border-radius: 12px;
                 font-weight: bold;
                 font-size: 18px;
+                white-space: pre-wrap;
                 cursor: pointer;
                 &:hover, &.selected {
-                    border: 2px solid ${palette.black};
+                    border-color: ${palette.black};
                 }
             }
             li + li {
