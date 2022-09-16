@@ -45,8 +45,12 @@ const Container = styled.div`
                 font-size: 18px;
                 white-space: pre-wrap;
                 cursor: pointer;
-                &:hover, &.selected {
+                &:hover {
                     border-color: ${palette.black};
+                }
+                &.selected {
+                    border-color: ${palette.black};
+                    background-color: ${palette.gray_f7}
                 }
             }
             li + li {
@@ -95,7 +99,7 @@ const LargeBuilding: React.FC = () => {
                         </li>
                     ))}
                 </ul>
-                <Footer prevHref='/' isValid={!!largeBuildingType} >
+                <Footer step={1} prevHref='/' isValid={!!largeBuildingType} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>

@@ -2,10 +2,9 @@ import React, {  useEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import shallow from 'zustand/shallow';
 
-import { apartmentBuildingTpyeList } from '../../../lib/staticData';
+import { apartmentBuildingTpyeList, houstBuildingTypeList, secondaryUnitBuildingTypeList, bnbBuildingTypeList, uniqueSpaceBuildingTypeList, boutiquesHotelBuildingTypeList } from '../../../lib/staticData';
 import { useRegisterRoomStore } from '../../../stores/useRegisterRoomStore';
 
 import StageInfo from './StageInfo';
@@ -68,19 +67,43 @@ const Building: React.FC = () => {
         ,shallow
     );
     
-    const [largeBuildingType, setLargeBuildingType] = useState<string | null>(); // 숙소 유형 선택
+    const [buildingTypeList, setBuildingTypeList] = useState<{ type:string; description?: string; }[]>([]);
+    const [buildingType, setBuildingType] = useState<string | null>(); // 숙소 유형 선택
 
 
     useEffect(() => {
-        setLargeBuildingType(storedLargeBuildingType)
+        switch(storedLargeBuildingType){
+            case '아파트':
+                setBuildingTypeList([...apartmentBuildingTpyeList])
+                break
+            case '주택':
+                setBuildingTypeList([...houstBuildingTypeList])
+                break
+            case '별채':
+                setBuildingTypeList([...secondaryUnitBuildingTypeList])
+                break
+            case '독특한 숙소':
+                setBuildingTypeList([...uniqueSpaceBuildingTypeList])
+                break
+            case 'B&B':
+                setBuildingTypeList([...bnbBuildingTypeList])
+                break
+            case '부티크호텔':
+                setBuildingTypeList([...boutiquesHotelBuildingTypeList])
+                break                                     
+            default:
+                // 전 단계로 이동
+                router.replace('/room/register/large-building')
+                break
+        }
     },[storedLargeBuildingType])
 
     const onClickNextButton = () => {
-        if(!!largeBuildingType) {
+        if(!!buildingType) {
             setRegisterRoom({
-                largeBuildingType
+                buildingType
             })
-            router.push('/room/register/bedrooms')
+            router.push('/room/register/bedrooms');
         }
     }
 
@@ -94,14 +117,14 @@ const Building: React.FC = () => {
             </StageInfo>
             <div className='selector-wrapper'>
                 <ul>
-                    {apartmentBuildingTpyeList.map((option, index) => (
-                        <li className={option.type === largeBuildingType ? 'selected' : ''} key={index} onClick={() => setLargeBuildingType(option.type)}>
+                    {buildingTypeList.map((option, index) => (
+                        <li className={option.type === buildingType ? 'selected' : ''} key={index} onClick={() => setBuildingType(option.type)}>
                             <h1>{option.type}</h1>
                             {option.description && <p>{option.description}</p>}
                         </li>
                     ))}
                 </ul>
-                <Footer prevHref='/room/register/large-building' isValid={!!largeBuildingType} >
+                <Footer step={2} prevHref='/room/register/large-building' isValid={!!buildingType} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>

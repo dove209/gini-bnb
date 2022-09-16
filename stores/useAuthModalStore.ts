@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { devtools } from 'zustand/middleware';
 
 interface authModalState {
     authModalType: string;
@@ -8,10 +8,10 @@ interface authModalState {
 
 const useAuthModalStore = create<authModalState>()(
     devtools(
-        persist((set) => ({
+        (set) => ({
             authModalType: '',
             setAuthModalType: (type) => set(() => ({ authModalType: type }))
-        }))
+        })
     )
 )
 

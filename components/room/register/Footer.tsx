@@ -1,9 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
+import { useRegisterStepStore } from '../../../stores/useRegisterStepStore';
 
-const Container = styled.div<{isValid: boolean}>`
+const fillStepGauge = (prevStep: number, curStep: number) => keyframes`
+    from {
+        width: ${prevStep / 10 * 100}%;
+    } 
+    to {
+        width: ${curStep / 10 * 100}%;
+    }
+`
+
+const Container = styled.div<{ prevStep:number, curStep:number, isValid: boolean}>`
     position: absolute;
     bottom: 0;
     left: 0;
@@ -17,6 +27,15 @@ const Container = styled.div<{isValid: boolean}>`
         height: 2px;
         width: 100%;
         background-color: ${palette.gray_e5};
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 2px;
+            animation: ${({ prevStep, curStep }) => fillStepGauge(prevStep, curStep)} 0.5s ease-out forwards;
+            background-color: ${palette.black};
+        }
     }
     .button-wrapper {
         display: flex;
@@ -50,22 +69,29 @@ const Container = styled.div<{isValid: boolean}>`
             color: #fff;
         }
     }
-
-
 `;
 
 interface IProps {
+    step: number;
     prevHref?: string;
     isValid?: boolean;
     children: React.ReactNode;
 }
 
 
-const Footer: React.FC<IProps> = ({ prevHref = '', isValid=false, children }) => {
+const Footer: React.FC<IProps> = ({ step = 1, prevHref = '', isValid = false, children }) => {
     const router = useRouter();
+    const { prevStep, curStep, setPrevStep, setCurStep } = useRegisterStepStore();
+    useEffect(() => {
+            setCurStep(step)
+        return () => {
+            setPrevStep(curStep)
+        }
+    },[])
+
     return (
-        <Container isValid={isValid}>
-            <div className="step-bar"></div>
+        <Container prevStep={prevStep} curStep={curStep} isValid={isValid} >
+            <div className="step-bar" ></div>
             <div className="button-wrapper">
                 <button className='back-button' onClick={() => router.replace(prevHref)}>
                     뒤로

@@ -89,7 +89,7 @@ const Bedrooms: React.FC = () => {
                         </li>
                     ))}
                 </ul>
-                <Footer prevHref='/room/register/building' isValid={!!largeBuildingType} >
+                <Footer step={3} prevHref='/room/register/building' isValid={!!largeBuildingType} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>
