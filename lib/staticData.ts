@@ -378,20 +378,17 @@ export const boutiquesHotelBuildingTypeList = [
 ]
 
 // 숙소 유형
-export const roomTypeList = [
+export const privacyTypeList = [
     {
-        label: '집 전체',
-        value: 'entire',
+        type: '공간 전체',
         description: '게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로 이용합니다. 일반적으로 침실, 욕실, 부엌이 포함됩니다.'
     },
     {
-        label: '개인실',
-        value: 'private',
+        type: '개인실',
         description: '게스트에게 개인 침실이 제공됩니다. 침실 이외의 공간은 공용일 수  있습니다.'
     },
     {
-        label: '다인실',
-        value: 'public',
+        type: '다인실',
         description: '게스트는 개인 공간 없이, 다른 사람과 함께 쓰는 침실이나 공용공간에서 숙박합니다.'
     }
 ];

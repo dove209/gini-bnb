@@ -13,7 +13,11 @@ const useRegisterRoomStore = create<IRegisterRoomStore>()(
             largeBuildingType: null,
             buildingType: null,
             roomType: null,
-            isSetUpForGuest: null,
+            maximumGuestCount: 1,
+            bedroomCount: 1,
+            bedCount: 0,
+            bathroomCount: 0.5,
+            bathroomType: 'private',
             setRegisterRoom: (registerRoom) => set(() => ({ ...registerRoom }))
         }))
     )

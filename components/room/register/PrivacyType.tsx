@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import shallow from 'zustand/shallow';
 
-import { largeBuildingTypeList } from '../../../lib/staticData';
+import { privacyTypeList } from '../../../lib/staticData';
 import { useRegisterRoomStore } from '../../../stores/useRegisterRoomStore';
 
 import StageInfo from './StageInfo';
@@ -19,7 +19,6 @@ const Container = styled.div`
         position: relative;
         flex: 1;
         height: 100%;
-
         ul {
             position: absolute;
             top: 45%;
@@ -30,14 +29,18 @@ const Container = styled.div`
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: 20px;
+                padding: 34px 20px;
                 border: 2px solid ${palette.gray_ed};
                 border-radius: 12px;
                 font-weight: bold;
                 font-size: 18px;
                 cursor: pointer;
-                &:hover, &.selected {
-                    border: 2px solid ${palette.black};
+                &:hover {
+                    border-color: ${palette.black};
+                }
+                &.selected {
+                    border-color: ${palette.black};
+                    background-color: ${palette.gray_f7}
                 }
             }
             li + li {
@@ -49,26 +52,26 @@ const Container = styled.div`
 
 
 
-const Bedrooms: React.FC = () => {
+const PrivacyType: React.FC = () => {
     const router = useRouter();
-    const { largeBuildingType: storedLargeBuildingType, setRegisterRoom } = useRegisterRoomStore(
-        (state) => ({ largeBuildingType: state.largeBuildingType, setRegisterRoom: state.setRegisterRoom })
+    const { roomType: storedRoomType, setRegisterRoom } = useRegisterRoomStore(
+        (state) => ({ roomType: state.roomType, setRegisterRoom: state.setRegisterRoom })
         ,shallow
     );
     
-    const [largeBuildingType, setLargeBuildingType] = useState<string | null>(); // 숙소 유형 선택
+    const [roomType, setRoomType] = useState<string | null>(); // 숙소의 종류 선택
 
 
     useEffect(() => {
-        setLargeBuildingType(storedLargeBuildingType)
-    },[storedLargeBuildingType])
+        setRoomType(storedRoomType)
+    },[storedRoomType])
 
     const onClickNextButton = () => {
-        if(!!largeBuildingType) {
+        if(!!roomType) {
             setRegisterRoom({
-                largeBuildingType
+                roomType
             })
-            router.push('/room/register/bedrooms')
+            router.push('/room/register/floor-plan')
         }
     }
 
@@ -76,20 +79,19 @@ const Bedrooms: React.FC = () => {
         <Container>
             <StageInfo>
                 <h1>
-                    다음 중 숙소를 가장 잘<br />
-                    설명하는 문구는 무었인가요?
+                    게스트가 머무르게 될 숙소의 종류가<br />
+                    무엇인가요?
                 </h1>
             </StageInfo>
             <div className='selector-wrapper'>
                 <ul>
-                    {largeBuildingTypeList.map((option, index) => (
-                        <li className={option.type === largeBuildingType ? 'selected' : ''} key={index} onClick={() => setLargeBuildingType(option.type)}>
+                    {privacyTypeList.map((option, index) => (
+                        <li className={option.type === roomType ? 'selected' : ''} key={index} onClick={() => setRoomType(option.type)}>
                             <span>{option.type}</span>
-                            <Image src={option.imgSrc} width={56} height={56} alt='' />
                         </li>
                     ))}
                 </ul>
-                <Footer step={3} prevHref='/room/register/building' isValid={!!largeBuildingType} >
+                <Footer step={3} prevHref='/room/register/building' isValid={!!roomType} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>
@@ -97,4 +99,4 @@ const Bedrooms: React.FC = () => {
     )
 }
 
-export default Bedrooms;
+export default PrivacyType;

@@ -35,11 +35,15 @@ const Container = styled.div`
                 padding: 24px;
                 border: 2px solid ${palette.gray_ed};
                 border-radius: 12px;
-  
                 cursor: pointer;
-                &:hover, &.selected {
+                &:hover {
                     border-color: ${palette.black};
                 }
+                &.selected {
+                    border-color: ${palette.black};
+                    background-color: ${palette.gray_f7}
+                }
+
                 h1 {
                     font-weight: bold;
                     font-size: 18px;
@@ -62,13 +66,21 @@ const Container = styled.div`
 
 const Building: React.FC = () => {
     const router = useRouter();
-    const { largeBuildingType: storedLargeBuildingType, setRegisterRoom } = useRegisterRoomStore(
-        (state) => ({ largeBuildingType: state.largeBuildingType, setRegisterRoom: state.setRegisterRoom })
-        ,shallow
+    const { 
+        largeBuildingType: storedLargeBuildingType, 
+        buildingType: storedBuildingType,
+        setRegisterRoom
+    } = useRegisterRoomStore(
+        (state) => ({ 
+            largeBuildingType: state.largeBuildingType,
+            buildingType: state.buildingType,
+            setRegisterRoom: state.setRegisterRoom
+        }),
+        shallow
     );
     
     const [buildingTypeList, setBuildingTypeList] = useState<{ type:string; description?: string; }[]>([]);
-    const [buildingType, setBuildingType] = useState<string | null>(); // 숙소 유형 선택
+    const [buildingType, setBuildingType] = useState<string | null>();  // 숙소 문구 선택
 
 
     useEffect(() => {
@@ -98,12 +110,16 @@ const Building: React.FC = () => {
         }
     },[storedLargeBuildingType])
 
+    useEffect(() => {
+        setBuildingType(storedBuildingType)
+    },[storedBuildingType])
+
     const onClickNextButton = () => {
         if(!!buildingType) {
             setRegisterRoom({
                 buildingType
             })
-            router.push('/room/register/bedrooms');
+            router.push('/room/register/privacy-type');
         }
     }
 

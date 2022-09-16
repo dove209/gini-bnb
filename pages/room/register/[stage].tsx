@@ -7,7 +7,8 @@ import { getSession } from 'next-auth/react';
 import Custom404 from '../../404';
 import LargeBuilding from '../../../components/room/register/LargeBuilding';
 import Building from '../../../components/room/register/Building';
-import Bedrooms from '../../../components/room/register/Bedrooms';
+import PrivacyType from '../../../components/room/register/PrivacyType';
+import FloorPlan from '../../../components/room/register/FloorPlan';
 
 
 const RegisterStage: NextPage = () => {
@@ -18,9 +19,14 @@ const RegisterStage: NextPage = () => {
         return <LargeBuilding />
     } else if (stage === 'building') {
       return <Building />
-    } else if (stage === 'bedrooms') {
-        return <Bedrooms />
+    } else if (stage === 'privacy-type') {
+        return <PrivacyType />
+    } else if (stage === 'floor-plan') {
+      return <FloorPlan />
+    } else if (stage === 'location') {
+      return <Custom404 />
     }
+
     return <Custom404 />
 }
 
