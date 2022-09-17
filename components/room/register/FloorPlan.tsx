@@ -149,7 +149,7 @@ const FloorPlan: React.FC = () => {
             bathroomCount: bathroomCnt,
             bathroomType: isPrivate,
         })
-        // router.push('/room/register/bedrooms')
+        router.push('/room/register/location')
     }
 
     return (
