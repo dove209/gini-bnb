@@ -24,14 +24,14 @@ export type RegisterRoomState = {
     bedCount?: number;
     bathroomCount?: number;
     bathroomType?: 'private' | 'public';
-    // country: string;
-    // city: string;
-    // district: string;
-    // streetAddress: string;
-    // detailAddress: string;
-    // postcode: string;
-    // latitude: number;
-    // longitude: number;
+    country?: string;
+    city?: string;
+    district?: string;
+    streetAddress?: string;
+    detailAddress?: string;
+    postcode?: string;
+    latitude?: number;
+    longitude?: number;
     // amentities: string[],
     // conveniences: string[],
     // photos: string[],

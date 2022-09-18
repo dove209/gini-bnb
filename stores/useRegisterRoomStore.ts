@@ -18,6 +18,14 @@ const useRegisterRoomStore = create<IRegisterRoomStore>()(
             bedCount: 0,
             bathroomCount: 0.5,
             bathroomType: 'private',
+            country: '',
+            city: '',
+            district: '',
+            streetAddress: '',
+            detailAddress: '',
+            postcode: '',
+            latitude: 0,
+            longitude: 0,
             setRegisterRoom: (registerRoom) => set(() => ({ ...registerRoom }))
         }))
     )
