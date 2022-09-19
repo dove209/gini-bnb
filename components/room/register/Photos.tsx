@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import shallow from 'zustand/shallow';
+import uuid from 'react-uuid';
 
-import { privacyTypeList } from '../../../lib/staticData';
+import storage from '../../../firebaseConfig';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { useRegisterRoomStore } from '../../../stores/useRegisterRoomStore';
 
-import UploadIcon from '../../../public/static/svg/register/upload.svg';
 import Button from '../../common/Button';
-
 import StageInfo from './StageInfo';
 import Footer from './Footer';
 
@@ -22,11 +22,12 @@ const Container = styled.div`
         position: relative;
         flex: 1;
         height: 100%;
+        min-width: 600px;
         .upload-photo-wrapper {
             width: 500px;
-            height: 700px;
+            height: 600px;
             position: absolute;
-            top: 50%;
+            top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
@@ -49,7 +50,8 @@ const Container = styled.div`
             }
 
             button {
-                width: 167px;
+                margin-top: 20px;
+                width: 120px;
             }
 
             img { 
@@ -72,10 +74,23 @@ const Photos: React.FC = () => {
     const [roomType, setRoomType] = useState<string | null>(); // 숙소의 종류 선택
     const [photos, setPhotos] = useState<string[]>([]);
 
-    const uploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    /** 이미지 업로드 하기(firebase Store 사용) */
+    const uploadImage = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { files } = event.target;
-        console.log(files)
-
+        if (files && files.length > 0) {
+            try {
+                const file = files[0];
+                const storageRef = ref(storage, `/photos/${uuid()}_${file.name}`)
+                uploadBytes(storageRef, file).then((snapshot) => {
+                    getDownloadURL(snapshot.ref).then((url) => {
+                        console.log(url)
+                        setPhotos((prev) => [...prev, url]);
+                    });
+                });
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
 
 
@@ -100,7 +115,7 @@ const Photos: React.FC = () => {
                 </h1>
             </StageInfo>
             <div className='selector-wrapper'>
-                {photos.length === 0 && (
+                {photos.length === 0 ? (
                     <div className="upload-photo-wrapper">
                         <>
                             <h1>여기로 사진을 끌어다 놓으세요.</h1>
@@ -108,6 +123,10 @@ const Photos: React.FC = () => {
                             <Button >사진 업로드</Button>
                         </>
                     </div>
+                ) : (
+                    <>
+                        <Image src={photos[0]} width={300} height={200}></Image>
+                    </>
                 )}
                 <Footer step={7} prevHref='/room/register/amenities' isValid={!!roomType} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>

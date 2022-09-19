@@ -13,6 +13,7 @@
     "babel-plugin-inline-react-svg": "^2.0.1",
     "babel-plugin-styled-components": "^2.0.7",
     "bcryptjs": "^2.4.3",
+    "firebase": "^9.10.0",
     "formidable": "^2.0.1",
     "formik": "^2.2.9",
     "jsonwebtoken": "^8.5.1",
