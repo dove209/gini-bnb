@@ -10,6 +10,7 @@ import Building from '../../../components/room/register/Building';
 import PrivacyType from '../../../components/room/register/PrivacyType';
 import FloorPlan from '../../../components/room/register/FloorPlan';
 import Location from '../../../components/room/register/Location';
+import Amenities from '../../../components/room/register/Amenities';
 
 
 const RegisterStage: NextPage = () => {
@@ -26,6 +27,8 @@ const RegisterStage: NextPage = () => {
       return <FloorPlan />
     } else if (stage === 'location') {
       return <Location />
+    } else if (stage === 'amenities') {
+      return <Amenities />
     }
 
     return <Custom404 />

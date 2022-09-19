@@ -26,6 +26,10 @@ const useRegisterRoomStore = create<IRegisterRoomStore>()(
             postcode: '',
             latitude: 0,
             longitude: 0,
+            conveniences: [],
+            popularConveniences: [],
+            safetyGoods: [],
+            photos: [],
             setRegisterRoom: (registerRoom) => set(() => ({ ...registerRoom }))
         }))
     )

@@ -28,8 +28,8 @@ const Container = styled.div`
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 63%;
-        height: 600px;
+        width: 45%;
+        height: 650px;
         background-color: white;
         border-radius: 16px;
         padding: 32px 24px;
@@ -37,7 +37,7 @@ const Container = styled.div`
         h1 {
           text-align: center;
           font-weight: bold;
-          font-size: 18px;
+          font-size: 20px;
         }
         ul {
           margin-top: 40px;
@@ -45,23 +45,23 @@ const Container = styled.div`
           border-radius: 5px;
           li {
             position: relative;
-            height: 52px;
+            height: 60px;
             width: 100%;
             border-bottom: 1px solid ${palette.gray_71};
             &:focus-within,
             &.isValid {
               border-radius: 10px;
               p {
-                top: 20%;
-                font-size: 10px;
+                top: 22%;
+                font-size: 12px;
               }
             }
             p {
               position: absolute;
               top: 50%;
-              left: 10px;
+              left: 15px;
               transform: translateY(-50%);
-              font-size: 14px;
+              font-size: 16px;
               transition: all 0.2s;
               color: ${palette.gray_71};
             }
@@ -72,7 +72,7 @@ const Container = styled.div`
               height: 100%;
               border: 0;
               background-color: transparent;
-              padding-left: 10px;
+              padding-left: 15px;
               padding-top: 10px;
               &:focus {
                 outline: none;
@@ -98,15 +98,14 @@ const Container = styled.div`
           }
         }
         .currentAPI {
-          margin-top: 20px;
+          margin-top: 30px;
           border-top: 1px solid ${palette.gray_dd};
           padding-top: 20px;
           h2 {
-            font-size: 14px;
+            font-size: 18px;
           }
-
           button {
-            margin-top: 10px;
+            margin-top: 20px;
             border: 0;
             background-color: transparent;
             width: 150px;
@@ -114,7 +113,7 @@ const Container = styled.div`
             border: 2px solid ${palette.dark_cyan};
             border-radius: 5px;
             color: ${palette.dark_cyan};
-            font-size: 12px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
           }
@@ -195,27 +194,13 @@ const Location: React.FC = () => {
   });
 
   useEffect(() => {
-    {
-      !!storedCountry && setCountry(storedCountry);
-    }
-    {
-      !!storedCity && setCity(storedCity);
-    }
-    {
-      !!storedDistrict && setDistrict(storedDistrict);
-    }
-    {
-      !!storedStreetAddress && setStreetAddress(storedStreetAddress);
-    }
-    {
-      !!storedDetailAddress && setDetailAddress(storedDetailAddress);
-    }
-    {
-      !!storedPostcode && setPostcode(storedPostcode);
-    }
-    {
-      !!storedLatitude &&
-        !!storedLongitude &&
+    {!!storedCountry && setCountry(storedCountry);}
+    {!!storedCity && setCity(storedCity);}
+    {!!storedDistrict && setDistrict(storedDistrict);}
+    {!!storedStreetAddress && setStreetAddress(storedStreetAddress);}
+    {!!storedDetailAddress && setDetailAddress(storedDetailAddress);}
+    {!!storedPostcode && setPostcode(storedPostcode);}
+    {!!storedLatitude && !!storedLongitude &&
         setPosition({
           ...position,
           lat: storedLatitude,
@@ -237,25 +222,27 @@ const Location: React.FC = () => {
   }, []);
 
 
- 
+
   const onClickNextButton = () => {
     if (!!city && !!district && !!streetAddress && !!postcode) {
       setIsInputFinish(true);
     }
-    if (isInputFinish && !position) {
-      alert("핀을 꽃아 주세요.");
-    } else {
-      setRegisterRoom({
-        country,
-        city,
-        district,
-        streetAddress,
-        detailAddress,
-        postcode,
-        latitude: position?.lat,
-        longitude: position?.lng,
-      });
-      // router.push('/room/register/building')
+    if (isInputFinish) {
+      if(!position) {
+        alert("핀을 꽃아 주세요.");
+      } else {
+        setRegisterRoom({
+          country,
+          city,
+          district,
+          streetAddress,
+          detailAddress,
+          postcode,
+          latitude: position?.lat,
+          longitude: position?.lng,
+        });
+        router.push('/room/register/amenities')
+      }
     }
   };
 
