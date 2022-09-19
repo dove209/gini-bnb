@@ -34,6 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@types/bcryptjs", "npm:2.4.2"],\
+            ["@types/formidable", "npm:2.0.5"],\
             ["@types/jsonwebtoken", "npm:8.5.9"],\
             ["@types/node", "npm:18.7.14"],\
             ["@types/react", "npm:18.0.18"],\
@@ -47,6 +48,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bcryptjs", "npm:2.4.3"],\
             ["eslint", "npm:8.23.0"],\
             ["eslint-config-next", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:12.2.5"],\
+            ["formidable", "npm:2.0.1"],\
             ["formik", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:2.2.9"],\
             ["jsonwebtoken", "npm:8.5.1"],\
             ["next", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:12.2.5"],\
@@ -617,6 +619,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/formidable", [\
+        ["npm:2.0.5", {\
+          "packageLocation": "./.yarn/cache/@types-formidable-npm-2.0.5-2c70f897be-2de9a08a53.zip/node_modules/@types/formidable/",\
+          "packageDependencies": [\
+            ["@types/formidable", "npm:2.0.5"],\
+            ["@types/node", "npm:18.7.16"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/hoist-non-react-statics", [\
         ["npm:3.3.1", {\
           "packageLocation": "./.yarn/cache/@types-hoist-non-react-statics-npm-3.3.1-c0081332b2-2c0778570d.zip/node_modules/@types/hoist-non-react-statics/",\
@@ -1013,6 +1025,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["define-properties", "npm:1.1.4"],\
             ["es-abstract", "npm:1.20.2"],\
             ["es-shim-unscopables", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["asap", [\
+        ["npm:2.0.6", {\
+          "packageLocation": "./.yarn/cache/asap-npm-2.0.6-36714d439d-b296c92c4b.zip/node_modules/asap/",\
+          "packageDependencies": [\
+            ["asap", "npm:2.0.6"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1544,6 +1565,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/delayed-stream-npm-1.0.0-c5a4c4cc02-46fe6e83e2.zip/node_modules/delayed-stream/",\
           "packageDependencies": [\
             ["delayed-stream", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["dezalgo", [\
+        ["npm:1.0.3", {\
+          "packageLocation": "./.yarn/cache/dezalgo-npm-1.0.3-e2bc978ebd-8b26238db9.zip/node_modules/dezalgo/",\
+          "packageDependencies": [\
+            ["dezalgo", "npm:1.0.3"],\
+            ["asap", "npm:2.0.6"],\
+            ["wrappy", "npm:1.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2259,6 +2291,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["formidable", [\
+        ["npm:2.0.1", {\
+          "packageLocation": "./.yarn/cache/formidable-npm-2.0.1-b18227215c-b35445444e.zip/node_modules/formidable/",\
+          "packageDependencies": [\
+            ["formidable", "npm:2.0.1"],\
+            ["dezalgo", "npm:1.0.3"],\
+            ["hexoid", "npm:1.0.0"],\
+            ["once", "npm:1.4.0"],\
+            ["qs", "npm:6.9.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["formik", [\
         ["npm:2.2.9", {\
           "packageLocation": "./.yarn/cache/formik-npm-2.2.9-0e8cb516ca-f07f80eee8.zip/node_modules/formik/",\
@@ -2366,6 +2411,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["gini-bnb", "workspace:."],\
             ["@types/bcryptjs", "npm:2.4.2"],\
+            ["@types/formidable", "npm:2.0.5"],\
             ["@types/jsonwebtoken", "npm:8.5.9"],\
             ["@types/node", "npm:18.7.14"],\
             ["@types/react", "npm:18.0.18"],\
@@ -2379,6 +2425,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bcryptjs", "npm:2.4.3"],\
             ["eslint", "npm:8.23.0"],\
             ["eslint-config-next", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:12.2.5"],\
+            ["formidable", "npm:2.0.1"],\
             ["formik", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:2.2.9"],\
             ["jsonwebtoken", "npm:8.5.1"],\
             ["next", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:12.2.5"],\
@@ -2544,6 +2591,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["has-tostringtag", "npm:1.0.0"],\
             ["has-symbols", "npm:1.0.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["hexoid", [\
+        ["npm:1.0.0", {\
+          "packageLocation": "./.yarn/cache/hexoid-npm-1.0.0-2274609209-27a148ca76.zip/node_modules/hexoid/",\
+          "packageDependencies": [\
+            ["hexoid", "npm:1.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -3641,6 +3697,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/punycode-npm-2.1.1-26eb3e15cf-823bf443c6.zip/node_modules/punycode/",\
           "packageDependencies": [\
             ["punycode", "npm:2.1.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["qs", [\
+        ["npm:6.9.3", {\
+          "packageLocation": "./.yarn/cache/qs-npm-6.9.3-d8c69297f4-89cd1b5e52.zip/node_modules/qs/",\
+          "packageDependencies": [\
+            ["qs", "npm:6.9.3"]\
           ],\
           "linkType": "HARD"\
         }]\

@@ -101,7 +101,7 @@ const Amenities: React.FC = () => {
             popularConveniences,
             safetyGoods
         })
-        // router.push('/room/register/floor-plan')
+        router.push('/room/register/photos');
     }
 
     return (
