@@ -3,7 +3,8 @@ import { devtools, persist } from 'zustand/middleware';
 import { RegisterRoomState } from '../types/room';
 
 interface IRegisterRoomStore extends RegisterRoomState {
-    setRegisterRoom: (registerRoom: RegisterRoomState) => void
+    setRegisterRoom: (registerRoom: RegisterRoomState) => void;
+    reset: () => void;
 }
 
 const useRegisterRoomStore = create<IRegisterRoomStore>()(
@@ -30,6 +31,7 @@ const useRegisterRoomStore = create<IRegisterRoomStore>()(
             popularConveniences: [],
             safetyGoods: [],
             photos: [],
+            reset:() => set(() => ({ photos: [] })),
             setRegisterRoom: (registerRoom) => set(() => ({ ...registerRoom }))
         }))
     )

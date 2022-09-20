@@ -102,11 +102,11 @@ const Container = styled.div`
 
 
 interface IProps {
-    photos: string[];
+    photos?: string[];
     uploadImage: (event: React.ChangeEvent<HTMLInputElement>) => void;
     deletePhoto: (src: string) => void;
 }
-const PhotoCardList: React.FC<IProps> = ({ photos, uploadImage, deletePhoto }) => {
+const PhotoCardList: React.FC<IProps> = ({ photos = [], uploadImage, deletePhoto }) => {
     return (
         <Container>
             <h1>4장의 사진을 올려주세요.</h1>

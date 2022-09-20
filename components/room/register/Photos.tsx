@@ -74,6 +74,10 @@ const Photos: React.FC = () => {
 
     const [photos, setPhotos] = useState<string[]>([]);
 
+    useEffect(() => {
+        {!!storedPhotos && setPhotos([...storedPhotos])}
+    }, [storedPhotos])
+
     
     /** 이미지 업로드 하기(firebase Store 사용) */
     const addPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,8 +87,9 @@ const Photos: React.FC = () => {
                 const storageRef = ref(storage, `/photos/${uuid()}_${file.name}`)
                 uploadBytes(storageRef, file).then((snapshot) => {
                     getDownloadURL(snapshot.ref).then((url) => {
-                        console.log(url)
-                        setPhotos((prev) => [...prev, url]);
+                        setRegisterRoom({
+                            photos: [...photos, url]
+                        })
                     });
                 });
             } catch (error) {
@@ -97,20 +102,14 @@ const Photos: React.FC = () => {
     const deletePhoto = (src: string) => {
         const fileRef = ref(storage, src);
         deleteObject(fileRef).then(() => {
-            setPhotos(photos.filter((photo => photo !== src)))
+            setRegisterRoom({
+                photos: photos?.filter((photo => photo !== src))
+            })
         })
     };
 
-
-    useEffect(() => {
-        {!!storedPhotos && setPhotos([...storedPhotos])}
-    }, [storedPhotos])
-
     const onClickNextButton = () => {
-        if (photos.length === 4) {
-            setRegisterRoom({
-                photos
-            })
+        if (photos?.length === 4) {
             router.push('/room/register/title')
         }
     }
@@ -123,7 +122,7 @@ const Photos: React.FC = () => {
                 </h1>
             </StageInfo>
             <div className='selector-wrapper'>
-                {photos.length === 0 ? 
+                {photos?.length === 0 ? 
                 (
                     <div className="upload-photo-wrapper">
                         <>
@@ -137,7 +136,7 @@ const Photos: React.FC = () => {
                         <PhotoCardList photos={photos} uploadImage={addPhoto} deletePhoto={deletePhoto} />
                     </>
                 )}
-                <Footer step={7} prevHref='/room/register/amenities' isValid={photos.length === 4} >
+                <Footer step={7} prevHref='/room/register/amenities' isValid={photos?.length === 4} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>
