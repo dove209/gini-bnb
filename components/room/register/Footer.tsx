@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
@@ -82,7 +82,8 @@ interface IProps {
 const Footer: React.FC<IProps> = ({ step = 1, prevHref = '', isValid = false, children }) => {
     const router = useRouter();
     const { prevStep, curStep, setPrevStep, setCurStep } = useRegisterStepStore();
-    useEffect(() => {
+
+    useLayoutEffect(() => {
             setCurStep(step)
         return () => {
             setPrevStep(curStep)

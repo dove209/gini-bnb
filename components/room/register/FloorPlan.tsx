@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
@@ -113,14 +113,14 @@ const Container = styled.div`
 
 const FloorPlan: React.FC = () => {
     const router = useRouter();
-    const { maximumGuestCount, bedroomCount, bedCount, bathroomCount, bathroomType, setRegisterRoom } = useRegisterRoomStore(
+    const { maximumGuestCount, bedroomCount, bedCount, bathroomCount, bathroomType, setFloorPlan } = useRegisterRoomStore(
         (state) => ({ 
             maximumGuestCount: state.maximumGuestCount,
             bedroomCount: state.bedroomCount,
             bedCount: state.bedCount,
             bathroomCount: state.bathroomCount,
             bathroomType: state.bathroomType,
-            setRegisterRoom: state.setRegisterRoom
+            setFloorPlan: state.setFloorPlan
         }),
         shallow
     );
@@ -129,11 +129,11 @@ const FloorPlan: React.FC = () => {
     const [bedroomCnt, setBedroomCnt]  = useState<number>(0);
     const [bedCnt, setBedCnt] = useState<number>(0);
     const [bathroomCnt, setBathroomCnt] = useState<number>(0);
-    const [isPrivate, setIsPrivate] = useState<'private' | 'public'>();
+    const [isPrivate, setIsPrivate] = useState<'private' | 'public'>('private');
 
 
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         {!!maximumGuestCount && setMaxGestCnt(maximumGuestCount)};
         {!!bedroomCount && setBedroomCnt(bedroomCount)};
         {!!bedCount && setBedCnt(bedCount)};
@@ -142,7 +142,7 @@ const FloorPlan: React.FC = () => {
     },[maximumGuestCount, bedroomCount, bedCount, bathroomCount, bathroomType])
 
     const onClickNextButton = () => {
-        setRegisterRoom({
+        setFloorPlan({
             maximumGuestCount: maxGuestCnt,
             bedroomCount: bedroomCnt,
             bedCount: bedCnt,

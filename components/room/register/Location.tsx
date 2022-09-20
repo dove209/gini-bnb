@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import palette from "../../../styles/palette";
 import { useRouter } from "next/router";
@@ -29,7 +29,6 @@ const Container = styled.div`
         left: 50%;
         transform: translate(-50%, -50%);
         width: 45%;
-        height: 650px;
         background-color: white;
         border-radius: 16px;
         padding: 32px 24px;
@@ -155,7 +154,7 @@ const Location: React.FC = () => {
     postcode: storedPostcode,
     latitude: storedLatitude,
     longitude: storedLongitude,
-    setRegisterRoom,
+    setAddress,
   } = useRegisterRoomStore(
     (state) => ({
       country: state.country,
@@ -166,7 +165,7 @@ const Location: React.FC = () => {
       postcode: state.postcode,
       latitude: state.latitude,
       longitude: state.longitude,
-      setRegisterRoom: state.setRegisterRoom,
+      setAddress: state.setAddress,
     }),
     shallow
   );
@@ -178,12 +177,12 @@ const Location: React.FC = () => {
   const postcodeInputRef = useRef<HTMLInputElement>(null);
 
   const [isInputFinish, setIsInputFinish] = useState<boolean>(false);
-  const [country, setCountry] = useState<string | undefined>("");
-  const [city, setCity] = useState<string | undefined>("");
-  const [district, setDistrict] = useState<string | undefined>("");
-  const [streetAddress, setStreetAddress] = useState<string | undefined>("");
-  const [detailAddress, setDetailAddress] = useState<string | undefined>("");
-  const [postcode, setPostcode] = useState<string | undefined>("");
+  const [country, setCountry] = useState<string>("");
+  const [city, setCity] = useState<string>("");
+  const [district, setDistrict] = useState<string>("");
+  const [streetAddress, setStreetAddress] = useState<string>("");
+  const [detailAddress, setDetailAddress] = useState<string>("");
+  const [postcode, setPostcode] = useState<string>("");
   const [position, setPosition] = useState<{ lat: number; lng: number } | null>(
     null
   );
@@ -193,7 +192,7 @@ const Location: React.FC = () => {
     lng: 126.570667,
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     {!!storedCountry && setCountry(storedCountry);}
     {!!storedCity && setCity(storedCity);}
     {!!storedDistrict && setDistrict(storedDistrict);}
@@ -209,7 +208,7 @@ const Location: React.FC = () => {
     }
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // 현재 위치 불러오기
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
@@ -231,7 +230,7 @@ const Location: React.FC = () => {
       if(!position) {
         alert("핀을 꽃아 주세요.");
       } else {
-        setRegisterRoom({
+        setAddress({
           country,
           city,
           district,
@@ -256,9 +255,9 @@ const Location: React.FC = () => {
         setCountry("대한민국");
         setCity(result[0].address?.region_1depth_name);
         setDistrict(result[0].address?.region_2depth_name);
-        setStreetAddress(result[0].road_address?.road_name);
-        setDetailAddress(result[0].road_address?.building_name);
-        setPostcode(result[0].address?.zip_code);
+        setStreetAddress(result[0]?.road_address?.road_name ?? '');
+        setDetailAddress(result[0]?.road_address?.building_name ?? '');
+        setPostcode(result[0].address?.zip_code ?? '');
       }
     });
   };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
@@ -63,24 +63,22 @@ const Container = styled.div`
 
 const Title: React.FC = () => {
     const router = useRouter();
-    const { title: storedTitle, setRegisterRoom } = useRegisterRoomStore(
-        (state) => ({ title: state.title, setRegisterRoom: state.setRegisterRoom })
+    const { title: storedTitle, setTitle } = useRegisterRoomStore(
+        (state) => ({ title: state.title, setTitle: state.setTitle })
         , shallow
     );
 
-    const [title, setTitle] = useState('');
+    const [value, setValue] = useState<string>('');
 
-    useEffect(() => {
-        {!!storedTitle && setTitle(storedTitle)}
+    useLayoutEffect(() => {
+        {!!storedTitle && setValue(storedTitle)}
     }, [storedTitle])
 
     
 
     const onClickNextButton = () => {
-        if (!!title) {
-            setRegisterRoom({
-                title
-            })
+        if (!!value) {
+            setTitle(value)
             router.push('/room/register/description');
         }
     }
@@ -101,14 +99,14 @@ const Title: React.FC = () => {
                     <textarea 
                         placeholder='도심이 내려다보이는 현대적인 로프트'
                         maxLength={50}
-                        onChange={(e) => setTitle(e.target.value)}
-                        value={title}
+                        onChange={(e) => setValue(e.target.value)}
+                        value={value}
                     />
                     <span>
-                       {title.length} / 50
+                       {value.length} / 50
                     </span>
                 </div>
-                <Footer step={8} prevHref='/room/register/photos' isValid={!!title} >
+                <Footer step={8} prevHref='/room/register/photos' isValid={!!value} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>

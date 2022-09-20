@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, {  useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
@@ -74,13 +74,13 @@ const Amenities: React.FC = () => {
         conveniences: storedConveniences,
         popularConveniences: storedPopularConveniences,
         safetyGoods: storedSafetyGoods,
-        setRegisterRoom 
+        setAmenities 
     } = useRegisterRoomStore(
         (state) => ({
             conveniences: state.conveniences,
             popularConveniences: state.popularConveniences,
             safetyGoods: state.safetyGoods,
-            setRegisterRoom: state.setRegisterRoom 
+            setAmenities: state.setAmenities 
         }),
         shallow
     );
@@ -89,14 +89,14 @@ const Amenities: React.FC = () => {
     const [popularConveniences, setPopularConveniences] = useState<string[]>([]);
     const [safetyGoods, setSafetyGoods] = useState<string[]>([]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         {!!storedConveniences && setConveniences([...storedConveniences])}
         {!!storedPopularConveniences && setPopularConveniences([...storedPopularConveniences])}
         {!!storedSafetyGoods && setSafetyGoods([...storedSafetyGoods])}
     },[storedConveniences, storedPopularConveniences, storedSafetyGoods])
 
     const onClickNextButton = () => {
-        setRegisterRoom({
+        setAmenities({
             conveniences,
             popularConveniences,
             safetyGoods

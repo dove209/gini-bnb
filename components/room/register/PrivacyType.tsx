@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
@@ -54,23 +54,24 @@ const Container = styled.div`
 
 const PrivacyType: React.FC = () => {
     const router = useRouter();
-    const { roomType: storedRoomType, setRegisterRoom } = useRegisterRoomStore(
-        (state) => ({ roomType: state.roomType, setRegisterRoom: state.setRegisterRoom })
-        ,shallow
+    const { roomType: storedRoomType, setRoomType } = useRegisterRoomStore(
+        (state) => ({ 
+            roomType: state.roomType,
+            setRoomType: state.setRoomType
+        }),
+        shallow
     );
     
-    const [roomType, setRoomType] = useState<string | null>(); // 숙소의 종류 선택
+    const [room, setRoom] = useState<string>(); // 숙소의 종류 선택
 
 
-    useEffect(() => {
-        setRoomType(storedRoomType)
+    useLayoutEffect(() => {
+        setRoom(storedRoomType)
     },[storedRoomType])
 
     const onClickNextButton = () => {
-        if(!!roomType) {
-            setRegisterRoom({
-                roomType
-            })
+        if(!!room) {
+            setRoomType(room)
             router.push('/room/register/floor-plan')
         }
     }
@@ -86,12 +87,12 @@ const PrivacyType: React.FC = () => {
             <div className='selector-wrapper'>
                 <ul>
                     {privacyTypeList.map((option, index) => (
-                        <li className={option.type === roomType ? 'selected' : ''} key={index} onClick={() => setRoomType(option.type)}>
+                        <li className={option.type === room ? 'selected' : ''} key={index} onClick={() => setRoom(option.type)}>
                             <span>{option.type}</span>
                         </li>
                     ))}
                 </ul>
-                <Footer step={3} prevHref='/room/register/building' isValid={!!roomType} >
+                <Footer step={3} prevHref='/room/register/building' isValid={!!room} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>

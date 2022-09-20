@@ -1,29 +1,29 @@
 import { UserType } from "./user";
 
 export type RegisterRoomState = {
-    largeBuildingType?: string | null;
-    buildingType?: string | null;
-    roomType?: string | null;
-    maximumGuestCount?: number;
-    bedroomCount?: number;
-    bedCount?: number;
-    bathroomCount?: number;
-    bathroomType?: 'private' | 'public';
-    country?: string;
-    city?: string;
-    district?: string;
-    streetAddress?: string;
-    detailAddress?: string;
-    postcode?: string;
-    latitude?: number;
-    longitude?: number;
-    conveniences?: string[],
-    popularConveniences?: string[],
-    safetyGoods?: string[]
-    photos?: string[],
-    title?: string,
-    description?: string,
-    price?: number,
+    largeBuildingType: string;
+    buildingType: string;
+    roomType: string;
+    maximumGuestCount: number;
+    bedroomCount: number;
+    bedCount: number;
+    bathroomCount: number;
+    bathroomType: 'private' | 'public';
+    country: string;
+    city: string;
+    district: string;
+    streetAddress: string;
+    detailAddress: string;
+    postcode: string;
+    latitude: number;
+    longitude: number;
+    conveniences: string[],
+    popularConveniences: string[],
+    safetyGoods: string[]
+    photos: string[],
+    title: string,
+    description: string,
+    price: number,
 };
 
 // 만들어진 숙소 타입

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
@@ -67,15 +67,15 @@ const Container = styled.div`
 
 const Photos: React.FC = () => {
     const router = useRouter();
-    const { photos: storedPhotos, setRegisterRoom } = useRegisterRoomStore(
-        (state) => ({ photos: state.photos, setRegisterRoom: state.setRegisterRoom })
+    const { photos: storedPhotos, setPhotos } = useRegisterRoomStore(
+        (state) => ({ photos: state.photos, setPhotos: state.setPhotos })
         , shallow
     );
 
-    const [photos, setPhotos] = useState<string[]>([]);
+    const [images, setImages] = useState<string[]>([]);
 
-    useEffect(() => {
-        {!!storedPhotos && setPhotos([...storedPhotos])}
+    useLayoutEffect(() => {
+        {!!storedPhotos && setImages([...storedPhotos])}
     }, [storedPhotos])
 
     
@@ -87,9 +87,7 @@ const Photos: React.FC = () => {
                 const storageRef = ref(storage, `/photos/${uuid()}_${file.name}`)
                 uploadBytes(storageRef, file).then((snapshot) => {
                     getDownloadURL(snapshot.ref).then((url) => {
-                        setRegisterRoom({
-                            photos: [...photos, url]
-                        })
+                        setPhotos([...images, url])
                     });
                 });
             } catch (error) {
@@ -102,14 +100,12 @@ const Photos: React.FC = () => {
     const deletePhoto = (src: string) => {
         const fileRef = ref(storage, src);
         deleteObject(fileRef).then(() => {
-            setRegisterRoom({
-                photos: photos?.filter((photo => photo !== src))
-            })
+            setPhotos(images?.filter((image => image !== src)))
         })
     };
 
     const onClickNextButton = () => {
-        if (photos?.length === 4) {
+        if (images?.length === 4) {
             router.push('/room/register/title')
         }
     }
@@ -122,7 +118,7 @@ const Photos: React.FC = () => {
                 </h1>
             </StageInfo>
             <div className='selector-wrapper'>
-                {photos?.length === 0 ? 
+                {images?.length === 0 ? 
                 (
                     <div className="upload-photo-wrapper">
                         <>
@@ -133,10 +129,10 @@ const Photos: React.FC = () => {
                     </div>
                 ) : (
                     <>  
-                        <PhotoCardList photos={photos} uploadImage={addPhoto} deletePhoto={deletePhoto} />
+                        <PhotoCardList photos={images} uploadImage={addPhoto} deletePhoto={deletePhoto} />
                     </>
                 )}
-                <Footer step={7} prevHref='/room/register/amenities' isValid={photos?.length === 4} >
+                <Footer step={7} prevHref='/room/register/amenities' isValid={images?.length === 4} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>

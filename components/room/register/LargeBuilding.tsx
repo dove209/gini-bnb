@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, {  useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
@@ -64,23 +64,24 @@ const Container = styled.div`
 
 const LargeBuilding: React.FC = () => {
     const router = useRouter();
-    const { largeBuildingType: storedLargeBuildingType, setRegisterRoom } = useRegisterRoomStore(
-        (state) => ({ largeBuildingType: state.largeBuildingType, setRegisterRoom: state.setRegisterRoom })
-        ,shallow
+    const { largeBuildingType: storedLargeBuildingType, setLargBuildingType } = useRegisterRoomStore(
+        (state) => ({ 
+            largeBuildingType: state.largeBuildingType,
+            setLargBuildingType: state.setLargeBuildingType
+         }),
+         shallow
     );
     
-    const [largeBuildingType, setLargeBuildingType] = useState<string | null>(); // 숙소 유형 선택
+    const [largeBuilding, setLargeBuilding] = useState<string>(''); // 숙소 유형 선택
 
 
-    useEffect(() => {
-        setLargeBuildingType(storedLargeBuildingType)
+    useLayoutEffect(() => {
+        setLargeBuilding(storedLargeBuildingType)
     },[storedLargeBuildingType])
 
     const onClickNextButton = () => {
-        if(!!largeBuildingType) {
-            setRegisterRoom({
-                largeBuildingType
-            })
+        if(!!largeBuilding) {
+            setLargBuildingType(largeBuilding);
             router.push('/room/register/building')
         }
     }
@@ -93,13 +94,17 @@ const LargeBuilding: React.FC = () => {
             <div className='selector-wrapper'>
                 <ul>
                     {largeBuildingTypeList.map((option, index) => (
-                        <li className={option.type === largeBuildingType ? 'selected' : ''} key={index} onClick={() => setLargeBuildingType(option.type)}>
+                        <li  
+                            key={index}
+                            className={option.type === largeBuilding ? 'selected' : ''}
+                            onClick={() => setLargeBuilding(option.type)}
+                        >
                             <span>{option.type}</span>
                             <Image src={option.imgSrc} width={56} height={56} alt='' />
                         </li>
                     ))}
                 </ul>
-                <Footer step={1} prevHref='/' isValid={!!largeBuildingType} >
+                <Footer step={1} prevHref='/' isValid={!!largeBuilding} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>

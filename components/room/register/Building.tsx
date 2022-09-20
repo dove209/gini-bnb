@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, {  useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
@@ -69,21 +69,21 @@ const Building: React.FC = () => {
     const { 
         largeBuildingType: storedLargeBuildingType, 
         buildingType: storedBuildingType,
-        setRegisterRoom
+        setBuildingType
     } = useRegisterRoomStore(
         (state) => ({ 
             largeBuildingType: state.largeBuildingType,
             buildingType: state.buildingType,
-            setRegisterRoom: state.setRegisterRoom
+            setBuildingType: state.setBuildingType
         }),
         shallow
     );
     
     const [buildingTypeList, setBuildingTypeList] = useState<{ type:string; description?: string; }[]>([]);
-    const [buildingType, setBuildingType] = useState<string | null>();  // 숙소 문구 선택
+    const [building, setBuilding] = useState<string>();  // 숙소 문구 선택
 
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         switch(storedLargeBuildingType){
             case '아파트':
                 setBuildingTypeList([...apartmentBuildingTpyeList])
@@ -110,15 +110,13 @@ const Building: React.FC = () => {
         }
     },[storedLargeBuildingType])
 
-    useEffect(() => {
-        setBuildingType(storedBuildingType)
+    useLayoutEffect(() => {
+        setBuilding(storedBuildingType)
     },[storedBuildingType])
 
     const onClickNextButton = () => {
-        if(!!buildingType) {
-            setRegisterRoom({
-                buildingType
-            })
+        if(!!building) {
+            setBuildingType(building);
             router.push('/room/register/privacy-type');
         }
     }
@@ -134,13 +132,13 @@ const Building: React.FC = () => {
             <div className='selector-wrapper'>
                 <ul>
                     {buildingTypeList.map((option, index) => (
-                        <li className={option.type === buildingType ? 'selected' : ''} key={index} onClick={() => setBuildingType(option.type)}>
+                        <li className={option.type === building ? 'selected' : ''} key={index} onClick={() => setBuilding(option.type)}>
                             <h1>{option.type}</h1>
                             {option.description && <p>{option.description}</p>}
                         </li>
                     ))}
                 </ul>
-                <Footer step={2} prevHref='/room/register/large-building' isValid={!!buildingType} >
+                <Footer step={2} prevHref='/room/register/large-building' isValid={!!building} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>

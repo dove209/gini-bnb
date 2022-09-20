@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
@@ -63,23 +63,21 @@ const Container = styled.div`
 
 const Description: React.FC = () => {
     const router = useRouter();
-    const { description: storedDescription, setRegisterRoom } = useRegisterRoomStore(
-        (state) => ({ description: state.description, setRegisterRoom: state.setRegisterRoom })
+    const { description: storedDescription, setDescription } = useRegisterRoomStore(
+        (state) => ({ description: state.description, setDescription: state.setDescription })
         , shallow
     );
 
-    const [description, setDescription] = useState('');
+    const [value, setValue] = useState<string>('');
 
-    useEffect(() => {
-        {!!storedDescription && setDescription(storedDescription)}
+    useLayoutEffect(() => {
+        {!!storedDescription && setValue(storedDescription)}
     }, [storedDescription])
 
     
     const onClickNextButton = () => {
-        if (!!description) {
-            setRegisterRoom({
-                description
-            })
+        if (!!value) {
+            setDescription(value);
             router.push('/room/register/price')
         }
     }
@@ -100,14 +98,14 @@ const Description: React.FC = () => {
                     <textarea 
                         placeholder='편안함을 자랑하는 이곳에서 즐거운 시간을 보내실 수 있을 것입니다.'
                         maxLength={500}
-                        onChange={(e) => setDescription(e.target.value)}
-                        value={description}
+                        onChange={(e) => setValue(e.target.value)}
+                        value={value}
                     />
                     <span>
-                       {description.length} / 500
+                       {value.length} / 500
                     </span>
                 </div>
-                <Footer step={9} prevHref='/room/register/title' isValid={!!description} >
+                <Footer step={9} prevHref='/room/register/title' isValid={!!value} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>
