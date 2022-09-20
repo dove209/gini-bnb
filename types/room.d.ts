@@ -21,9 +21,9 @@ export type RegisterRoomState = {
     popularConveniences?: string[],
     safetyGoods?: string[]
     photos?: string[],
-    // description: string,
-    // title: string,
-    // price: number,
+    title?: string,
+    description?: string,
+    price?: number,
 };
 
 // 만들어진 숙소 타입

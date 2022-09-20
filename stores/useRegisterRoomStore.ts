@@ -31,6 +31,9 @@ const useRegisterRoomStore = create<IRegisterRoomStore>()(
             popularConveniences: [],
             safetyGoods: [],
             photos: [],
+            title: '',
+            description: '',
+            price: 0,
             reset:() => set(() => ({ photos: [] })),
             setRegisterRoom: (registerRoom) => set(() => ({ ...registerRoom }))
         }))
