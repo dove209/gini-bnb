@@ -6,7 +6,7 @@ import shallow from 'zustand/shallow';
 import uuid from 'react-uuid';
 
 import storage from '../../../firebaseConfig';
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage"
 import { useRegisterRoomStore } from '../../../stores/useRegisterRoomStore';
 
 import PhotoCardList from './PhotoCardList';
@@ -67,24 +67,19 @@ const Container = styled.div`
 
 const Photos: React.FC = () => {
     const router = useRouter();
-    const { roomType: storedRoomType, setRegisterRoom } = useRegisterRoomStore(
-        (state) => ({ roomType: state.roomType, setRegisterRoom: state.setRegisterRoom })
+    const { photos: storedPhotos, setRegisterRoom } = useRegisterRoomStore(
+        (state) => ({ photos: state.photos, setRegisterRoom: state.setRegisterRoom })
         , shallow
     );
 
-    const [roomType, setRoomType] = useState<string | null>(); // 숙소의 종류 선택
-    const [photos, setPhotos] = useState<string[]>([
-        'https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2Ff34aa6-d28c-75d-15c-3416027f4375_KakaoTalk_20220914_131925481.jpg?alt=media&token=fe13125d-c1f5-4b1c-824b-c950c88cb18f',
-        'https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2Ff34aa6-d28c-75d-15c-3416027f4375_KakaoTalk_20220914_131925481.jpg?alt=media&token=fe13125d-c1f5-4b1c-824b-c950c88cb18f',
-        'https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2Ff34aa6-d28c-75d-15c-3416027f4375_KakaoTalk_20220914_131925481.jpg?alt=media&token=fe13125d-c1f5-4b1c-824b-c950c88cb18f',
-    ]);
+    const [photos, setPhotos] = useState<string[]>([]);
 
+    
     /** 이미지 업로드 하기(firebase Store 사용) */
-    const uploadImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { files } = event.target;
-        if (files && files.length > 0) {
+    const addPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target?.files?.[0];
+        if (file) {
             try {
-                const file = files[0];
                 const storageRef = ref(storage, `/photos/${uuid()}_${file.name}`)
                 uploadBytes(storageRef, file).then((snapshot) => {
                     getDownloadURL(snapshot.ref).then((url) => {
@@ -93,22 +88,30 @@ const Photos: React.FC = () => {
                     });
                 });
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         }
     }
 
+    /** 사진 삭제 */
+    const deletePhoto = (src: string) => {
+        const fileRef = ref(storage, src);
+        deleteObject(fileRef).then(() => {
+            setPhotos(photos.filter((photo => photo !== src)))
+        })
+    };
+
 
     useEffect(() => {
-        setRoomType(storedRoomType)
-    }, [storedRoomType])
+        {!!storedPhotos && setPhotos([...storedPhotos])}
+    }, [storedPhotos])
 
     const onClickNextButton = () => {
-        if (!!roomType) {
+        if (photos.length === 4) {
             setRegisterRoom({
-                roomType
+                photos
             })
-            router.push('/room/register/floor-plan')
+            router.push('/room/register/title')
         }
     }
 
@@ -125,16 +128,16 @@ const Photos: React.FC = () => {
                     <div className="upload-photo-wrapper">
                         <>
                             <h1>여기로 사진을 끌어다 놓으세요.</h1>
-                            <input type="file" accept='image/*' onChange={uploadImage} />
+                            <input type="file" accept='image/*' onChange={addPhoto} />
                             <Button >사진 업로드</Button>
                         </>
                     </div>
                 ) : (
-                    <>
-                        <PhotoCardList photos={photos} />
+                    <>  
+                        <PhotoCardList photos={photos} uploadImage={addPhoto} deletePhoto={deletePhoto} />
                     </>
                 )}
-                <Footer step={7} prevHref='/room/register/amenities' isValid={!!roomType} >
+                <Footer step={7} prevHref='/room/register/amenities' isValid={photos.length === 4} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>
