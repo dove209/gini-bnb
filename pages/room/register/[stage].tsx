@@ -13,7 +13,7 @@ import Location from '../../../components/room/register/Location';
 import Amenities from '../../../components/room/register/Amenities';
 import Photos from '../../../components/room/register/Photos';
 import Title from '../../../components/room/register/Title';
-
+import Description from '../../../components/room/register/Description';
 
 const RegisterStage: NextPage = () => {
     const router = useRouter();
@@ -35,7 +35,10 @@ const RegisterStage: NextPage = () => {
       return <Photos />
     } else if (stage === 'title') {
       return <Title />
+    } else if (stage === 'description') {
+      return <Description />
     }
+    
     
     return <Custom404 />
 }

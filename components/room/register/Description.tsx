@@ -42,7 +42,7 @@ const Container = styled.div`
                 border: 2px solid ${palette.gray_bb};
                 border-radius: 6px;
                 outline: none;
-                font-size: 2rem;
+                font-size: 1.5rem;
                 font-family: Noto Sans, Noto Sans KR;
                 -ms-overflow-style: none; 
                 scrollbar-width: none;
@@ -61,27 +61,26 @@ const Container = styled.div`
 
 
 
-const Title: React.FC = () => {
+const Description: React.FC = () => {
     const router = useRouter();
-    const { title: storedTitle, setRegisterRoom } = useRegisterRoomStore(
-        (state) => ({ title: state.title, setRegisterRoom: state.setRegisterRoom })
+    const { description: storedDescription, setRegisterRoom } = useRegisterRoomStore(
+        (state) => ({ description: state.description, setRegisterRoom: state.setRegisterRoom })
         , shallow
     );
 
-    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
 
     useEffect(() => {
-        {!!storedTitle && setTitle(storedTitle)}
-    }, [storedTitle])
+        {!!storedDescription && setDescription(storedDescription)}
+    }, [storedDescription])
 
     
-
     const onClickNextButton = () => {
-        if (!!title) {
+        if (!!description) {
             setRegisterRoom({
-                title
+                description
             })
-            router.push('/room/register/description');
+            router.push('/room/register/price')
         }
     }
 
@@ -89,26 +88,26 @@ const Title: React.FC = () => {
         <Container>
             <StageInfo>
                 <h1>
-                    숙소 이름을 만들어주세요.
+                    숙소에 대해 설명해 주세요.
                 </h1>
             </StageInfo>
             <div className='selector-wrapper'>
                 <div className="text-input-wrapper">
-                    <h1>숙소 이름 정하기</h1>
+                    <h1>숙소 설명 작성하기</h1>
                     <p>
-                        숙소 이름에서 숙소를 차별화할 수 있는 특징을 강조해야 합니다.
+                        숙소의 장점, 특별한 편의 시설과 주변 지역의 매력을 소개해주세요.
                     </p>
                     <textarea 
-                        placeholder='도심이 내려다보이는 현대적인 로프트'
-                        maxLength={50}
-                        onChange={(e) => setTitle(e.target.value)}
-                        value={title}
+                        placeholder='편안함을 자랑하는 이곳에서 즐거운 시간을 보내실 수 있을 것입니다.'
+                        maxLength={500}
+                        onChange={(e) => setDescription(e.target.value)}
+                        value={description}
                     />
                     <span>
-                       {title.length} / 50
+                       {description.length} / 500
                     </span>
                 </div>
-                <Footer step={8} prevHref='/room/register/photos' isValid={!!title} >
+                <Footer step={9} prevHref='/room/register/title' isValid={!!description} >
                     <button className={'next-button'} onClick={onClickNextButton}>다음</button>
                 </Footer>
             </div>
@@ -116,4 +115,4 @@ const Title: React.FC = () => {
     )
 }
 
-export default Title;
+export default Description;
