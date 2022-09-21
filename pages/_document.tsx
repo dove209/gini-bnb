@@ -1,6 +1,9 @@
 /* eslint-disable @next/next/no-sync-scripts */
+import React from 'react';
 import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
 import { ServerStyleSheet } from "styled-components";
+
+React.useLayoutEffect = React.useEffect;
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {

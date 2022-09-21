@@ -2,7 +2,6 @@ import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import shallow from 'zustand/shallow';
 
 import { privacyTypeList } from '../../../lib/staticData';
