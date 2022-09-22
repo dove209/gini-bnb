@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
@@ -62,8 +62,8 @@ const Container = styled.div`
                 margin-top: 10px;
             }
             .errorText {
-                margin-top: 10px;
-                font-size: 12px;
+                margin-top: 20px;
+                font-size: 16                                                                                           px;
                 height: 20px;
                 color: ${palette.bittersweet};
             }
@@ -121,7 +121,7 @@ const Price: React.FC = () => {
     const onClickNextButton = () => {
         if (!!value) {
             setPrice(value);
-            // router.push('/room/register/price')
+            router.push('/room/register/preview')
         }
     }
 

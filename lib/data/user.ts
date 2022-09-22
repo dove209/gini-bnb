@@ -17,7 +17,7 @@ const getList = () => {
 
 
 /**
- * email의 유저가 있는 확인
+ * email의 유저가 있는지 확인
  */
 const existEmail = ({ email }: { email: string }) => {
     const users = getList();

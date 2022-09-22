@@ -12,6 +12,8 @@ type PhotosType = RegisterRoomState['photos'];
 type titleType = RegisterRoomState['title'];
 type descriptionType = RegisterRoomState['description'];
 type priceType = RegisterRoomState['price'];
+type HostIdType = RegisterRoomState['hostId'];
+
 
 interface IRegisterRoomStore extends RegisterRoomState {
     setLargeBuildingType: (payload: largeBuildingType) => void;
@@ -24,6 +26,7 @@ interface IRegisterRoomStore extends RegisterRoomState {
     setTitle: (payload: titleType) => void;
     setDescription: (payload: descriptionType) => void;
     setPrice: (payload: priceType) => void;
+    setHostId: (payload: HostIdType) => void;
 }
 
 const useRegisterRoomStore = create<IRegisterRoomStore>()(
@@ -53,6 +56,7 @@ const useRegisterRoomStore = create<IRegisterRoomStore>()(
             title: '',
             description: '',
             price: 0,
+            hostId: '',
             setLargeBuildingType: (payload) => set(() => ({ largeBuildingType: payload })),
             setBuildingType: (payload) => set(() => ({ buildingType: payload })),
             setRoomType: (payload) => set(() => ({ roomType: payload })),
@@ -82,7 +86,12 @@ const useRegisterRoomStore = create<IRegisterRoomStore>()(
              setTitle: (payload) => set(() => ({ title: payload })),
              setDescription: (payload) => set(() => ({ description: payload })),
              setPrice: (payload) => set(() => ({ price: payload })),
-        }))
+             setHostId: (payload) => set(() => ({ hostId: payload })),
+        }),
+        {
+            name: 'register-room',
+        }
+        )
     )
 )
 

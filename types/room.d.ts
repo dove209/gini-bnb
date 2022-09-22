@@ -1,5 +1,6 @@
 import { UserType } from "./user";
 
+// 숙소 등록 단계
 export type RegisterRoomState = {
     largeBuildingType: string;
     buildingType: string;
@@ -17,75 +18,19 @@ export type RegisterRoomState = {
     postcode: string;
     latitude: number;
     longitude: number;
-    conveniences: string[],
-    popularConveniences: string[],
-    safetyGoods: string[]
-    photos: string[],
-    title: string,
-    description: string,
-    price: number,
+    conveniences: string[];
+    popularConveniences: string[];
+    safetyGoods: string[];
+    photos: string[];
+    title: string;
+    description: string;
+    price: number;
+    hostId: string;
 };
 
 // 만들어진 숙소 타입
-export type StoredRoomType = {
-    id: number;
-    largeBuildingType: string | null;
-    buildingType: string | null;
-    roomType: string | null;
-    maximumGuestCount: number;
-    bedroomCount: number;
-    bedCount: number;
-    bathroomCount: number;
-    bathroomType: 'private' | 'public';
-    latitude: number;
-    longitude: number;
-    country: string;
-    city: string;
-    district: string;
-    streetAddress: string;
-    detailAddress: string;
-    postcode: string;
-    amentities: string[],
-    conveniences: string[],
-    photos: string[],
-    description: string,
-    title: string,
-    price: number,
-    startDate: Date;
-    endDate: Date;
-    createAt: Date;
-    updateAt: Date;
-    hostId: number;
-}
-
-// 숙소 타입
-export type RoomType = {
-    id: number;
-    largeBuildingType: string | null;
-    buildingType: string | null;
-    roomType: string | null;
-    maximumGuestCount: number;
-    bedroomCount: number;
-    bedCount: number;
-    bathroomCount: number;
-    bathroomType: 'private' | 'public';
-    latitude: number;
-    longitude: number;
-    country: string;
-    city: string;
-    district: string;
-    streetAddress: string;
-    detailAddress: string;
-    postcode: string;
-    amentities: string[],
-    conveniences: string[],
-    photos: string[],
-    description: string,
-    title: string,
-    price: string,
-    startDate: string;
-    endDate: string;
+export type StoredRoomType = RegisterRoomState & {
+    id: string;
     createAt: string;
     updateAt: string;
-    host: UserType;
-};
+}

@@ -223,7 +223,7 @@ const Location: React.FC = () => {
 
 
   const onClickNextButton = () => {
-    if (!!city && !!district && !!streetAddress && !!postcode) {
+    if (!!country && !!city && !!district && !!streetAddress && !!postcode) {
       setIsInputFinish(true);
     }
     if (isInputFinish) {
@@ -390,7 +390,7 @@ const Location: React.FC = () => {
         <Footer
           step={5}
           prevHref="/room/register/floor-plan"
-          isValid={!!city && !!district && !!streetAddress && !!postcode}
+          isValid={!!country && !!city && !!district && !!streetAddress && !!postcode}
         >
           <button className={"next-button"} onClick={onClickNextButton}>
             다음

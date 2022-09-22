@@ -19,9 +19,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         const users = Data.user.getList();
 
-        let userId = uuid();
         const newUser: StoredUserType = {
-            id: userId,
+            id: uuid(),
             email,
             name,
             password: hashedPassword,

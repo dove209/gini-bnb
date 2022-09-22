@@ -2,6 +2,7 @@ import React, {  useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import shallow from 'zustand/shallow';
 
@@ -63,11 +64,13 @@ const Container = styled.div`
 
 
 const LargeBuilding: React.FC = () => {
+    const { data: session } = useSession();
     const router = useRouter();
-    const { largeBuildingType: storedLargeBuildingType, setLargBuildingType } = useRegisterRoomStore(
+    const { largeBuildingType: storedLargeBuildingType, setLargBuildingType, setHostId } = useRegisterRoomStore(
         (state) => ({ 
             largeBuildingType: state.largeBuildingType,
-            setLargBuildingType: state.setLargeBuildingType
+            setLargBuildingType: state.setLargeBuildingType,
+            setHostId: state.setHostId,
          }),
          shallow
     );
@@ -82,6 +85,7 @@ const LargeBuilding: React.FC = () => {
     const onClickNextButton = () => {
         if(!!largeBuilding) {
             setLargBuildingType(largeBuilding);
+            setHostId(session?.user.id ?? '');
             router.push('/room/register/building')
         }
     }

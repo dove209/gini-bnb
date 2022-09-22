@@ -6,10 +6,10 @@ import { useRegisterStepStore } from '../../../stores/useRegisterStepStore';
 
 const fillStepGauge = (prevStep: number, curStep: number) => keyframes`
     from {
-        width: ${prevStep / 10 * 100}%;
+        width: ${prevStep / 11 * 100}%;
     } 
     to {
-        width: ${curStep / 10 * 100}%;
+        width: ${curStep / 11 * 100}%;
     }
 `
 
@@ -63,8 +63,17 @@ const Container = styled.div<{ prevStep:number, curStep:number, isValid: boolean
                 background-color: ${palette.gray_ed}
             }
         }
+        
         .next-button {          
             background-color: ${({ isValid }) => (isValid ? `${palette.black}` : `${palette.gray_bb}`)};
+            cursor: ${({ isValid }) => (isValid ? 'pointer' : 'not-allowed')};
+            color: #fff;
+        }
+
+        .finish-button {
+            width: auto;
+            padding: 0px 30px;
+            background-color: ${({ isValid }) => (isValid ? `${palette.dark_cyan}` : `${palette.gray_bb}`)};
             cursor: ${({ isValid }) => (isValid ? 'pointer' : 'not-allowed')};
             color: #fff;
         }

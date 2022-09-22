@@ -15,6 +15,7 @@ import Photos from '../../../components/room/register/Photos';
 import Title from '../../../components/room/register/Title';
 import Description from '../../../components/room/register/Description';
 import Price from '../../../components/room/register/Price';
+import Preview from '../../../components/room/register/Preview';
 
 const RegisterStage: NextPage = () => {
     const router = useRouter();
@@ -38,8 +39,10 @@ const RegisterStage: NextPage = () => {
       return <Title />
     } else if (stage === 'description') {
       return <Description />
-    }  else if (stage === 'price') {
+    } else if (stage === 'price') {
       return <Price />
+    } else if (stage === 'preview') {
+      return <Preview />
     }  
     return <Custom404 />
 }
