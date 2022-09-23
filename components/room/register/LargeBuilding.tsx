@@ -1,6 +1,8 @@
 import React, {  useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
+import { fadeUp } from './FadeUpAnimation';
+
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -12,6 +14,7 @@ import { useRegisterRoomStore } from '../../../stores/useRegisterRoomStore';
 import StageInfo from './StageInfo';
 import Footer from './Footer';
 
+
 const Container = styled.div`
     display: flex;
     width: 100vw;
@@ -20,14 +23,13 @@ const Container = styled.div`
         position: relative;
         flex: 1;
         height: 100%;
-        
         ul {
             position: absolute;
-            top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 50%;
             max-height: calc(100% - 160px);
+            animation: ${fadeUp('50%', '45%')} 0.8s ease-in-out forwards;
             overflow: auto;
             -ms-overflow-style: none; 
             scrollbar-width: none;

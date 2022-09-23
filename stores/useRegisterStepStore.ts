@@ -6,8 +6,6 @@ interface IRegisterStepStore{
     curStep: number;
     setPrevStep: (step: number) => void;
     setCurStep: (step: number) => void;
-    clearAllStep: () => void;
-
 }
 
 const useRegisterStepStore = create<IRegisterStepStore>()(
@@ -17,7 +15,6 @@ const useRegisterStepStore = create<IRegisterStepStore>()(
             curStep: 1,
             setPrevStep: (step) => set(() => ({ prevStep: step })),
             setCurStep: (step) => set(() => ({ curStep: step })),
-            clearAllStep: () => set(() => ({ prevStep: 1, curStep: 1}))
         })
     )
 )

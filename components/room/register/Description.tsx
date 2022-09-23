@@ -1,6 +1,8 @@
 import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
+import { fadeUp } from './FadeUpAnimation';
+
 import { useRouter } from 'next/router';
 import shallow from 'zustand/shallow';
 
@@ -22,9 +24,9 @@ const Container = styled.div`
             width: 50%;
             min-width: 400px;
             position: absolute;
-            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            animation: ${fadeUp('55%', '50%')} 0.8s ease-in-out forwards;
             h1 {
                 font-weight: bold;
                 font-size: 1.5rem;

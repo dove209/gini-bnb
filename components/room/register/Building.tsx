@@ -1,6 +1,8 @@
 import React, {  useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
+import { fadeUp } from './FadeUpAnimation';
+
 import { useRouter } from 'next/router';
 import shallow from 'zustand/shallow';
 
@@ -20,11 +22,11 @@ const Container = styled.div`
         height: 100%;
         ul {
             position: absolute;
-            top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 50%;
             max-height: calc(100% - 160px);
+            animation: ${fadeUp('50%', '45%')} 0.8s ease-in-out forwards;
             overflow: auto;
             -ms-overflow-style: none; 
             scrollbar-width: none;

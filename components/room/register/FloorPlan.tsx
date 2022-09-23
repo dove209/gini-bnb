@@ -1,6 +1,8 @@
 import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
+import { fadeUp } from './FadeUpAnimation';
+
 import { useRouter } from 'next/router';
 import shallow from 'zustand/shallow';
 
@@ -23,10 +25,10 @@ const Container = styled.div`
         height: 100%;
         .selector-box {
             position: absolute;
-            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 464px;
+            animation: ${fadeUp('50%', '45%')} 0.8s ease-in-out forwards;
             .count-selector {
                 li {
                     display: flex;

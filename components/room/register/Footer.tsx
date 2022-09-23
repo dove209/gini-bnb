@@ -6,12 +6,13 @@ import { useRegisterStepStore } from '../../../stores/useRegisterStepStore';
 
 const fillStepGauge = (prevStep: number, curStep: number) => keyframes`
     from {
-        width: ${prevStep / 11 * 100}%;
+        width: ${(prevStep / 11) * 100}%;
     } 
     to {
         width: ${curStep / 11 * 100}%;
     }
-`
+`;
+
 
 const Container = styled.div<{ prevStep:number, curStep:number, isValid: boolean}>`
     position: absolute;
@@ -91,11 +92,10 @@ interface IProps {
 const Footer: React.FC<IProps> = ({ step = 1, prevHref = '', isValid = false, children }) => {
     const router = useRouter();
     const { prevStep, curStep, setPrevStep, setCurStep } = useRegisterStepStore();
-
     useLayoutEffect(() => {
-            setCurStep(step)
+            setCurStep(step);
         return () => {
-            setPrevStep(curStep)
+            setPrevStep(curStep);
         }
     },[])
 
@@ -113,4 +113,4 @@ const Footer: React.FC<IProps> = ({ step = 1, prevHref = '', isValid = false, ch
     )
 }
 
-export default Footer
+export default React.memo(Footer);

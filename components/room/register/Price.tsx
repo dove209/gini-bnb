@@ -1,6 +1,8 @@
 import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
+import { fadeUp } from './FadeUpAnimation';
+
 import { useRouter } from 'next/router';
 import shallow from 'zustand/shallow';
 
@@ -22,10 +24,10 @@ const Container = styled.div`
             width: 500px;
             min-width: 400px;
             position: absolute;
-            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
+            animation: ${fadeUp('55%', '50%')} 0.8s ease-in-out forwards;
             .price-buttons {
                 display: flex;
                 align-items: center;

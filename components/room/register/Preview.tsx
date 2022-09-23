@@ -1,6 +1,8 @@
 import React, { useLayoutEffect, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
+import { fadeUp } from './FadeUpAnimation';
+
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
@@ -25,9 +27,9 @@ const Container = styled.div`
             width: 500px;
             min-width: 400px;
             position: absolute;
-            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            animation: ${fadeUp('50%', '45%')} 0.8s ease-in-out forwards;
             li {
                 width: 100%;
                 cursor: pointer;
@@ -169,7 +171,7 @@ const Preview: React.FC = () => {
                                 <h1>숙소 유형 등록 완료</h1>
                             </div>
                         :
-                            <div className='not-active' onClick={() => router.replace('/room/register/large-building')}>
+                            <div className='not-active' onClick={() => router.push('/room/register/large-building')}>
                                 <h1>숙소 유형 등록 미완료</h1>
                             </div>
                         }
@@ -182,7 +184,7 @@ const Preview: React.FC = () => {
                                 <h1>숙소 종류 등록 완료</h1>
                             </div>
                         :
-                            <div className='not-active' onClick={() => router.replace('/room/register/building')}>
+                            <div className='not-active' onClick={() => router.push('/room/register/building')}>
                                 <h1>숙소 종류 등록 미완료</h1>
                             </div>
                         }
@@ -195,7 +197,7 @@ const Preview: React.FC = () => {
                                 <h1>방 타입 등록 완료</h1>
                             </div>
                         :
-                            <div className='not-active' onClick={() => router.replace('/room/register/privacy-type')}>
+                            <div className='not-active' onClick={() => router.push('/room/register/privacy-type')}>
                                 <h1>방 타입 등록 미완료</h1>
                             </div>
                         }
@@ -208,7 +210,7 @@ const Preview: React.FC = () => {
                                 <h1>숙소 위치 등록 완료</h1>
                             </div>
                         :
-                            <div className='not-active' onClick={() => router.replace('/room/register/location')}>
+                            <div className='not-active' onClick={() => router.push('/room/register/location')}>
                                 <h1>숙소 위치 등록 미완료</h1>
                             </div>
                         }
@@ -221,7 +223,7 @@ const Preview: React.FC = () => {
                                 <h1>숙소 사진 등록 완료</h1>
                             </div>
                         :
-                            <div className='not-active' onClick={() => router.replace('/room/register/photos')}>
+                            <div className='not-active' onClick={() => router.push('/room/register/photos')}>
                                 <h1>숙소 사진 등록 미완료</h1>
                             </div>
                         }
@@ -231,11 +233,11 @@ const Preview: React.FC = () => {
                         ?
                             <div>
                                 <CheckMarkIcon />
-                                <h1>숙소 제목 등록 완료</h1>
+                                <h1>숙소 이름 등록 완료</h1>
                             </div>
                         :
-                            <div className='not-active' onClick={() => router.replace('/room/register/title')}>
-                                <h1>숙소 제목 등록 미완료</h1>
+                            <div className='not-active' onClick={() => router.push('/room/register/title')}>
+                                <h1>숙소 이름 등록 미완료</h1>
                             </div>
                         }
                     </li>
@@ -247,7 +249,7 @@ const Preview: React.FC = () => {
                                 <h1>숙소 설명 등록 완료</h1>
                             </div>
                         :
-                            <div className='not-active' onClick={() => router.replace('/room/register/price')}>
+                            <div className='not-active' onClick={() => router.push('/room/register/description')}>
                                 <h1>숙소 설명 등록 미완료</h1>
                             </div>
                         }
@@ -260,7 +262,7 @@ const Preview: React.FC = () => {
                                 <h1>숙소 가격 등록 완료</h1>
                             </div>
                         :
-                            <div className='not-active' onClick={() => router.push('/room/register/preview')}>
+                            <div className='not-active' onClick={() => router.push('/room/register/price')}>
                                 <h1>숙소 가격 등록 미완료</h1>
                             </div>
                         }
