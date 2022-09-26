@@ -3,8 +3,11 @@ import React, { useState } from 'react';
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 
-const Home: NextPage = () => {
-  return <div>hello next 안녕 코딩</div>;
+import Home from "../components/home/Home";
+
+
+const index: NextPage = () => {
+  return <Home />;
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res}) => {
@@ -15,4 +18,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res}) => {
 }
 
 
-export default Home;
+export default index;

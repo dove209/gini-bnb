@@ -79,7 +79,6 @@ const LargeBuilding: React.FC = () => {
     
     const [largeBuilding, setLargeBuilding] = useState<string>(''); // 숙소 유형 선택
 
-
     useLayoutEffect(() => {
         setLargeBuilding(storedLargeBuildingType)
     },[storedLargeBuildingType])
