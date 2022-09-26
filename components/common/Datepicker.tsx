@@ -69,7 +69,6 @@ const Container = styled.div`
         font-size: 14px;
         font-weight: 600;
         font-family: --apple-system, sans-serif;
-        color: ${palette.black};
         outline: none;
         &:hover {
             border: 1px solid ${palette.black};
@@ -91,7 +90,6 @@ const Container = styled.div`
         border-radius: 50%;
     }
     .react-datepicker__day-disabled {
-        color: ${palette.gray_dd};
         cursor: no-drop;
         &:hover {
             border: 0;
@@ -105,7 +103,7 @@ const DatePicker: React.FC<ReactDatePickerProps> = ({ onChange, ...props }) => {
         <Container>
             <ReactDatePicker
                 {...props}
-                dateFormat={'MM??dd??'}
+                dateFormat={'MM월 dd일'}
                 disabledKeyboardNavigation
                 locale={ko}
                 onChange={(date, event) => {

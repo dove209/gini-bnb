@@ -13,8 +13,8 @@ interface ISearchRoomStore {
     setLocation: (payload: string) => void;
     setLatitude: (payload: number) => void;
     setLongitude: (payload: number) => void;
-    setCheckInDate: (payload: string) => void;
-    setCheckOutDate: (payload: string) => void;
+    setCheckInDate: (payload: string | null) => void;
+    setCheckOutDate: (payload: string | null) => void;
     setAdultCount: (payload: number) => void;
     setChildrenCount: (payload: number) => void;
     setInfantsCount: (payload: number) => void;
@@ -41,7 +41,6 @@ const useSearchRoomStore = create<ISearchRoomStore>()(
             setInfantsCount: (payload) => set(() => ({ infantsCount: payload })),
         })
     )
-)
-
+);
 
 export { useSearchRoomStore };
