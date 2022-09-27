@@ -24,7 +24,7 @@ const Container = styled.div`
     top: 16px;
     left: 20px;
     .search-room-bar-location-label {
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 800;
       margin-bottom: 4px;
     }

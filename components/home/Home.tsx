@@ -7,11 +7,11 @@ import SearchRoomBar from './searchRoomBar/SearchRoomBar';
 const Container = styled.div`
     width: 100%;
     padding: 0 80px;
-
+    
     .home-search-bar-label {
         margin: 32px 0 16px;
-        font-weight: 600;
-        font-size: 14px;
+        font-size: 1.5rem;
+        text-align: center;
     }
 
     h2 {

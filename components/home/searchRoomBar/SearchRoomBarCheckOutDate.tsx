@@ -17,7 +17,7 @@ const Container = styled.div`
     border-color: ${palette.gray_dd};
   }
   .search-room-bar-date-label {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     margin-bottom: 4px;
     position: absolute;
@@ -68,7 +68,6 @@ const SearchRoomBarCheckOutDate: React.FC = () => {
       console.log(date?.toISOString())
       setCheckOutDate(date?.toISOString() ?? null);
   }
-  console.log(checkInDate)
   return (
     <Container>
       <div>
@@ -76,7 +75,7 @@ const SearchRoomBarCheckOutDate: React.FC = () => {
         <DatePicker 
           selected={checkOutDate}
           selectsEnd
-          monthsShown={2}
+          monthsShown={1}
           onChange={onChangeCheckInDate}
           startDate={checkInDate}
           endDate={checkOutDate}

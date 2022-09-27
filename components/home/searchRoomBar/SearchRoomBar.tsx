@@ -8,13 +8,14 @@ import SearchRoomBarCheckOutData from './SearchRoomBarCheckOutDate';
 import SearchRoomGuests from './SearchRoomGuests';
 
 const Container = styled.div`
-    width: 100%;
+    width: 50%;
     height: 70px;
     display: flex;
     align-items: center;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
     border-radius: 12px;
-
+    margin: 0 auto;
+    
     .search-room-bar-inputs {
       display: flex;
       align-items: center;
