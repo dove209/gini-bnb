@@ -1,30 +1,23 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { StoredRoomType } from '../../../types/room';
 import RoomCard from './RoomCard';
 
-const Container = styled.ul<{ showMap: boolean }>`
+const Container = styled.ul`
     display: flex;
     flex-wrap: wrap;
-    padding-top: 50px;
+    padding-top: 20px;
     width: 100%;
-    ${({ showMap }) =>
-        showMap &&
-        css`
-            flex-direction: column;
-        `
-    }
 `;
 
 interface IProps {
-    showMap: boolean;
     rooms: StoredRoomType[]
 }
-const RoomList: React.FC<IProps> = ({ showMap, rooms }) => {
+const RoomList: React.FC<IProps> = ({ rooms }) => {
   return (
-    <Container showMap={showMap}>
+    <Container>
         {rooms.map((room) => (
-            <RoomCard room={room} key={room.id} showMap={showMap}  />
+            <RoomCard room={room} key={room.id} />
         ))}
     </Container>
   )

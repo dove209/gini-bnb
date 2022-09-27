@@ -1,13 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useMemo } from 'react'
-import styled, { css } from 'styled-components';
-import differenceInDays from 'date-fns/differenceInDays';
-import Link from 'next/link';
-import { StoredRoomType } from '../../../types/room';
+import React from 'react'
+import styled from 'styled-components';
 import palette from '../../../styles/palette';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import shallow from 'zustand/shallow';
+import differenceInDays from 'date-fns/differenceInDays';
+
+import { useSearchRoomStore } from '../../../stores/useSearchRoomStore';
+import { StoredRoomType } from '../../../types/room';
 import { makeMoneyString } from '../../../lib/utils';
 
-const Container = styled.li<{ showMap: boolean }>`
+const Container = styled.li`
     width: calc((100% - 48px) / 4);
     &:nth-child(4n) {
         margin-right: 0;
@@ -15,7 +19,7 @@ const Container = styled.li<{ showMap: boolean }>`
     margin-right: 16px;
     margin-bottom: 32px;
 
-    @media (min-width: 1440px) { //1440px 이상
+    @media (min-width: 1440px) { 
         width: calc((100% - 64px) / 5);
         &:nth-child(4n) {
             margin-right: 16px;
@@ -38,8 +42,8 @@ const Container = styled.li<{ showMap: boolean }>`
         }
     }
     .room-card-room-info {
-        font-size: 12px;
-        color: ${palette.gray_71};
+        font-size: 14px;
+        font-weight: bold;
         margin-bottom: 9px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -47,6 +51,7 @@ const Container = styled.li<{ showMap: boolean }>`
     }
     .room-card-title {
         font-size: 16px;
+        color: ${palette.gray_71};
         margin-bottom: 4px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -65,114 +70,45 @@ const Container = styled.li<{ showMap: boolean }>`
     .room-bed-bath-room-info {
         display: none;
     }
-
-    ${({ showMap }) =>
-        showMap &&
-        css`
-            width: 100% !important;
-            margin: 0;
-            padding: 24px 0;
-            border-bottom: 1px solid ${palette.gray_eb};
-            &:first-child {
-                padding-top: 0;
-            }
-            a {
-                width: 100%;
-                display: flex;
-                .room-card-info-texts {
-                    position: relative;
-                    flex-grow: 1;
-                    height: 200px;
-                }
-                .room-card-photo-wrapper {
-                    width: 300px;
-                    min-width: 300px;
-                    height: 200px;
-                    margin-right: 16px;
-                    margin-bottom: 0;
-                    padding-bottom: 0;
-                    border-radius: 8px;
-                    overflow: hidden;
-                }
-                .room-card-room-info {
-                    font-size: 14px;
-                    margin-bottom: 13px;
-                }
-                .room-card-title {
-                    font-size: 18px;
-                    margin-bottom: 11px;
-                }
-                .room-card-text-divider {
-                    width: 32px;
-                    height: 1px;
-                    margin-bottom: 10px;
-                    background-color: ${palette.gray_dd};
-                }
-                .room-bed-bath-room-info {
-                    display: block;
-                    font-size: 14px;
-                    color: ${palette.gray_71};
-                }
-                .room-card-price {
-                    position: absolute;
-                    margin: 0;
-                    right: 0;
-                    bottom: 17px;
-                }
-                .room-card-total-price {
-                    position: absolute;
-                    right: 0;
-                    bottom: 0;
-                    text-decoration: underline;
-                }
-            }
-        `}
 `;
 
 interface IProps {
     room: StoredRoomType;
-    showMap: boolean
 }
 
 
-const RoomCard: React.FC<IProps> = ({ room, showMap }) => {
+const RoomCard: React.FC<IProps> = ({ room }) => {
+    const router = useRouter();
+    const { checkInDate, checkOutDate } = router.query;
 
-    // 한글로 된 숙소 유형
-    const translateRoomType = useMemo(() => {
-        switch (room.roomType) {
-            case 'entire':
-                return '집 전체';
-            case 'private':
-                return '개인실';
-            case 'public':
-                return '공용';
-            default:
-                return '';
-        }
-    }, []);
-
+    const remainDays = checkInDate && checkOutDate && differenceInDays(new Date(checkOutDate as string), new Date(checkInDate as string));
+        
     return (
-        <Container showMap={showMap}>
+        <Container>
             <Link href={`/room/${room.id}`}>
                 <a>
                     <div className='room-card-photo-wrapper'>
                         <img src={room.photos[0]} alt='' />
                     </div>
+
                     <div className='room-card-info-texts'>
                         <p className='room-card-room-info'>
-                            {room.buildingType} {translateRoomType} {room.district}{" "} {room.city}
+                            {room.buildingType} / {room.city}
                         </p>
-                        <p className='room-card-title'>{room.title}</p>
-                        <div className='room-card-text-divider' />
+                        <p className='room-card-title'>
+                            {room.title} <br />
+                            침대 {room.bedCount}개
+                        </p>
 
                         <p className='room-card-price'>
-                            <b>￦{makeMoneyString(Number(room.price))}</b> /1박
+                            <b>￦{makeMoneyString(String(room.price))}</b> /박
+                            {!!remainDays && (
+                                <span className='room-card-total-price'>
+                                    · 총 요금: ￦ {makeMoneyString(`${Number(room.price) * remainDays}`)}
+                                </span>
+                            )}
                         </p>
-                        {/* {!!remainDays && (
-                            <p className='room-card-total-price'>
-                                총 요금: ￦ {makeMoneyString(`${Number(room.price) * remainDays}`)}
-                            </p>
-                        )} */}
+       
                     </div>
                 </a>
             </Link>
