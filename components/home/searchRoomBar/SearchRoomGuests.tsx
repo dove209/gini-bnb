@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import shallow from 'zustand/shallow';
 import OutsideClickHandler from 'react-outside-click-handler';
-import Link from 'next/link';
 
 import Counter from '../../common/Counter';
-import Button from '../../common/Button';
+import SearchRoomButton from './SearchRoomButton';
 
 import { useSearchRoomStore } from '../../../stores/useSearchRoomStore';
 
@@ -91,8 +90,6 @@ const SearchRoomGuests = () => {
   )
 
 
-
-
   return (
     <Container onClick={() => setIsPopup(true)}> 
       <OutsideClickHandler onOutsideClick={() => setIsPopup(false)}>
@@ -105,11 +102,7 @@ const SearchRoomGuests = () => {
         </div>
 
         <div className="search-room-bar-button-wrapper">
-          <Link href={'/room'}>
-            <a>
-              <Button>검색</Button>
-            </a>
-          </Link>
+          <SearchRoomButton />
         </div>
 
         {isPopup && (

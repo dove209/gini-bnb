@@ -22,5 +22,28 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(500).send(error)
         }
     } 
-    return res.status(405).end();
+    if (req.method === 'GET') {
+        const { checkInDate, checkOutDate, adultCount, childrenCount, latitude, longitude, limit, page = '1', } = req.query;
+        try {
+            const rooms = Data.room.getList();
+
+            // 개수 자르기
+            const limitedRooms = rooms.splice(0 + (Number(page) - 1) * Number(limit), Number(limit));
+
+            // host 정보 넣기
+            const roomsWithHost = await Promise.all(
+                limitedRooms.map(async (room) => {
+                    const host = Data.user.find({ id: room.hostId });
+                    return { ...room, host }
+                })
+            );
+
+
+            return res.status(200).send(roomsWithHost);
+        } catch (e) {
+            console.log(e)
+            return res.send(e);
+        }
+    }
+    return res.end();
 }

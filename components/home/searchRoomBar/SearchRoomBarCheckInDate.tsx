@@ -65,10 +65,8 @@ const SearchRoomBarCheckInDate: React.FC = () => {
 
   /** 체크인 날짜 변경 시 */
   const onChangeCheckInDate = (date: Date | null) => {
-      console.log(date?.toISOString())
       setCheckInDate(date?.toISOString() ?? null);
   }
-  console.log(checkInDate)
   return (
     <Container>
       <div>

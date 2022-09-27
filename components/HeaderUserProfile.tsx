@@ -4,7 +4,6 @@ import styled from "styled-components";
 import palette from "../styles/palette";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { signOut } from "next-auth/react"
 
 import HamburgetIcon from "../public/static/svg/header/hamburger.svg";

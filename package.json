@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.6.1",
     "axios": "^0.27.2",
     "babel-plugin-inline-react-svg": "^2.0.1",
     "babel-plugin-styled-components": "^2.0.7",
@@ -32,6 +33,7 @@
     "zustand": "^4.1.1"
   },
   "devDependencies": {
+    "@tanstack/react-query-devtools": "^4.2.1",
     "@types/bcryptjs": "^2.4.2",
     "@types/formidable": "^2.0.5",
     "@types/jsonwebtoken": "^8.5.9",

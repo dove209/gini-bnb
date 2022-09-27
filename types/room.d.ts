@@ -34,3 +34,23 @@ export type StoredRoomType = RegisterRoomState & {
     createAt: string;
     updateAt: string;
 }
+
+
+// 숙소 타입(숙소 리스트 화면)
+export type RoomType = StoredRoomType & {
+    host: UserType
+}
+
+/** 숙소 리스트 불러오기 Query */
+export type GetRoomListAPIQueries = {
+    location?: string | string[];
+    checkInDate?: string | string[];
+    checkOutDate?: string | string[];
+    adultCount?: string | string[];
+    childrenCount?: string | string[];
+    infantsCount?: string | string[];
+    latitude?: string | string[];
+    longitude?: string | string[];
+    limit?: string | string[];
+    page?: string | string[];
+};

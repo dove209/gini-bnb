@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import React, { useState } from 'react';
+import React from 'react';
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 
