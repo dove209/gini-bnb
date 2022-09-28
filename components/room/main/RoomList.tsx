@@ -5,10 +5,11 @@ import RoomCard from './RoomCard';
 
 const Container = styled.ul`
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 40px;
     padding: 10px 0px;
     width: 100%;
+
 `;
 
 interface IProps {

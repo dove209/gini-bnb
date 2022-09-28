@@ -13,9 +13,14 @@ const Container = styled.div`
     display: flex;
 
     .room-list-wrapper {
-      flex: 1.5;
-      padding: 0 24px;
-      overflow: hidden;
+      flex: 0.55;
+      padding: 0 24px 150px;
+      overflow-y: auto;
+      -ms-overflow-style: none; 
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+          width: 0;
+      }
       .header {
         height: 40px;
         margin: 24px 0 8px;
