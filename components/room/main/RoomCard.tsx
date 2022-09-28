@@ -4,42 +4,29 @@ import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import shallow from 'zustand/shallow';
 import differenceInDays from 'date-fns/differenceInDays';
+import Slider from "react-slick";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-import { useSearchRoomStore } from '../../../stores/useSearchRoomStore';
 import { StoredRoomType } from '../../../types/room';
 import { makeMoneyString } from '../../../lib/utils';
 
 const Container = styled.li`
-    width: calc((100% - 48px) / 4);
-    &:nth-child(4n) {
-        margin-right: 0;
-    }
-    margin-right: 16px;
-    margin-bottom: 32px;
-
-    @media (min-width: 1440px) { 
-        width: calc((100% - 64px) / 5);
-        &:nth-child(4n) {
-            margin-right: 16px;
-        }
-        &:nth-child(5n) {
-            margin-right: 0px;
-        }
-    }
-    .room-card-photo-wrapper {
+    width: 100%;
+    overflow: hidden;
+    .photo-wrapper {
+        height: 340px;
         position: relative;
-        width: 100%;
-        padding-bottom: 66.6666%;
+        overflow: hidden;
+        border-radius: 15px;
         margin-bottom: 14px;
         img {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
+            object-fit: cover;
         }
+
     }
     .room-card-room-info {
         font-size: 14px;
@@ -50,15 +37,16 @@ const Container = styled.li`
         white-space: nowrap;
     }
     .room-card-title {
-        font-size: 16px;
-        color: ${palette.gray_71};
-        margin-bottom: 4px;
+        font-size: 14px;
+        font-weight: normal;
+        color: ${palette.gray_aa};
+        margin-bottom: 9px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        line-height: 20px;
     }
     .room-card-price {
-        margin-bottom: 4px;
         b {
             font-weight: bold;
         }
@@ -72,6 +60,49 @@ const Container = styled.li`
     }
 `;
 
+const StyledSlider = styled(Slider)`
+    &:hover {
+        .slick-arrow {
+            display: block !important;
+        }
+    }
+    .slick-arrow {
+        display: none !important;
+        position: absolute;
+        z-index: 1;
+    }
+    .slick-disabled::before {
+        display: none;
+    }
+    .slick-prev {
+        left: 10px;
+        &::before {
+            font-size: 30px;
+        }
+    }
+    .slick-next {
+        right: 20px;
+        &::before {
+            font-size: 30px;
+        }
+    }
+    .slick-dots {
+        position: absolute;
+        bottom: 8%;
+        li {
+            width: 5px;
+            height: 5px;
+            &.slick-active {
+                button {
+                    &:before {
+                        color : white;
+                    }
+                }
+            }
+        }
+    }
+`;
+
 interface IProps {
     room: StoredRoomType;
 }
@@ -82,14 +113,34 @@ const RoomCard: React.FC<IProps> = ({ room }) => {
     const { checkInDate, checkOutDate } = router.query;
 
     const remainDays = checkInDate && checkOutDate && differenceInDays(new Date(checkOutDate as string), new Date(checkInDate as string));
-        
+
+    const settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
+
     return (
         <Container>
             <Link href={`/room/${room.id}`}>
                 <a>
-                    <div className='room-card-photo-wrapper'>
-                        <img src={room.photos[0]} alt='' />
-                    </div>
+                    <StyledSlider {...settings}>
+                        <div className='photo-wrapper'>
+                            <img src={room.photos[0]} alt='' />
+                        </div>
+                        <div className='photo-wrapper'>
+                            <img src={room.photos[1]} alt='' />
+                        </div>
+                        <div className='photo-wrapper'>
+                            <img src={room.photos[2]} alt='' />
+                        </div>
+                        <div className='photo-wrapper'>
+                            <img src={room.photos[3]} alt='' />
+                        </div>
+                    </StyledSlider>
+        
 
                     <div className='room-card-info-texts'>
                         <p className='room-card-room-info'>
@@ -108,7 +159,7 @@ const RoomCard: React.FC<IProps> = ({ room }) => {
                                 </span>
                             )}
                         </p>
-       
+
                     </div>
                 </a>
             </Link>
