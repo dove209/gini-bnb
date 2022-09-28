@@ -13,7 +13,7 @@ const Container = styled.div`
     display: flex;
 
     .room-list-wrapper {
-      flex: 1.6;
+      flex: 1.5;
       padding: 0 24px;
       overflow: hidden;
       .header {
@@ -45,6 +45,7 @@ const RoomMain: React.FC<IProps> = ({ queries }) => {
   if (isSuccess) {
     return (
       <Container>
+        {/* 숙소 리스트 */}
         <div className='room-list-wrapper'>
           <div className="header">
             <h1>
@@ -53,8 +54,10 @@ const RoomMain: React.FC<IProps> = ({ queries }) => {
           </div>
           <RoomList rooms={data.data} />
         </div>
-        <div className='room-list-map-wrapper'>
 
+        {/* 숙소 지도 */}
+        <div className='room-list-map-wrapper'>
+          <RoomListMap rooms={data.data} />
         </div>
 
       </Container>
