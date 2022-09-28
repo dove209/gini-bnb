@@ -7,6 +7,8 @@ import Link from "next/link";
 import { signOut } from "next-auth/react"
 
 import HamburgetIcon from "../public/static/svg/header/hamburger.svg";
+import axios from "../lib/api";
+import { X509Certificate } from "crypto";
 
 const Container = styled.div`
   /* 유저 프로필 */
@@ -71,7 +73,7 @@ const HeaderUserProfile: React.FC<IProps> = ({ userProfileImage }) => {
   const [isUserMenuOpened, setIsUserMenuOpened] = useState(false);
 
   // 로그아웃 하기
-  const logout = () => {
+  const onClickLogout = () => {
     signOut();
     setIsUserMenuOpened(false);
   }
@@ -109,7 +111,7 @@ const HeaderUserProfile: React.FC<IProps> = ({ userProfileImage }) => {
               </a>
             </Link>
             <div className="header-username-divider"></div>
-            <li onClick={logout}>
+            <li onClick={onClickLogout}>
               로그아웃
             </li>
           </ul>
