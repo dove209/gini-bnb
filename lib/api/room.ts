@@ -11,3 +11,8 @@ export const registerRoomAPI = (body: RegisterRoomState ) => {
 export const getRoomListAPI = (queries: GetRoomListAPIQueries) => {
     return axios.get<StoredRoomType[]>(makeQueryString('/api/rooms', queries));
 }
+
+/** 숙소 상세 불러오기 API */
+export const getRoomAPI = (roomId: string) => {
+    return axios.get<StoredRoomType>(`/api/rooms/${roomId}`);
+}

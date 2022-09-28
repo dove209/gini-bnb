@@ -21,10 +21,10 @@
     "popularConveniences": ["세탁기", "TV", "건물 내 무료 주차"],
     "safetyGoods": ["구급 상자", "침실문 잠금장치", "화재 경보기"],
     "photos": [
-    "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F68f04b4-d1a6-da74-e0db-1ad07843804_room1.jpg?alt=media&token=b1ffaa2f-41f8-4231-aef3-633b227c6132",
-    "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F611dc20-6ed-d0ee-34d6-06614db63666_room2.jpg?alt=media&token=80296bd3-0d47-465b-b0ef-628ad3b908fa",
-    "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F446d2b6-057d-6f7-fb2-b457d3bd73a5_room3.jpg?alt=media&token=b34ed288-9466-47f1-b441-6c8a17d74223",
-    "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2Fae5113e-25b-3b2-5acd-1c86444bcec_room4.jpg?alt=media&token=1fb8622e-2e85-41e6-b488-c9ba1ab27969"
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F68f04b4-d1a6-da74-e0db-1ad07843804_room1.jpg?alt=media&token=b1ffaa2f-41f8-4231-aef3-633b227c6132",
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F611dc20-6ed-d0ee-34d6-06614db63666_room2.jpg?alt=media&token=80296bd3-0d47-465b-b0ef-628ad3b908fa",
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F446d2b6-057d-6f7-fb2-b457d3bd73a5_room3.jpg?alt=media&token=b34ed288-9466-47f1-b441-6c8a17d74223",
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2Fae5113e-25b-3b2-5acd-1c86444bcec_room4.jpg?alt=media&token=1fb8622e-2e85-41e6-b488-c9ba1ab27969"
     ],
     "title": "도심이 내려다 보이는 현대적 아파트",
     "description": "편안함을 자랑하는 이곳에서 즐거운 시간을 보내실 수 있을 것입니다.",
@@ -55,10 +55,10 @@
     "popularConveniences": ["세탁기", "TV", "건물 내 무료 주차"],
     "safetyGoods": ["구급 상자", "침실문 잠금장치", "화재 경보기"],
     "photos": [
-        "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F68f04b4-d1a6-da74-e0db-1ad07843804_room1.jpg?alt=media&token=b1ffaa2f-41f8-4231-aef3-633b227c6132",
-        "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F611dc20-6ed-d0ee-34d6-06614db63666_room2.jpg?alt=media&token=80296bd3-0d47-465b-b0ef-628ad3b908fa",
-        "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F446d2b6-057d-6f7-fb2-b457d3bd73a5_room3.jpg?alt=media&token=b34ed288-9466-47f1-b441-6c8a17d74223",
-        "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2Fae5113e-25b-3b2-5acd-1c86444bcec_room4.jpg?alt=media&token=1fb8622e-2e85-41e6-b488-c9ba1ab27969"
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F68f04b4-d1a6-da74-e0db-1ad07843804_room1.jpg?alt=media&token=b1ffaa2f-41f8-4231-aef3-633b227c6132",
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F611dc20-6ed-d0ee-34d6-06614db63666_room2.jpg?alt=media&token=80296bd3-0d47-465b-b0ef-628ad3b908fa",
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F446d2b6-057d-6f7-fb2-b457d3bd73a5_room3.jpg?alt=media&token=b34ed288-9466-47f1-b441-6c8a17d74223",
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2Fae5113e-25b-3b2-5acd-1c86444bcec_room4.jpg?alt=media&token=1fb8622e-2e85-41e6-b488-c9ba1ab27969"
     ],
     "title": "도심이 내려다 보이는 현대적 아파트",
     "description": "편안함을 자랑하는 이곳에서 즐거운 시간을 보내실 수 있을 것입니다.",
@@ -100,5 +100,73 @@
     "hostId": "2427353522",
     "createAt": "2022-09-26T03:39:04.273Z",
     "updateAt": "2022-09-26T03:39:04.273Z"
+  },
+  {
+    "id": "86afc-bf7-fef8-276b-ee3610cb221c",
+    "largeBuildingType": "주택",
+    "buildingType": "전원 주택",
+    "roomType": "공간 전체",
+    "maximumGuestCount": 2,
+    "bedroomCount": 4,
+    "bedCount": 1,
+    "bathroomCount": 1,
+    "bathroomType": "private",
+    "country": "대한민국",
+    "city": "서울",
+    "district": "구로구",
+    "streetAddress": "구일로2길",
+    "detailAddress": "서울전동차사무소",
+    "postcode": "12312312",
+    "latitude": 37.557751030154186,
+    "longitude": 126.97790788039059,
+    "conveniences": ["수영장", "온수 욕조", "화로"],
+    "popularConveniences": ["세탁기", "TV", "무선 인터넷"],
+    "safetyGoods": ["구급 상자", "화재 경보기", "침실문 잠금장치", "소화기"],
+    "photos": [
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2Faa46705-5a21-8285-5b5-1158d151bea_roomTEST.jpg?alt=media&token=8a8217cf-8d5a-43e0-a057-c5fcb77ae598",
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F235f357-8d60-025-8ea6-e610cdd361c5_roomtest1.jpg?alt=media&token=53ef5b36-df27-486c-9075-78cbcb359946",
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F2bda6e3-c54-677-2572-0efde06fdbdc_room1.jpg?alt=media&token=119f8a82-a529-47a4-910f-5f767ed1291b",
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F62acd-c725-18ff-d725-466a2486e2fe_room2.jpg?alt=media&token=82cef09a-7fd1-4caf-9086-5c414df5b2dd"
+    ],
+    "title": "지리는 숙소",
+    "description": "오지고 지리는 숙소입니다.",
+    "price": 20000,
+    "hostId": "116424459340579812687",
+    "createAt": "2022-09-28T08:30:30.252Z",
+    "updateAt": "2022-09-28T08:30:30.252Z"
+  },
+  {
+    "id": "721e36-3fda-ca4-1f8-e84410eba86e",
+    "largeBuildingType": "주택",
+    "buildingType": "전원 주택",
+    "roomType": "공간 전체",
+    "maximumGuestCount": 2,
+    "bedroomCount": 4,
+    "bedCount": 1,
+    "bathroomCount": 1,
+    "bathroomType": "private",
+    "country": "대한민국",
+    "city": "서울",
+    "district": "구로구",
+    "streetAddress": "구일로2길",
+    "detailAddress": "서울전동차사무소",
+    "postcode": "12312312",
+    "latitude": 37.557751030154186,
+    "longitude": 126.97790788039059,
+    "conveniences": ["수영장", "온수 욕조", "화로"],
+    "popularConveniences": ["세탁기", "TV", "무선 인터넷"],
+    "safetyGoods": ["구급 상자", "화재 경보기", "침실문 잠금장치", "소화기"],
+    "photos": [
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2Faa46705-5a21-8285-5b5-1158d151bea_roomTEST.jpg?alt=media&token=8a8217cf-8d5a-43e0-a057-c5fcb77ae598",
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F235f357-8d60-025-8ea6-e610cdd361c5_roomtest1.jpg?alt=media&token=53ef5b36-df27-486c-9075-78cbcb359946",
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F2bda6e3-c54-677-2572-0efde06fdbdc_room1.jpg?alt=media&token=119f8a82-a529-47a4-910f-5f767ed1291b",
+      "https://firebasestorage.googleapis.com/v0/b/gini-bnb-imageupload.appspot.com/o/photos%2F62acd-c725-18ff-d725-466a2486e2fe_room2.jpg?alt=media&token=82cef09a-7fd1-4caf-9086-5c414df5b2dd"
+    ],
+    "title": "지리는 숙소",
+    "description": "오지고 지리는 숙소입니다.",
+    "price": 20000,
+    "hostId": "116424459340579812687",
+    "createAt": "2022-09-28T08:30:30.296Z",
+    "updateAt": "2022-09-28T08:30:30.296Z"
   }
 ]

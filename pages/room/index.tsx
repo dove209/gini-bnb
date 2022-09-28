@@ -2,25 +2,15 @@
 import React from "react";
 import { NextPage } from 'next';
 import { GetServerSideProps } from "next";
-import RoomMain from '../../components/room/main/RoomMain';
-import { GetRoomListAPIQueries } from "../../types/room";
-import { getRoomListAPI } from "../../lib/api/room";
-import queryCache from "../../queryCache";
-
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
-const getCircularReplacer = () => {
-    const seen = new WeakSet();
-    return (key: any, value: any) => {
-        if (typeof value === 'object' && value !== null) {
-            if (seen.has(value)) {
-                return;
-            }
-            seen.add(value);
-        }
-        return value;
-    };
-};
+import { GetRoomListAPIQueries } from "../../types/room";
+import { getRoomListAPI } from "../../lib/api/room";
+import { getCircularReplacer } from "../../lib/utils";
+import queryCache from "../../queryCache";
+
+
+import RoomMain from '../../components/room/main/RoomMain';
 
 interface IProps {
     queries: GetRoomListAPIQueries

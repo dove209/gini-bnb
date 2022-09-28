@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
 import { StoredRoomType } from '../../../types/room';
-import { Map, MapMarker, MarkerClusterer, CustomOverlayMap } from "react-kakao-maps-sdk";
+import { Map, MarkerClusterer, CustomOverlayMap } from "react-kakao-maps-sdk";
 
 import { makeMoneyString } from '../../../lib/utils';
 
@@ -51,15 +51,8 @@ const RoomListMap: React.FC<IProps> = ({ rooms }) => {
                 level={7}
             >
                 <MarkerClusterer averageCenter={true}>
-
                     {rooms.map((room, index) => (
                         <div key={index}>
-                            {/* <MapMarker
-                                position={{
-                                    lat: Number(room.latitude),
-                                    lng: Number(room.longitude)
-                                }}
-                            /> */}
                             <CustomOverlayMap
                                 position={{
                                     lat: Number(room.latitude),
@@ -70,7 +63,6 @@ const RoomListMap: React.FC<IProps> = ({ rooms }) => {
                                 <div className='room-map-price-overlay'>￦{makeMoneyString(String(room.price))}</div>
                             </CustomOverlayMap>
                         </div>
-
                     ))}
                 </MarkerClusterer>
 
