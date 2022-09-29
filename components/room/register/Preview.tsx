@@ -4,15 +4,15 @@ import palette from '../../../styles/palette';
 import { fadeUp } from './FadeUpAnimation';
 
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
 
 import { useRegisterRoomStore } from '../../../stores/useRegisterRoomStore';
 import { registerRoomAPI } from '../../../lib/api/room';
+import { usePostRoom } from '../../../hooks/reactQuery/useRooms';
 import { RegisterRoomState } from '../../../types/room';
 
 import CheckMarkIcon from '../../../public/static/svg/register/dark_cyan_check_mark.svg';
 import StageInfo from './StageInfo';
-import Footer from './Footer';                                        
+import Footer from './Footer';
 
 
 const Container = styled.div`
@@ -66,7 +66,8 @@ const Container = styled.div`
 
 const Preview: React.FC = () => {
     const router = useRouter();
-    
+    const { mutate: postRoomMutate } = usePostRoom();
+
     const {
         largeBuildingType,
         buildingType,
@@ -107,50 +108,52 @@ const Preview: React.FC = () => {
         setIsLargeBuildingType(!!largeBuildingType);
         setIsBuildingType(!!buildingType);
         setIsRoomType(!!roomType);
-        setIsLocation(!!country && !!city && !!district && !! streetAddress && !!postcode && !!latitude && !!longitude);
+        setIsLocation(!!country && !!city && !!district && !!streetAddress && !!postcode && !!latitude && !!longitude);
         setIsPhotos(photos.length !== 0);
         setIsTitle(!!title);
         setIsDescription(!!description);
         setIsPrice(!!price);
     }, [])
-    
-    
+
+
     const onClickSubmitButton = async () => {
         if (isLargeBuildingType && isBuildingType && isRoomType && isLocation && isPhotos && isTitle && isDescription && isPrice) {
-            try {
-                const registerRoomBody: RegisterRoomState = {
-                    largeBuildingType,
-                    buildingType,
-                    roomType,
-                    maximumGuestCount,
-                    bedroomCount,
-                    bedCount,
-                    bathroomCount,
-                    bathroomType,
-                    country,
-                    city,
-                    district,
-                    streetAddress,
-                    detailAddress,
-                    postcode,
-                    latitude,
-                    longitude,
-                    conveniences,
-                    popularConveniences,
-                    safetyGoods,
-                    photos,
-                    title,
-                    description,
-                    price,
-                    hostId
-                }
-                await registerRoomAPI(registerRoomBody);
-                localStorage.removeItem('register-room');
-                router.push('/')
-            } catch (error) {
-                console.log(error);
-                alert('숙소 등록이 실패 하였습니다.')
+            const registerRoomBody: RegisterRoomState = {
+                largeBuildingType,
+                buildingType,
+                roomType,
+                maximumGuestCount,
+                bedroomCount,
+                bedCount,
+                bathroomCount,
+                bathroomType,
+                country,
+                city,
+                district,
+                streetAddress,
+                detailAddress,
+                postcode,
+                latitude,
+                longitude,
+                conveniences,
+                popularConveniences,
+                safetyGoods,
+                photos,
+                title,
+                description,
+                price,
+                hostId
             }
+            postRoomMutate(registerRoomBody, {
+                onSuccess: (data) => {
+                    localStorage.removeItem('register-room');
+                    router.push('/')
+                },
+                onError: (error) => {
+                    console.log(error);
+                    alert('숙소 등록이 실패 하였습니다.')
+                }
+            })
         }
     }
 
@@ -165,12 +168,12 @@ const Preview: React.FC = () => {
                 <ul className="preview-wrapper">
                     <li>
                         {isLargeBuildingType
-                        ?
+                            ?
                             <div>
                                 <CheckMarkIcon />
                                 <h1>숙소 유형 등록 완료</h1>
                             </div>
-                        :
+                            :
                             <div className='not-active' onClick={() => router.push('/room/register/large-building')}>
                                 <h1>숙소 유형 등록 미완료</h1>
                             </div>
@@ -178,12 +181,12 @@ const Preview: React.FC = () => {
                     </li>
                     <li>
                         {isBuildingType
-                        ?
+                            ?
                             <div>
                                 <CheckMarkIcon />
                                 <h1>숙소 종류 등록 완료</h1>
                             </div>
-                        :
+                            :
                             <div className='not-active' onClick={() => router.push('/room/register/building')}>
                                 <h1>숙소 종류 등록 미완료</h1>
                             </div>
@@ -191,12 +194,12 @@ const Preview: React.FC = () => {
                     </li>
                     <li>
                         {isRoomType
-                        ?
+                            ?
                             <div>
                                 <CheckMarkIcon />
                                 <h1>방 타입 등록 완료</h1>
                             </div>
-                        :
+                            :
                             <div className='not-active' onClick={() => router.push('/room/register/privacy-type')}>
                                 <h1>방 타입 등록 미완료</h1>
                             </div>
@@ -204,12 +207,12 @@ const Preview: React.FC = () => {
                     </li>
                     <li>
                         {isLocation
-                        ?
+                            ?
                             <div>
                                 <CheckMarkIcon />
                                 <h1>숙소 위치 등록 완료</h1>
                             </div>
-                        :
+                            :
                             <div className='not-active' onClick={() => router.push('/room/register/location')}>
                                 <h1>숙소 위치 등록 미완료</h1>
                             </div>
@@ -217,12 +220,12 @@ const Preview: React.FC = () => {
                     </li>
                     <li>
                         {isPhotos
-                        ?
+                            ?
                             <div>
                                 <CheckMarkIcon />
                                 <h1>숙소 사진 등록 완료</h1>
                             </div>
-                        :
+                            :
                             <div className='not-active' onClick={() => router.push('/room/register/photos')}>
                                 <h1>숙소 사진 등록 미완료</h1>
                             </div>
@@ -230,12 +233,12 @@ const Preview: React.FC = () => {
                     </li>
                     <li>
                         {isTitle
-                        ?
+                            ?
                             <div>
                                 <CheckMarkIcon />
                                 <h1>숙소 이름 등록 완료</h1>
                             </div>
-                        :
+                            :
                             <div className='not-active' onClick={() => router.push('/room/register/title')}>
                                 <h1>숙소 이름 등록 미완료</h1>
                             </div>
@@ -243,12 +246,12 @@ const Preview: React.FC = () => {
                     </li>
                     <li>
                         {isDescription
-                        ?
+                            ?
                             <div>
                                 <CheckMarkIcon />
                                 <h1>숙소 설명 등록 완료</h1>
                             </div>
-                        :
+                            :
                             <div className='not-active' onClick={() => router.push('/room/register/description')}>
                                 <h1>숙소 설명 등록 미완료</h1>
                             </div>
@@ -256,12 +259,12 @@ const Preview: React.FC = () => {
                     </li>
                     <li>
                         {isPrice
-                        ?
+                            ?
                             <div>
                                 <CheckMarkIcon />
                                 <h1>숙소 가격 등록 완료</h1>
                             </div>
-                        :
+                            :
                             <div className='not-active' onClick={() => router.push('/room/register/price')}>
                                 <h1>숙소 가격 등록 미완료</h1>
                             </div>

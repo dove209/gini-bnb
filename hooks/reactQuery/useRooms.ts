@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { getRoomAPI, getRoomListAPI } from "../../lib/api/room";
+import { getRoomAPI, getRoomListAPI, registerRoomAPI } from "../../lib/api/room";
 import queryCache from "../../queryCache";
 import { StoredRoomType, GetRoomListAPIQueries } from '../../types/room';
 
@@ -19,4 +19,9 @@ export const useRoom = (roomId: string) => {
         staleTime: 30 * 1000,
         enabled: !!roomId
     })
+}
+
+/** [POST]: 숙소 등록하기 */
+export const usePostRoom = () => {
+    return useMutation(registerRoomAPI)
 }

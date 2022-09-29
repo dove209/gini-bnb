@@ -3,8 +3,8 @@ import { RegisterRoomState, StoredRoomType, GetRoomListAPIQueries } from '../../
 import { makeQueryString } from "../utils";
 
 /** 숙소 등록 API */
-export const registerRoomAPI = (body: RegisterRoomState ) => {
-    return axios.post<StoredRoomType>('/api/rooms', body);
+export const registerRoomAPI = (body: RegisterRoomState ): Promise<StoredRoomType> => {
+    return axios.post('/api/rooms', body);
 }
 
 /** 숙소 리스트 불러오기 API */

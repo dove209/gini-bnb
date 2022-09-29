@@ -1,25 +1,11 @@
 import axios from ".";
-import { UserType } from '../../types/user'
+import { UserType, LoginAPIBody, SignUpAPIBody} from '../../types/user'
 
-// 회원가입 body
-interface SignUpAPIBody {
-    email: string;
-    name: string;
-    password: string;
-    birthday: string;
+//** 회원가입 API */
+export const signupAPI = (body: SignUpAPIBody): Promise<UserType> => {
+    return axios.post('/api/auth/signup', body);
 }
 
-/** 회원가입 API */
-export const signupAPI = (body: SignUpAPIBody) => {
-    return axios.post<UserType>('/api/auth/signup', body);
-}
-
-/** 로그인 API */
-interface LoginAPIBody {
-    email: string;
-    password: string;
-}
-
-export const loginAPI = (body: LoginAPIBody) => {
-    return axios.post<UserType>('/api/auth/login', body)
+export const loginAPI = (body: LoginAPIBody): Promise<UserType> => {
+    return axios.post('/api/auth/login', body)
 }

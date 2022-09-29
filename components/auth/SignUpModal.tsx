@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import palette from '../../styles/palette';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { signIn } from 'next-auth/react';
+import { useSignUp } from '../../hooks/reactQuery/useAuth';
 
 import { yearList, monthList, dayList } from '../../lib/staticData';
 import CloseXIcon from '../../public/static/svg/modal/modal_close_x_icon.svg';
@@ -14,10 +16,9 @@ import ClosedEyeIcon from '../../public/static/svg/auth/closed_eye.svg';
 
 import Button from '../common/Button';
 
-import { signupAPI } from '../../lib/api/auth';
-import { signIn } from 'next-auth/react';
 
 import { useAuthModalStore } from "../../stores/useAuthModalStore";
+import { SignUpAPIBody } from '../../types/user';
 
 
 const Container = styled.div`
@@ -147,6 +148,8 @@ interface IProps {
 }
 
 const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
+  const { mutate: signUpMutate } = useSignUp();
+
   const setAuthModalType = useAuthModalStore(state => state.setAuthModalType);
 
   const [hidePassword, setHidePassword] = useState(true);  
@@ -176,28 +179,28 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
     },
     validationSchema: signUpValidationSchema,
     onSubmit: async (values) => {
-      try {
-        const { email, name, password, birthYear, birthMonth, birthDay } = values;
-          const signUpBody = {
+      const { email, name, password, birthYear, birthMonth, birthDay } = values;
+      const signUpBody: SignUpAPIBody = {
+        email,
+        name,
+        password,
+        birthday: new Date(`${birthYear}-${birthMonth!.replace('월', '')}-${birthDay}`).toISOString()
+      };
+      signUpMutate(signUpBody, ({
+        onSuccess: (data) => {
+          alert('회원 가입이 완료 되었습니다.');
+          signIn('credentials', {
             email,
-            name,
-            password,
-            birthday: new Date(`${birthYear}-${birthMonth!.replace('월', '')}-${birthDay}`).toISOString()
+            password
+          });
+          closeModal();
+        },
+        onError: (error) => {
+          if (error instanceof AxiosError) {
+            console.log(error.response?.data);
           }
-          const { data } = await signupAPI(signUpBody)
-          if (data) {
-            alert('회원 가입이 완료 되었습니다.');
-            await signIn('credentials', {
-              email,
-              password
-            })
-            closeModal();
-          }
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          console.log(error.response?.data)
         }
-      }
+      }))
     }
   })
 

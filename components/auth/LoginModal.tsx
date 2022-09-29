@@ -6,7 +6,8 @@ import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { signIn } from 'next-auth/react';
-import { loginAPI } from "../../lib/api/auth";
+import { useLogin } from "../../hooks/reactQuery/useAuth";
+import { LoginAPIBody } from "../../types/user";
 
 import CloseXIcon from "../../public/static/svg/modal/modal_close_x_icon.svg";
 import MaillIcon from "../../public/static/svg/auth/mail.svg";
@@ -116,6 +117,8 @@ interface IProps {
 }
 
 const LoginModal: React.FC<IProps> = ({ closeModal }) => {
+  const { mutate: loginMutate } = useLogin();
+
   const setAuthModalType = useAuthModalStore(state => state.setAuthModalType);
 
   const [hidePassword, setHidePassword] = useState(true);
@@ -140,18 +143,19 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
     },
     validationSchema: logInValidationSchema,
     onSubmit: async (values) => {
-      try {
-        const { email, password } = values;
-        const loginBody = { email, password };
-        const { data } = await loginAPI(loginBody);
-        await signIn('credentials', data);
-        closeModal();
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          console.log(error.response?.data);
-          setLoginError(error.response?.data)
+      const { email, password } = values;
+      const loginBody: LoginAPIBody = { email, password };
+      loginMutate(loginBody, ({
+        onSuccess: (data) => {
+          signIn('credentials', data);
+        },
+        onError: (error) => {
+          if (error instanceof AxiosError) {
+            console.log(error.response?.data);
+            setLoginError(error.response?.data)
+          }
         }
-      }
+      }))
     },
   });
 
