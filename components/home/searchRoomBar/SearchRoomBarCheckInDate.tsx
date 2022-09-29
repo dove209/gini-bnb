@@ -4,7 +4,7 @@ import palette from '../../../styles/palette';
 import shallow from 'zustand/shallow';
 
 import { useSearchRoomStore } from '../../../stores/useSearchRoomStore';
-import DatePicker from '../../common/Datepicker';
+import DatePicker from '../../common/DatePicker';
 
 const Container = styled.div`
   position: relative;

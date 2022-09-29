@@ -8,11 +8,11 @@ export const registerRoomAPI = (body: RegisterRoomState ) => {
 }
 
 /** 숙소 리스트 불러오기 API */
-export const getRoomListAPI = (queries: GetRoomListAPIQueries) => {
-    return axios.get<StoredRoomType[]>(makeQueryString('/api/rooms', queries));
+export const getRoomListAPI = (queries: GetRoomListAPIQueries): Promise<StoredRoomType[]> => {
+    return axios.get(makeQueryString('/api/rooms', queries));
 }
 
 /** 숙소 상세 불러오기 API */
-export const getRoomAPI = (roomId: string) => {
-    return axios.get<StoredRoomType>(`/api/rooms/${roomId}`);
+export const getRoomAPI = (roomId: string): Promise<StoredRoomType> => {
+    return axios.get(`/api/rooms/${roomId}`);
 }

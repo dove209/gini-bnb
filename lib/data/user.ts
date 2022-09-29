@@ -6,7 +6,7 @@ import { StoredUserType } from "../../types/user";
  * 유저 리스트 데이터 불러오기
  */
 const getList = () => {
-    const usersBuffer = readFileSync('data/users.json');
+    const usersBuffer = readFileSync('database/users.json');
     const usersString = usersBuffer.toString();
     if (!usersString) {
         return [];
@@ -28,7 +28,7 @@ const existEmail = ({ email }: { email: string }) => {
  * 유저 리스트 저장
  */
 const write = (users: StoredUserType[]) => {
-    writeFileSync('data/users.json', JSON.stringify(users));
+    writeFileSync('database/users.json', JSON.stringify(users));
 };
 
 

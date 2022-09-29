@@ -38,8 +38,6 @@ const RoomListMap: React.FC<IProps> = ({ rooms }) => {
     const router = useRouter();
     const { latitude, longitude } = router.query;
 
-    console.log(rooms)
-
     return (
         <Container>
             <Map

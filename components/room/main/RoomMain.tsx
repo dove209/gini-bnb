@@ -47,7 +47,7 @@ interface IProps {
 
 const RoomMain: React.FC<IProps> = ({ queries }) => {
   
-  const { data, isSuccess, isLoading } = useRooms(queries);
+  const { data: roomsList, isSuccess, isLoading } = useRooms(queries);
 
   if (isSuccess) {
     return (
@@ -56,15 +56,15 @@ const RoomMain: React.FC<IProps> = ({ queries }) => {
         <div className='room-list-wrapper'>
           <div className="header">
             <h1>
-              숙소 {data?.data?.length}개
+              숙소 {roomsList?.data?.length}개
             </h1>
           </div>
-          <RoomList rooms={data.data} />
+          <RoomList rooms={roomsList?.data} />
         </div>
 
         {/* 숙소 지도 */}
         <div className='room-list-map-wrapper'>
-          <RoomListMap rooms={data.data} />
+          <RoomListMap rooms={roomsList?.data} />
         </div>
 
       </Container>

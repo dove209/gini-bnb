@@ -6,7 +6,7 @@ import { StoredRoomType } from "../../types/room";
  * 숙소 리스트 데이터 불러오기
  */
 const getList = () => {
-    const roomBuffer = readFileSync('data/rooms.json');
+    const roomBuffer = readFileSync('database/rooms.json');
     const roomString = roomBuffer.toString();
     if (!roomString) {
         return [];
@@ -35,7 +35,7 @@ const find = (roomId: string) => {
  * 숙소 리스트 저장하기
  */
 const write = (rooms: StoredRoomType[]) => {
-    writeFileSync('data/rooms.json', JSON.stringify(rooms));
+    writeFileSync('database/rooms.json', JSON.stringify(rooms));
 };
 
 export default { getList, existId, find, write };

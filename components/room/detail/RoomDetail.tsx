@@ -169,7 +169,7 @@ const RoomDetail: React.FC<IProps> = ({ roomId }) => {
                 </ul>
             </div>
 
-            <RoomDetailReservation />
+            <RoomDetailReservation room={data?.data} /> 
         </div>
 
         <section className="location">
