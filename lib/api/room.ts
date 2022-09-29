@@ -8,7 +8,7 @@ export const registerRoomAPI = (body: RegisterRoomState ): Promise<StoredRoomTyp
 }
 
 /** 숙소 리스트 불러오기 API */
-export const getRoomListAPI = (queries: GetRoomListAPIQueries): Promise<StoredRoomType[]> => {
+export const getRoomListAPI = (queries: GetRoomListAPIQueries): Promise<{data : StoredRoomType[]}> => {
     return axios.get(makeQueryString('/api/rooms', queries));
 }
 

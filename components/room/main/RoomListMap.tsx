@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
+import { useHoveredRoomStore } from '../../../stores/useHoverRoomStore';
 import { StoredRoomType } from '../../../types/room';
 import { Map, MarkerClusterer, CustomOverlayMap } from "react-kakao-maps-sdk";
 
@@ -24,8 +25,12 @@ const Container = styled.div`
         font-weight: bold;
         cursor: pointer;
         transition: transform 0.2s;
-        &:hover {
+        &:hover, &.active {
             transform: scale(1.1);
+        }
+        &.active {
+            background-color:  black;
+            color: white;
         }
     }
 `;
@@ -37,6 +42,8 @@ interface IProps {
 const RoomListMap: React.FC<IProps> = ({ rooms }) => {
     const router = useRouter();
     const { latitude, longitude } = router.query;
+
+    const hoveredRoomId = useHoveredRoomStore((state) => state.hoveredRoomId);
 
     return (
         <Container>
@@ -58,7 +65,11 @@ const RoomListMap: React.FC<IProps> = ({ rooms }) => {
                                 }}
                                 yAnchor={-0.3}
                             >
-                                <div className='room-map-price-overlay'>￦{makeMoneyString(String(room.price))}</div>
+                                <div 
+                                    className={hoveredRoomId === room.id ? 'room-map-price-overlay active' : 'room-map-price-overlay'}
+                                >
+                                    ￦{makeMoneyString(String(room.price))}
+                                </div>
                             </CustomOverlayMap>
                         </div>
                     ))}

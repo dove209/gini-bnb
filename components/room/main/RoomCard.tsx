@@ -9,6 +9,8 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { useHoveredRoomStore } from '../../../stores/useHoverRoomStore';
+
 import { StoredRoomType } from '../../../types/room';
 import { makeMoneyString } from '../../../lib/utils';
 
@@ -112,6 +114,8 @@ const RoomCard: React.FC<IProps> = ({ room }) => {
     const router = useRouter();
     const { checkInDate, checkOutDate } = router.query;
 
+    const setHoveredRoomId = useHoveredRoomStore((state) => state.setHoveredRoomId);
+
     const remainDays = checkInDate && checkOutDate && differenceInDays(new Date(checkOutDate as string), new Date(checkInDate as string));
 
     const settings = {
@@ -123,7 +127,10 @@ const RoomCard: React.FC<IProps> = ({ room }) => {
     };
 
     return (
-        <Container>
+        <Container
+            onMouseOver={() => setHoveredRoomId(room.id)}
+            onMouseOut={() => setHoveredRoomId(null)}
+        >
             <Link href={`/room/${room.id}`}>
                 <a>
                     <StyledSlider {...settings}>

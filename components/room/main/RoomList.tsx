@@ -13,7 +13,7 @@ const Container = styled.ul`
 `;
 
 interface IProps {
-    rooms: StoredRoomType[]
+    rooms: StoredRoomType[];
 }
 const RoomList: React.FC<IProps> = ({ rooms }) => {
   return (

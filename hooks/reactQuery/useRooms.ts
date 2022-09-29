@@ -7,7 +7,7 @@ import { StoredRoomType, GetRoomListAPIQueries } from '../../types/room';
 
 /** [GET]: (조건)검색된 숙소 리스트 */
 export const useRooms = (queries: GetRoomListAPIQueries) => {
-    return useQuery<StoredRoomType[], AxiosError>(queryCache.rooms(queries), () => getRoomListAPI(queries), {
+    return useQuery<{ data : StoredRoomType[] }, AxiosError>(queryCache.rooms(queries), () => getRoomListAPI(queries), {
         staleTime: 30 * 1000, // 10초 후 refetch
         enabled: !!queries,   //id가 존재할 때만 쿼리 요청
     })
