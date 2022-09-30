@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import palette from '../../styles/palette';
 
 import SearchRoomBar from './searchRoomBar/SearchRoomBar';
+import RoomList from './RoomList';
+
 
 const Container = styled.div`
     width: 100%;
@@ -28,6 +30,7 @@ const Home = () => {
         <p className="home-search-bar-label">숙소</p>
         <SearchRoomBar />
         <h2>가까운 여행지, 에어비엔비와 탐험해보세요.</h2>
+        <RoomList />
     </Container>
   )
 }

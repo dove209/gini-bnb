@@ -7,8 +7,13 @@ export const registerRoomAPI = (body: RegisterRoomState ): Promise<StoredRoomTyp
     return axios.post('/api/rooms', body);
 }
 
-/** 숙소 리스트 불러오기 API */
-export const getRoomListAPI = (queries: GetRoomListAPIQueries): Promise<{data : StoredRoomType[]}> => {
+/** 모든 숙소 리스트 불러오기 API */
+export const getAllRoomListAPI = (): Promise<{ data: StoredRoomType[] }> => {
+    return axios.get('/api/allRooms');
+}
+
+/** (조건queries)검색된 숙소 리스트 불러오기 API */
+export const getRoomListAPI = (queries: GetRoomListAPIQueries): Promise<{data: StoredRoomType[]}> => {
     return axios.get(makeQueryString('/api/rooms', queries));
 }
 

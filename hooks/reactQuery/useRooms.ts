@@ -1,8 +1,16 @@
 import { AxiosError } from 'axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { getRoomAPI, getRoomListAPI, registerRoomAPI } from "../../lib/api/room";
+import { getAllRoomListAPI, getRoomAPI, getRoomListAPI, registerRoomAPI } from "../../lib/api/room";
 import queryCache from "../../queryCache";
 import { StoredRoomType, GetRoomListAPIQueries } from '../../types/room';
+
+
+/** [GET]: 모든 숙소 리스트(메인 페이지) */
+export const useAllRooms = () => {
+    return useQuery<{ data: StoredRoomType[] }, AxiosError>(queryCache.allRooms, getAllRoomListAPI, {
+        staleTime: 30 * 1000
+    });
+}
 
 
 /** [GET]: (조건)검색된 숙소 리스트 */
