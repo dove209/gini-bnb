@@ -15,7 +15,7 @@ export const useRooms = (queries: GetRoomListAPIQueries) => {
 
 /** [GET]: 숙소 상세 정보 */
 export const useRoom = (roomId: string) => {
-    return useQuery<StoredRoomType, AxiosError>(queryCache.room(roomId), () => getRoomAPI(roomId), {
+    return useQuery<{data: StoredRoomType }, AxiosError>(queryCache.room(roomId), () => getRoomAPI(roomId), {
         staleTime: 30 * 1000,
         enabled: !!roomId
     })

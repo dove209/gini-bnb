@@ -46,9 +46,8 @@ interface IProps {
 
 
 const RoomMain: React.FC<IProps> = ({ queries }) => {
-  
   const { data: roomsList, isSuccess, isLoading } = useRooms(queries);
-
+  
   if (isSuccess) {
     return (
       <Container>

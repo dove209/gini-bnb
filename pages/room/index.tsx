@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         infantsCount,
         latitude,
         longitude,
-        limit: limit || '20',
+        limit: limit || '30',
         page: page || '1'
     } as GetRoomListAPIQueries;
 

@@ -6,7 +6,6 @@ import { fadeUp } from './FadeUpAnimation';
 import { useRouter } from 'next/router';
 
 import { useRegisterRoomStore } from '../../../stores/useRegisterRoomStore';
-import { registerRoomAPI } from '../../../lib/api/room';
 import { usePostRoom } from '../../../hooks/reactQuery/useRooms';
 import { RegisterRoomState } from '../../../types/room';
 
@@ -92,8 +91,9 @@ const Preview: React.FC = () => {
         title,
         description,
         price,
-        hostId
-    } = useRegisterRoomStore();
+        hostId,
+        resetAll
+    } = useRegisterRoomStore(state => state);
 
     const [isLargeBuildingType, setIsLargeBuildingType] = useState<boolean>(false);
     const [isBuildingType, setIsBuildingType] = useState<boolean>(false);
@@ -147,6 +147,7 @@ const Preview: React.FC = () => {
             postRoomMutate(registerRoomBody, {
                 onSuccess: (data) => {
                     localStorage.removeItem('register-room');
+                    resetAll();
                     router.push('/')
                 },
                 onError: (error) => {

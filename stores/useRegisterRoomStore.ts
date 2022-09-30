@@ -27,36 +27,41 @@ interface IRegisterRoomStore extends RegisterRoomState {
     setDescription: (payload: descriptionType) => void;
     setPrice: (payload: priceType) => void;
     setHostId: (payload: HostIdType) => void;
+    resetAll: () => void;
+}
+
+const initialState: RegisterRoomState = {
+    largeBuildingType: '',
+    buildingType: '',
+    roomType: '',
+    maximumGuestCount: 1,
+    bedroomCount: 1,
+    bedCount: 0,
+    bathroomCount: 0.5,
+    bathroomType: 'private',
+    country: '',
+    city: '',
+    district: '',
+    streetAddress: '',
+    detailAddress: '',
+    postcode: '',
+    latitude: 0,
+    longitude: 0,
+    conveniences: [],
+    popularConveniences: [],
+    safetyGoods: [],
+    photos: [],
+    title: '',
+    description: '',
+    price: 0,
+    hostId: '',
 }
 
 const useRegisterRoomStore = create<IRegisterRoomStore>()(
     devtools(
         // 새로고침 해도 유지된다.
         persist((set) => ({
-            largeBuildingType: '',
-            buildingType: '',
-            roomType: '',
-            maximumGuestCount: 1,
-            bedroomCount: 1,
-            bedCount: 0,
-            bathroomCount: 0.5,
-            bathroomType: 'private',
-            country: '',
-            city: '',
-            district: '',
-            streetAddress: '',
-            detailAddress: '',
-            postcode: '',
-            latitude: 0,
-            longitude: 0,
-            conveniences: [],
-            popularConveniences: [],
-            safetyGoods: [],
-            photos: [],
-            title: '',
-            description: '',
-            price: 0,
-            hostId: '',
+            ...initialState,
             setLargeBuildingType: (payload) => set(() => ({ largeBuildingType: payload })),
             setBuildingType: (payload) => set(() => ({ buildingType: payload })),
             setRoomType: (payload) => set(() => ({ roomType: payload })),
@@ -87,6 +92,7 @@ const useRegisterRoomStore = create<IRegisterRoomStore>()(
              setDescription: (payload) => set(() => ({ description: payload })),
              setPrice: (payload) => set(() => ({ price: payload })),
              setHostId: (payload) => set(() => ({ hostId: payload })),
+             resetAll: () => set(initialState),
         }),
         {
             name: 'register-room',

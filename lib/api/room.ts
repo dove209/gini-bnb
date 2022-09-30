@@ -13,6 +13,6 @@ export const getRoomListAPI = (queries: GetRoomListAPIQueries): Promise<{data : 
 }
 
 /** 숙소 상세 불러오기 API */
-export const getRoomAPI = (roomId: string): Promise<StoredRoomType> => {
+export const getRoomAPI = (roomId: string): Promise<{data: StoredRoomType}> => {
     return axios.get(`/api/rooms/${roomId}`);
 }
