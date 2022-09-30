@@ -9,7 +9,6 @@ import { getRoomListAPI } from "../../lib/api/room";
 import { getCircularReplacer } from "../../lib/utils";
 import queryCache from "../../queryCache";
 
-
 import RoomMain from '../../components/room/main/RoomMain';
 
 interface IProps {
