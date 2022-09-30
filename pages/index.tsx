@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const secret = process.env.JWT_SECRET
   const token = await getToken({ req, secret })
 
-  await queryClient.prefetchQuery(queryCache.allRooms, getAllRoomListAPI)
+  await queryClient.prefetchQuery(queryCache.allRooms, getAllRoomListAPI, { staleTime: 3 * 1000 })
 
   return {
     props: {
