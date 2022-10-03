@@ -48,6 +48,7 @@ const Container = styled.div`
     border-radius: 32px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
     cursor: default;
+    z-index: 1;
   }
 
   .search-room-bar-guests-counter-wrapper {

@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     return {
         props: {
             roomId: id,
-            dehydratedState: JSON.stringify(dehydrate(queryClient), getCircularReplacer())
+            dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient), getCircularReplacer()))
         }
     }
 }

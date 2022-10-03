@@ -5,6 +5,7 @@ import { useAllRooms } from '../../hooks/reactQuery/useRooms';
 import RoomCard from '../room/main/RoomCard';
 
 const Container = styled.ul`
+    margin-top: 60px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 40px;
@@ -14,7 +15,6 @@ const Container = styled.ul`
 
 const RoomList: React.FC = () => {
   const { data: AllRoomsList, isSuccess, isLoading } = useAllRooms();
-
   if (isSuccess) {
     return (
         <Container>

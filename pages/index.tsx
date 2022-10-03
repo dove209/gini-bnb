@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import { NextPage } from "next";
 import React from 'react';
 import { getToken } from "next-auth/jwt";
 import { GetServerSideProps } from "next";
@@ -19,11 +19,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const secret = process.env.JWT_SECRET
   const token = await getToken({ req, secret })
 
-  await queryClient.prefetchQuery(queryCache.allRooms, getAllRoomListAPI, { staleTime: 3 * 1000 })
+  await queryClient.prefetchQuery(queryCache.allRooms, () => getAllRoomListAPI())
 
   return {
     props: {
-      dehydratedState: JSON.stringify(dehydrate(queryClient), getCircularReplacer()),
+      dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     }
   }
 }

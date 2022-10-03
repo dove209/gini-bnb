@@ -132,7 +132,7 @@ const RoomCard: React.FC<IProps> = ({ room }) => {
             onMouseOut={() => setHoveredRoomId(null)}
         >
             <Link href={`/room/${room.id}`}>
-                <a>
+                <a target="_blank">
                     <StyledSlider {...settings}>
                         <div className='photo-wrapper'>
                             <img src={room.photos[0]} alt='' />
