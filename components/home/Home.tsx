@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import palette from '../../styles/palette';
 
 import SearchRoomBar from './searchRoomBar/SearchRoomBar';
 import RoomList from './RoomList';

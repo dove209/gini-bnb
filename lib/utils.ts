@@ -26,7 +26,7 @@ export const makeMoneyString = (input: string) => {
 /** JSON.stringify() 오류 수정용  */
 export const getCircularReplacer = () => {
     const seen = new WeakSet();
-    return (key: any, value: any) => {
+    return (value: any) => {
         if (typeof value === 'object' && value !== null) {
             if (seen.has(value)) {
                 return;
