@@ -18,7 +18,7 @@ const RoomList: React.FC = () => {
   if (isSuccess) {
     return (
         <Container>
-            {AllRoomsList.data.map((room) => (
+            {AllRoomsList.map((room) => (
                 <RoomCard room={room} key={room.id} />
             ))}
         </Container>

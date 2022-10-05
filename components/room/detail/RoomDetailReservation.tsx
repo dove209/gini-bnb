@@ -30,6 +30,7 @@ const Container = styled.div`
         border: 1px solid ${palette.gray_e5};
         border-radius: 10px;
         box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+        z-index:2;
         .room-detail-reservation-info {
             font-size: 18px;
             font-weight: 600;
@@ -209,9 +210,11 @@ const RoomDetailReservation: React.FC<IProps> = ({ room }) => {
       }
       postReservationMutate(reservationBody, {
         onSuccess: (data) => {
+          alert('숙소 예약이 성공하였습니다.')
           console.log(data)
         },
         onError: (error) => {
+          alert('숙소 예약이 실패하였습니다..')
           console.log(error)
         }
       })

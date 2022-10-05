@@ -7,7 +7,7 @@ import { StoredRoomType, GetRoomListAPIQueries } from '../../types/room';
 
 /** [GET]: 모든 숙소 리스트(메인 페이지) */
 export const useAllRooms = () => {
-    return useQuery<{ data: StoredRoomType[] }, AxiosError>(queryCache.allRooms, getAllRoomListAPI, {
+    return useQuery<StoredRoomType[], AxiosError>(queryCache.allRooms, getAllRoomListAPI, {
         staleTime: 30 * 1000
     });
 }
@@ -15,7 +15,7 @@ export const useAllRooms = () => {
 
 /** [GET]: (조건)검색된 숙소 리스트 */
 export const useRooms = (queries: GetRoomListAPIQueries) => {
-    return useQuery<{ data : StoredRoomType[] }, AxiosError>(queryCache.rooms(queries), () => getRoomListAPI(queries), {
+    return useQuery<StoredRoomType[], AxiosError>(queryCache.rooms(queries), () => getRoomListAPI(queries), {
         staleTime: 30 * 1000, // 10초 후 refetch
         enabled: !!queries,   //id가 존재할 때만 쿼리 요청
     })
@@ -23,7 +23,7 @@ export const useRooms = (queries: GetRoomListAPIQueries) => {
 
 /** [GET]: 숙소 상세 정보 */
 export const useRoom = (roomId: string) => {
-    return useQuery<{data: StoredRoomType }, AxiosError>(queryCache.room(roomId), () => getRoomAPI(roomId), {
+    return useQuery<StoredRoomType, AxiosError>(queryCache.room(roomId), () => getRoomAPI(roomId), {
         staleTime: 30 * 1000,
         enabled: !!roomId
     })

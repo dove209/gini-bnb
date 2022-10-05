@@ -189,10 +189,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
       signUpMutate(signUpBody, ({
         onSuccess: (data) => {
           alert('회원 가입이 완료 되었습니다.');
-          signIn('credentials', {
-            email,
-            password
-          });
+          signIn('credentials', data);
           closeModal();
         },
         onError: (error) => {

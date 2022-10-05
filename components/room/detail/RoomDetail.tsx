@@ -111,11 +111,10 @@ interface IProps {
 }
 
 const RoomDetail: React.FC<IProps> = ({ roomId }) => {
-  const { data, isSuccess, isLoading } = useRoom(roomId);
+  const { data: room, isSuccess, isLoading } = useRoom(roomId);
 
 
   if (isSuccess) {
-    const room = data?.data;
     return (
       <Container>
         <h1 className="room-detail-title">{room.title}</h1>
@@ -169,7 +168,7 @@ const RoomDetail: React.FC<IProps> = ({ roomId }) => {
                 </ul>
             </div>
 
-            <RoomDetailReservation room={data?.data} /> 
+            <RoomDetailReservation room={room} /> 
         </div>
 
         <section className="location">

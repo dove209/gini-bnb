@@ -4,7 +4,6 @@ import { GetServerSideProps } from 'next';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
 import { getRoomAPI } from '../../lib/api/room';
-import { getCircularReplacer } from '../../lib/utils';
 import queryCache from "../../queryCache";
 
 import RoomDetail from '../../components/room/detail/RoomDetail';
@@ -30,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     return {
         props: {
             roomId: id,
-            dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient), getCircularReplacer()))
+            dehydratedState: dehydrate(queryClient),
         }
     }
 }

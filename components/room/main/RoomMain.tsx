@@ -55,15 +55,15 @@ const RoomMain: React.FC<IProps> = ({ queries }) => {
         <div className='room-list-wrapper'>
           <div className="header">
             <h1>
-              숙소 {roomsList?.data?.length}개
+              숙소 {roomsList.length}개
             </h1>
           </div>
-          <RoomList rooms={roomsList?.data} />
+          <RoomList rooms={roomsList} />
         </div>
 
         {/* 숙소 지도 */}
         <div className='room-list-map-wrapper'>
-          <RoomListMap rooms={roomsList?.data} />
+          <RoomListMap rooms={roomsList} />
         </div>
 
       </Container>

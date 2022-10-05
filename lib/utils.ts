@@ -21,18 +21,3 @@ export const makeMoneyString = (input: string) => {
     const numberPrice = Number(input).toLocaleString('ko-KR');
     return numberPrice;
 }
-
-
-/** JSON.stringify() 오류 수정용  */
-export const getCircularReplacer = () => {
-    const seen = new WeakSet();
-    return (value: any) => {
-        if (typeof value === 'object' && value !== null) {
-            if (seen.has(value)) {
-                return;
-            }
-            seen.add(value);
-        }
-        return value;
-    };
-};
