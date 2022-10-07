@@ -63,6 +63,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-datepicker", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:4.8.0"],\
             ["react-dom", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:18.2.0"],\
+            ["react-intersection-observer", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:9.4.0"],\
             ["react-kakao-maps-sdk", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:1.1.3"],\
             ["react-outside-click-handler", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:1.3.0"],\
             ["react-slick", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:0.29.0"],\
@@ -3896,6 +3897,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-datepicker", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:4.8.0"],\
             ["react-dom", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:18.2.0"],\
+            ["react-intersection-observer", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:9.4.0"],\
             ["react-kakao-maps-sdk", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:1.1.3"],\
             ["react-outside-click-handler", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:1.3.0"],\
             ["react-slick", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:0.29.0"],\
@@ -5457,6 +5459,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/react-fast-compare-npm-3.2.0-fbfa6627d9-8ef272c825.zip/node_modules/react-fast-compare/",\
           "packageDependencies": [\
             ["react-fast-compare", "npm:3.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-intersection-observer", [\
+        ["npm:9.4.0", {\
+          "packageLocation": "./.yarn/cache/react-intersection-observer-npm-9.4.0-2bda5dca9e-6b9caff424.zip/node_modules/react-intersection-observer/",\
+          "packageDependencies": [\
+            ["react-intersection-observer", "npm:9.4.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:9.4.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-intersection-observer-virtual-f28bfa37e4/0/cache/react-intersection-observer-npm-9.4.0-2bda5dca9e-6b9caff424.zip/node_modules/react-intersection-observer/",\
+          "packageDependencies": [\
+            ["react-intersection-observer", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:9.4.0"],\
+            ["@types/react", "npm:18.0.18"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
