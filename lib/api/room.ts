@@ -1,5 +1,5 @@
 import axios from ".";
-import { RegisterRoomState, StoredRoomType, GetRoomListAPIQueries } from '../../types/room';
+import { RegisterRoomState, StoredRoomType, GetRoomListAPIQueries, infiniteQueryAllRooms } from '../../types/room';
 import { makeQueryString } from "../utils";
 
 /** 숙소 등록 API */
@@ -9,8 +9,14 @@ export const registerRoomAPI = async (body: RegisterRoomState ): Promise<StoredR
 }
 
 /** 모든 숙소 리스트 불러오기 API */
-export const getAllRoomListAPI = async (): Promise<StoredRoomType[]> => {
-    const { data } = await axios.get('/api/allRooms');
+export const getAllRoomListAPI = async (pageParam: number): Promise<infiniteQueryAllRooms> => {
+    const limit = 10;
+    const { data } = await axios.get('/api/allRooms', {
+        params: {
+            pageParam,
+            limit
+        }
+    });
     return data;
 }
 

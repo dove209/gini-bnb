@@ -48,3 +48,13 @@ export type GetRoomListAPIQueries = {
     limit?: string | string[];
     page?: string | string[];
 };
+
+/**
+ * 메인 페이지 숙소 리스트 무한 스크롤 타입
+ */
+export type infiniteQueryAllRooms = {
+    roomsList: StoredRoomType[];
+    totalCount: number;
+    hasMore: boolean;
+    nextPage: number;
+}

@@ -8,6 +8,7 @@ import SearchRoomBarCheckOutData from './SearchRoomBarCheckOutDate';
 import SearchRoomGuests from './SearchRoomGuests';
 
 const Container = styled.div`
+  min-width: 810px;
     width: 50%;
     height: 70px;
     display: flex;

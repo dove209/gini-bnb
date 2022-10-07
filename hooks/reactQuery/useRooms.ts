@@ -1,14 +1,18 @@
 import { AxiosError } from 'axios';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import { getAllRoomListAPI, getRoomAPI, getRoomListAPI, registerRoomAPI } from "../../lib/api/room";
 import queryCache from "../../queryCache";
-import { StoredRoomType, GetRoomListAPIQueries } from '../../types/room';
+import { StoredRoomType, GetRoomListAPIQueries, infiniteQueryAllRooms } from '../../types/room';
 
 
 /** [GET]: 모든 숙소 리스트(메인 페이지) */
 export const useAllRooms = () => {
-    return useQuery<StoredRoomType[], AxiosError>(queryCache.allRooms, getAllRoomListAPI, {
-        staleTime: 30 * 1000
+    return useInfiniteQuery<infiniteQueryAllRooms, AxiosError>(queryCache.allRooms, ({ pageParam = 1 }) => getAllRoomListAPI(pageParam), {
+        staleTime: 30 * 1000,
+        getNextPageParam: (lastPage, allPages) => {
+            if (lastPage.hasMore) return lastPage.nextPage;
+            return undefined;
+        },
     });
 }
 
