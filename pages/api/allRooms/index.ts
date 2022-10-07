@@ -5,11 +5,11 @@ import Data from '../../../lib/data';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'GET') {
-        const { pageParam, limit } = req.query;
+        const { pageParam = 1, limit } = req.query;
         try {
             const roomsList = Data.room.getList();
             const totalCount = roomsList.length;
-            
+
             // 개수 자르기
             const limitedRooms = roomsList.slice((Number(pageParam) - 1) * Number(limit), (Number(pageParam) * Number(limit)));
 
