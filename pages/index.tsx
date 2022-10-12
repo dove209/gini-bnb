@@ -15,7 +15,7 @@ const index: NextPage = () => {
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery(queryCache.allRooms, ({ pageParam = 1 }) => getAllRoomListAPI(pageParam))
+  await queryClient.prefetchInfiniteQuery(queryCache.allRooms('list'), ({ pageParam = 1 }) => getAllRoomListAPI(pageParam, 'list'))
 
   return {
     props: {
