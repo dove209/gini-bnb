@@ -13,6 +13,15 @@ const Container = styled.ul`
     width: 100%;
     max-width: 1500px;
     min-width: 600px;
+
+    .room-list-room-card {
+      border-radius: 15px;
+      overflow: hidden;
+      .photo-wrapper {
+        border-radius: 15px;
+        overflow: hidden;
+      }
+    }
 `;
 
 const ObserverDIV = styled.div`
@@ -23,8 +32,7 @@ const ObserverDIV = styled.div`
 
 const RoomList: React.FC = () => {
   const [ref, inView] = useInView();
-  const { data, isSuccess, isFetching, fetchNextPage, hasNextPage } = useAllRooms();
-
+  const { data, isSuccess, isFetching, fetchNextPage, hasNextPage } = useAllRooms('list');
 
   useEffect(() => {
     if (hasNextPage && inView) {
@@ -37,11 +45,15 @@ const RoomList: React.FC = () => {
     return (
       <>
         <Container>
+
           {data.pages.map((page) => (
             page.roomsList.map((room) =>
-              <RoomCard room={room} key={room.id} />
+              <li className='room-list-room-card' key={room.id} >
+                <RoomCard room={room} />
+              </li>
             )
           ))}
+
         </Container>
         <ObserverDIV ref={ref}></ObserverDIV>
       </>

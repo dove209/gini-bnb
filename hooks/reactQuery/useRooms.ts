@@ -6,8 +6,8 @@ import { StoredRoomType, GetRoomListAPIQueries, infiniteQueryAllRooms } from '..
 
 
 /** [GET]: 모든 숙소 리스트(메인 페이지) */
-export const useAllRooms = () => {
-    return useInfiniteQuery<infiniteQueryAllRooms, AxiosError>(queryCache.allRooms, ({ pageParam = 1 }) => getAllRoomListAPI(pageParam), {
+export const useAllRooms = (type: 'list' | 'map' ) => {
+    return useInfiniteQuery<infiniteQueryAllRooms, AxiosError>(queryCache.allRooms(type), ({ pageParam = 1 }) => getAllRoomListAPI(pageParam, type), {
         staleTime: 30 * 1000,
         getNextPageParam: (lastPage, allPages) => {
             if (lastPage.hasMore) return lastPage.nextPage;

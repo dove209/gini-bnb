@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 
 import { useRooms } from '../../../hooks/reactQuery/useRooms';
@@ -40,6 +40,7 @@ const Container = styled.div`
 
 `
 
+
 interface IProps {
   queries: GetRoomListAPIQueries
 }
@@ -47,7 +48,7 @@ interface IProps {
 
 const RoomMain: React.FC<IProps> = ({ queries }) => {
   const { data: roomsList, isSuccess, isLoading } = useRooms(queries);
-  
+
   if (isSuccess) {
     return (
       <Container>
@@ -65,7 +66,6 @@ const RoomMain: React.FC<IProps> = ({ queries }) => {
         <div className='room-list-map-wrapper'>
           <RoomListMap rooms={roomsList} />
         </div>
-
       </Container>
     )
   }

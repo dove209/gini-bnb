@@ -9,12 +9,13 @@ export const registerRoomAPI = async (body: RegisterRoomState ): Promise<StoredR
 }
 
 /** 모든 숙소 리스트 불러오기 API */
-export const getAllRoomListAPI = async (pageParam: number): Promise<infiniteQueryAllRooms> => {
+export const getAllRoomListAPI = async (pageParam: number, type: 'list' | 'map'): Promise<infiniteQueryAllRooms> => {
     const limit = 10;
     const { data } = await axios.get('/api/allRooms', {
         params: {
             pageParam,
-            limit
+            limit,
+            type
         }
     });
     return data;

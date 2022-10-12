@@ -5,7 +5,7 @@ import Data from '../../../lib/data';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'GET') {
-        const { pageParam = 1, limit } = req.query;
+        const { pageParam = 1, limit, type } = req.query;
         try {
             const roomsList = Data.room.getList();
             const totalCount = roomsList.length;
@@ -13,13 +13,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             // 개수 자르기
             const limitedRooms = roomsList.slice((Number(pageParam) - 1) * Number(limit), (Number(pageParam) * Number(limit)));
 
-            const rooms: infiniteQueryAllRooms = {
-                roomsList: limitedRooms,
-                totalCount, //전체 데이터의 수 
-                hasMore: Number(pageParam) * Number(limit) < totalCount ? true : false, // 끝을 알려주는 속성
-                nextPage: Number(pageParam) + 1 , // 다음 번에 건너뛸 데이터의 수 offset의 누적합
+            if (type === 'list') {       
+                const rooms: infiniteQueryAllRooms = {
+                    roomsList: limitedRooms,
+                    totalCount, //전체 데이터의 수 
+                    hasMore: Number(pageParam) * Number(limit) < totalCount ? true : false, // 끝을 알려주는 속성
+                    nextPage: Number(pageParam) + 1 , // 다음 번에 건너뛸 데이터의 수 offset의 누적합
+                }
+                return res.status(200).send(rooms);
+            } else if (type === 'map') {
+                const rooms: infiniteQueryAllRooms = {
+                    roomsList: roomsList,
+                    totalCount,
+                    hasMore: true, 
+                    nextPage: 0, 
+                }
+                return res.status(200).send(rooms);
             }
-            return res.status(200).send(rooms);
         } catch (e) {
             console.log(e)
             return res.send(e);

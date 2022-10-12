@@ -14,14 +14,13 @@ import { useHoveredRoomStore } from '../../../stores/useHoverRoomStore';
 import { StoredRoomType } from '../../../types/room';
 import { makeMoneyString } from '../../../lib/utils';
 
-const Container = styled.li`
+const Container = styled.div`
     width: 100%;
     overflow: hidden;
     .photo-wrapper {
         height: 340px;
         position: relative;
         overflow: hidden;
-        border-radius: 15px;
         margin-bottom: 14px;
         img {
             width: 100%;
