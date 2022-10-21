@@ -113,7 +113,7 @@ interface IProps {
 const RoomDetail: React.FC<IProps> = ({ roomId }) => {
   const { data: room, isSuccess, isLoading } = useRoom(roomId);
 
-
+  console.log(room)
   if (isSuccess) {
     return (
       <Container>
@@ -171,7 +171,7 @@ const RoomDetail: React.FC<IProps> = ({ roomId }) => {
             <RoomDetailReservation room={room} /> 
         </div>
 
-        <section className="location">
+        <section>
           <div className="room-detail-divider" />
           <p className="room-detail-title">호스팅 지역</p>
           <div className="map-wrapper">
@@ -191,6 +191,26 @@ const RoomDetail: React.FC<IProps> = ({ roomId }) => {
               />
             </Map>
           </div>
+          <p className="room-detail-location">
+            {room.streetAddress}, {room.district}, {room.city}, {room.country}
+          </p>
+        </section>
+
+        <section>
+          <div className="room-detail-divider" />
+          <p className="room-detail-title">후기</p>
+        </section>
+
+
+        <section>
+          <div className="room-detail-divider" />
+          <p className="room-detail-title">호스트 정보</p>
+        </section>
+
+
+        <section>
+          <div className="room-detail-divider" />
+          <p className="room-detail-title">알아두어야 할 사항</p>
         </section>
       </Container>
     );
