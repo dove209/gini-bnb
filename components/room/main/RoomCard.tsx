@@ -18,6 +18,7 @@ const Container = styled.div`
     width: 100%;
     overflow: hidden;
     .photo-wrapper {
+        border-radius: 15px;
         height: 340px;
         position: relative;
         overflow: hidden;

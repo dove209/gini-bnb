@@ -104,7 +104,16 @@ const HeaderUserProfile: React.FC<IProps> = ({ userProfileImage }) => {
 
         {isUserMenuOpened && (
           <ul className="header-usermenu">
-            <li>숙소 관리</li>
+            <Link href={'/room/myReservation'}>
+              <a onClick={() => setIsUserMenuOpened(false)}>
+                <li>나의 숙소 예약</li>
+              </a>
+            </Link>
+            <Link href={'/room/myRooms'}>
+              <a onClick={() => setIsUserMenuOpened(false)}>
+                <li>나의 숙소 관리</li>
+              </a>
+            </Link>
             <Link href={'/room/register/large-building'}>
               <a onClick={() => setIsUserMenuOpened(false)}>
                 <li>숙소 등록하기</li>

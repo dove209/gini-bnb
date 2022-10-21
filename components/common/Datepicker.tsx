@@ -8,6 +8,9 @@ import ko from 'date-fns/locale/ko'
 const Container = styled.div`
     width: 100%;
     height: 100%;
+    .react-datepicker-popper {
+        z-index: 9999;
+    }
     .react-datepicker {
         padding: 16px 32px;
         background-color: #fff;

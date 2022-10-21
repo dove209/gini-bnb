@@ -87,8 +87,9 @@ const RoomMap: React.FC = () => {
           style={{ width: "100%", height: "100%" }}
           level={7}
           disableDoubleClickZoom={true}
+          onRightClick={() => setSelectedIndx(-1)}
         >
-          <MarkerClusterer averageCenter={true} minLevel={6}>
+          <MarkerClusterer averageCenter={true} minLevel={10}>
             {data.pages[0].roomsList.map((room, index) => (
               <div key={room.id}>
 
@@ -115,7 +116,6 @@ const RoomMap: React.FC = () => {
                       lat: Number(room.latitude),
                       lng: Number(room.longitude)
                     }}
-                    zIndex={9999}
                     yAnchor={1}
                   >
                     <div className='room-map-room-card'>

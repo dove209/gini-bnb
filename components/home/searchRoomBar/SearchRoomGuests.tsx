@@ -15,6 +15,7 @@ const Container = styled.div`
   height: 70px;
   border: 2px solid transparent;
   border-radius: 12px;
+  z-index: 9999;
   cursor: pointer;
   &:hover { 
     border-color: ${palette.gray_dd};
