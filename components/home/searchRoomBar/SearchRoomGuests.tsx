@@ -15,7 +15,6 @@ const Container = styled.div`
   height: 70px;
   border: 2px solid transparent;
   border-radius: 12px;
-  z-index: 9999;
   cursor: pointer;
   &:hover { 
     border-color: ${palette.gray_dd};
@@ -49,7 +48,7 @@ const Container = styled.div`
     border-radius: 32px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
     cursor: default;
-    z-index: 1;
+    z-index: 999;
   }
 
   .search-room-bar-guests-counter-wrapper {
