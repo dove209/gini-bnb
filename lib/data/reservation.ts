@@ -13,6 +13,12 @@ const getList = () => {
     return reservations;
 }
 
+// userId의 예약 리스트 불러오기
+const getMyList = (userId: string) => {
+    const reservations = getList();
+    return reservations.filter((room) => room.userId === userId);
+}
+
 // id의 예약이 있는지 확인하기
 const exist = (reservationId: string) => {
     const reservations = getList();
@@ -30,4 +36,4 @@ const write = (reservations: StoredReservation[]) => {
     writeFileSync('database/reservations.json', JSON.stringify(reservations));
 };
 
-export default { getList, exist, find, write };
+export default { getList, getMyList, exist, find, write };

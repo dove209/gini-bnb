@@ -6,3 +6,10 @@ export const makeReservationAPI = async (body: MakeReservationAPIBody): Promise<
     const { data } = await axios.post(`/api/reservation`, body);
     return data;
 }
+
+
+/** 나의 숙소 예약 현황 리스트 API */
+export const getMyReservationListAPI = async (userId: string) => {
+    const { data } = await axios.get(`/api/reservation?userId=${userId}`);
+    return data;
+}
