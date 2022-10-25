@@ -8,6 +8,16 @@ export const registerRoomAPI = async (body: RegisterRoomState ): Promise<StoredR
     return data;
 }
 
+/** 숙소 등록 취소 API  */
+export const removeRoomAPI = async (roomId: string): Promise<boolean> => {
+    const { data } = await axios.delete('/api/rooms', {
+        data: {
+            roomId
+        }
+    });
+    return data;
+}
+
 /** 모든 숙소 리스트 불러오기 API */
 export const getAllRoomListAPI = async (pageParam: number, type: 'list' | 'map'): Promise<infiniteQueryAllRooms> => {
     const limit = 10;
@@ -18,6 +28,12 @@ export const getAllRoomListAPI = async (pageParam: number, type: 'list' | 'map')
             type
         }
     });
+    return data;
+}
+
+/** 나의 등록 숙소 리스트 불러오기 API */
+export const getMyRoomsListAPI = async (userId: string): Promise<StoredRoomType[]> => {
+    const { data } = await axios.get(`/api/myRooms?userId=${userId}`);
     return data;
 }
 

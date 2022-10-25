@@ -6,7 +6,7 @@ import { StoredReservation } from "../../../types/reservation";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'GET') {
-        //나의 숙소 리스트 불러오기
+        //나의 숙소 에약 리스트 불러오기
         try {
             const { userId } = req.query;
             if (!userId) {
@@ -20,7 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         }
     }
     if (req.method === 'POST') {
-        // 숙소 등록하기
+        // 숙소 에약 등록하기
         try {
             const { userId, roomId, title, checkInDate, checkOutDate, adultCount, childrenCount, infantsCount } = req.body;
             if (!userId || !roomId || !title || !checkInDate || !checkOutDate || adultCount === undefined || childrenCount === undefined || infantsCount === undefined) {

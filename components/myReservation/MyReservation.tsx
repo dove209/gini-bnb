@@ -71,13 +71,13 @@ const Container = styled.div`
 `
 
 interface IProps {
-    userId: string
+    userId?: string
 }
 
 const MyReservation: React.FC<IProps> = ({ userId }) => {
     const router = useRouter();
     const queryClient = useQueryClient();
-    const { data, isLoading, isSuccess } = useGetMyReservation(userId);
+    const { data, isLoading, isSuccess } = useGetMyReservation(userId as string);
     const { mutate: cancelReservationMutate } = useCancelReservation();
 
     const onClickCard = (roomId: string) => {
@@ -91,7 +91,7 @@ const MyReservation: React.FC<IProps> = ({ userId }) => {
             onSuccess: (data) => {
                 if (data) {
                     alert('숙소 예약 취소가 성공하였습니다.');
-                    queryClient.invalidateQueries(queryCache.myReservation(userId))
+                    queryClient.invalidateQueries(queryCache.myReservation(userId as string))
                 }
             },
             onError: (error) => {

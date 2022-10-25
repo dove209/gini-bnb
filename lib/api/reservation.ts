@@ -19,7 +19,7 @@ export const makeReservationAPI = async (body: MakeReservationAPIBody): Promise<
 export const cancelReservationAPI = async (roomId: string): Promise<boolean> => {
      const { data } = await axios.delete(`/api/reservation`, {
         data: {
-            roomId: roomId
+            roomId
         }
     });
     return data;

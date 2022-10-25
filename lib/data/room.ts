@@ -15,6 +15,16 @@ const getList = () => {
     return rooms;
 }
 
+
+/**
+ * userId의 등록 숙소 리스트 불러오기
+ */
+const getMyList = (userId: string) => {
+    const rooms = getList();
+    return rooms.filter((room) => room.hostId === userId);
+}
+
+
 /**
  * id의 숙소가 있는지 확인
  */
@@ -38,4 +48,4 @@ const write = (rooms: StoredRoomType[]) => {
     writeFileSync('database/rooms.json', JSON.stringify(rooms));
 };
 
-export default { getList, existId, find, write };
+export default { getList, getMyList, existId, find, write };
