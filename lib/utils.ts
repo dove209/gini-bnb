@@ -21,3 +21,20 @@ export const makeMoneyString = (input: string) => {
     const numberPrice = Number(input).toLocaleString('ko-KR');
     return numberPrice;
 }
+
+
+/** 날짜 포맷 변경 */
+export const makeDateFormat = (input: string, isFull: boolean = true) => {
+    const date = new Date(Date.parse(input));
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hour = date.getHours();
+    const min = date.getMinutes();
+    const sec = date.getSeconds();
+    if (isFull) {
+        return `${year}-${month}-${day} ${hour}:${min}:${sec}`;
+    } else {
+        return `${year}년 ${month}월 ${day}일`;
+    }    
+}

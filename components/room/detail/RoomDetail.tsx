@@ -112,8 +112,6 @@ interface IProps {
 
 const RoomDetail: React.FC<IProps> = ({ roomId }) => {
   const { data: room, isSuccess, isLoading } = useRoom(roomId);
-
-  console.log(room)
   if (isSuccess) {
     return (
       <Container>

@@ -2,6 +2,7 @@
 export type MakeReservationAPIBody = {
     userId: string;
     roomId: string;
+    title: string;
     checkInDate: string;
     checkOutDate: string;
     adultCount: number;

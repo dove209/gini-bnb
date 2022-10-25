@@ -202,6 +202,7 @@ const RoomDetailReservation: React.FC<IProps> = ({ room }) => {
       const reservationBody: MakeReservationAPIBody = {
         userId: session!.user.id,
         roomId: room!.id,
+        title: room.title,
         checkInDate: startDate!.toISOString(),
         checkOutDate: endDate!.toISOString(),
         adultCount,
