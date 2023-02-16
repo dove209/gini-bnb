@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
@@ -32,7 +33,7 @@ const ObserverDIV = styled.div`
 
 const RoomList: React.FC = () => {
   const [ref, inView] = useInView();
-  const { data, isSuccess, isFetching, fetchNextPage, hasNextPage } = useAllRooms('list');
+  const { data, fetchNextPage, hasNextPage } = useAllRooms('list');
 
   useEffect(() => {
     if (hasNextPage && inView) {
@@ -40,29 +41,22 @@ const RoomList: React.FC = () => {
     }
   }, [inView])
 
+  return (
+    <>
+      <Container>
 
-  if (isSuccess) {
-    return (
-      <>
-        <Container>
+        {data?.pages.map((page) => (
+          page.roomsList.map((room) =>
+            <li className='room-list-room-card' key={room.id} >
+              <RoomCard room={room} />
+            </li>
+          )
+        ))}
 
-          {data.pages.map((page) => (
-            page.roomsList.map((room) =>
-              <li className='room-list-room-card' key={room.id} >
-                <RoomCard room={room} />
-              </li>
-            )
-          ))}
-
-        </Container>
-        <ObserverDIV ref={ref}></ObserverDIV>
-      </>
-    )
-  }
-  if (isFetching) {
-    return <div>로딩중...</div>
-  }
-  return <></>
+      </Container>
+      <ObserverDIV ref={ref}></ObserverDIV>
+    </>
+  )
 }
 
 export default RoomList

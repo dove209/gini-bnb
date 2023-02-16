@@ -72,71 +72,61 @@ const Container = styled.ul`
   `;
 
 const RoomMap: React.FC = () => {
-  const { data, isSuccess, isFetching } = useAllRooms('map');
+  const { data } = useAllRooms('map');
   const [selectedIdx, setSelectedIndx] = useState(-1);
+  return (
+    <Container>
+      <Map
+        center={{
+          lat: Number(data?.pages[0].roomsList[0].latitude),
+          lng: Number(data?.pages[0].roomsList[0].longitude)
+        }}
+        style={{ width: "100%", height: "100%" }}
+        level={7}
+        disableDoubleClickZoom={true}
+        onRightClick={() => setSelectedIndx(-1)}
+      >
+        <MarkerClusterer averageCenter={true} minLevel={10}>
+          {data?.pages[0].roomsList.map((room, index) => (
+            <div key={room.id}>
 
+              {/* 가격 오버레이 */}
+              <CustomOverlayMap
+                position={{
+                  lat: Number(room.latitude),
+                  lng: Number(room.longitude)
+                }}
+                yAnchor={-0.3}
+              >
+                <div
+                  className={index === selectedIdx ? 'room-map-price-overlay active' : 'room-map-price-overlay'}
+                  onClick={() => setSelectedIndx(index)}
+                >
+                  ￦{makeMoneyString(String(room.price))}
+                </div>
+              </CustomOverlayMap>
 
-  if (isSuccess) {
-    return (
-      <Container>
-        <Map
-          center={{
-            lat: Number(data.pages[0].roomsList[0].latitude),
-            lng: Number(data.pages[0].roomsList[0].longitude)
-          }}
-          style={{ width: "100%", height: "100%" }}
-          level={7}
-          disableDoubleClickZoom={true}
-          onRightClick={() => setSelectedIndx(-1)}
-        >
-          <MarkerClusterer averageCenter={true} minLevel={10}>
-            {data.pages[0].roomsList.map((room, index) => (
-              <div key={room.id}>
-
-                {/* 가격 오버레이 */}
+              {/* 숙소 카드 (in Map) */}
+              {index === selectedIdx && (
                 <CustomOverlayMap
                   position={{
                     lat: Number(room.latitude),
                     lng: Number(room.longitude)
                   }}
-                  yAnchor={-0.3}
+                  yAnchor={1}
                 >
-                  <div 
-                    className={index === selectedIdx ? 'room-map-price-overlay active' : 'room-map-price-overlay'}
-                    onClick={() => setSelectedIndx(index)}
-                  >
-                    ￦{makeMoneyString(String(room.price))}
+                  <div className='room-map-room-card'>
+                    <div className='close-overlay' onClick={() => setSelectedIndx(-1)}>X</div>
+                    <RoomCard room={room} />
                   </div>
                 </CustomOverlayMap>
-
-                {/* 숙소 카드 (in Map) */}
-                {index === selectedIdx && (
-                  <CustomOverlayMap
-                    position={{
-                      lat: Number(room.latitude),
-                      lng: Number(room.longitude)
-                    }}
-                    yAnchor={1}
-                  >
-                    <div className='room-map-room-card'>
-                      <div className='close-overlay' onClick={() => setSelectedIndx(-1)}>X</div>
-                      <RoomCard room={room} />
-                    </div>
-                  </CustomOverlayMap>
-                )}
-              </div>
-            ))}
-          </MarkerClusterer>
-
-        </Map>
-      </Container>
-    )
-  }
-  if (isFetching) {
-    return <div>로딩중...</div>
-  }
-  return <></>
-
+              )}
+            </div>
+          ))}
+        </MarkerClusterer>
+      </Map>
+    </Container>
+  )
 }
 
 export default RoomMap

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
 
@@ -49,8 +49,10 @@ const Home = () => {
     <Container>
         <p className="home-search-bar-label">숙소</p>
         <SearchRoomBar />
-        {type === 'list' && <RoomList />} 
-        {type === 'map' && <RoomMap />}
+        <Suspense fallback={<div>로딩중...</div>}>
+          {type === 'list' && <RoomList />} 
+          {type === 'map' && <RoomMap />}
+        </Suspense>
         <div className="list-map-toggle" onClick={toggleType}>
           {type === 'list' ? '지도 표시하기' : '목록 보기'}
         </div>

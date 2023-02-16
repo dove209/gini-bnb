@@ -13,6 +13,7 @@ export const useAllRooms = (type: 'list' | 'map' ) => {
             if (lastPage.hasMore) return lastPage.nextPage;
             return undefined;
         },
+        suspense: true,
     });
 }
 
