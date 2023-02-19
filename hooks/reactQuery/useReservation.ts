@@ -8,7 +8,7 @@ import { StoredReservation } from '../../types/reservation';
 export const useGetMyReservation = (userId: string) => {
     return useQuery<StoredReservation[], AxiosError>(queryCache.myReservation(userId), () => reservationAPI.getMyReservationListAPI(userId), {
         staleTime: 30 * 1000,
-        enabled: !!userId,   
+        enabled: !!userId,
     })
 }
 

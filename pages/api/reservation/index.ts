@@ -13,10 +13,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 return res.status(400).send('필수 값이 없습니다.')
             }
             const myReservations = Data.reservation.getMyList(userId as string);
-            return res.status(200).send(myReservations);
+                
+            res.status(200).send(myReservations); 
 
         } catch (error) {
             console.log(error)
+            return res.status(500).send(error);
         }
     }
     if (req.method === 'POST') {
@@ -41,6 +43,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         } catch (error) {
             console.log(error)
+            return res.status(500).send(error);
         }
     }
     if (req.method === 'DELETE') {
@@ -60,6 +63,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         } catch (error) {
             console.log(error)
+            return res.status(500).send(error);
         }
     }
     return res.status(405).end();

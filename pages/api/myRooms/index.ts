@@ -15,6 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(200).send(myRooms);
         } catch (error) {
             console.log(error)
+            return res.status(500).send(error);
         }
     }
     return res.status(405).end();

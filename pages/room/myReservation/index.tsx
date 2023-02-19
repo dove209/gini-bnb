@@ -10,7 +10,9 @@ import queryCache from '../../../queryCache';
 import MyReservation from '../../../components/myReservation/MyReservation';
 
 const index: NextPage = ({ userId }: { userId?: string }) => {
-  return <MyReservation userId={userId} />
+  return (
+    <MyReservation userId={userId} />
+  ) 
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {

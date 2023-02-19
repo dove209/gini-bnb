@@ -32,7 +32,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             }
         } catch (e) {
             console.log(e)
-            return res.send(e);
+            return res.status(500).send(e);
         }
     }
     return res.end();

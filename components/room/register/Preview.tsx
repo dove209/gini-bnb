@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useLayoutEffect, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import palette from '../../../styles/palette';

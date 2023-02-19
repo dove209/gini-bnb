@@ -36,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(200).send(limitedRooms);
         } catch (e) {
             console.log(e)
-            return res.send(e);
+            return res.status(500).send(e);
         }
     }
 
@@ -74,7 +74,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(200).send(true)
 
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            return res.status(500).send(error);
         }
     }
 

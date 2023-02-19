@@ -14,6 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(404).send('해당 숙소가 없습니다.')
         } catch (error) {
             console.log(error);
+            return res.status(500).send(error);
         }
     }
     

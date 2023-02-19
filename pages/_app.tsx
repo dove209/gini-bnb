@@ -9,7 +9,18 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Header from "../components/Header";
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 1,
+        suspense: true,
+        useErrorBoundary: true,
+      },
+      mutations: {
+        useErrorBoundary: true
+      }
+    }
+  }));
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>

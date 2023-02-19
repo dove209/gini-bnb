@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useLayoutEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import palette from '../../../styles/palette';
@@ -93,11 +94,11 @@ const Footer: React.FC<IProps> = ({ step = 1, prevHref = '', isValid = false, ch
     const router = useRouter();
     const { prevStep, curStep, setPrevStep, setCurStep } = useRegisterStepStore();
     useLayoutEffect(() => {
-            setCurStep(step);
+        setCurStep(step);
         return () => {
             setPrevStep(curStep);
         }
-    },[])
+    },[step, curStep])
 
     return (
         <Container prevStep={prevStep} curStep={curStep} isValid={isValid} >

@@ -77,7 +77,7 @@ interface IProps {
 const MyReservation: React.FC<IProps> = ({ userId }) => {
     const router = useRouter();
     const queryClient = useQueryClient();
-    const { data, isLoading, isSuccess } = useGetMyReservation(userId as string);
+    const { data, isSuccess } = useGetMyReservation(userId as string);
     const { mutate: cancelReservationMutate } = useCancelReservation();
 
     const onClickCard = (roomId: string) => {
@@ -100,7 +100,6 @@ const MyReservation: React.FC<IProps> = ({ userId }) => {
             }
         })
     }
-
 
     if (isSuccess) {
         if (data.length !== 0) {
@@ -132,9 +131,8 @@ const MyReservation: React.FC<IProps> = ({ userId }) => {
             )
 
         }
-
     }
-    return <></>
+    return null;
 }
 
 export default MyReservation

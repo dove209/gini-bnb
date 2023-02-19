@@ -44,7 +44,6 @@ const RoomList: React.FC = () => {
   return (
     <>
       <Container>
-
         {data?.pages.map((page) => (
           page.roomsList.map((room) =>
             <li className='room-list-room-card' key={room.id} >
@@ -52,7 +51,6 @@ const RoomList: React.FC = () => {
             </li>
           )
         ))}
-
       </Container>
       <ObserverDIV ref={ref}></ObserverDIV>
     </>

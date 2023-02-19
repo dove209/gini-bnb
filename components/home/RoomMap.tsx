@@ -78,8 +78,8 @@ const RoomMap: React.FC = () => {
     <Container>
       <Map
         center={{
-          lat: Number(data?.pages[0].roomsList[0].latitude),
-          lng: Number(data?.pages[0].roomsList[0].longitude)
+          lat: Number(data?.pages[0]?.roomsList[0]?.latitude),
+          lng: Number(data?.pages[0]?.roomsList[0]?.longitude)
         }}
         style={{ width: "100%", height: "100%" }}
         level={7}

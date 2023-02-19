@@ -49,7 +49,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/styled-components", "npm:5.1.26"],\
             ["@types/yup", "npm:0.29.14"],\
             ["axios", "npm:0.27.2"],\
-            ["babel-plugin-inline-react-svg", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:2.0.1"],\
             ["babel-plugin-styled-components", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:2.0.7"],\
             ["bcryptjs", "npm:2.4.3"],\
             ["date-fns", "npm:2.29.3"],\
@@ -5034,33 +5033,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["babel-plugin-inline-react-svg", [\
-        ["npm:2.0.1", {\
-          "packageLocation": "./.yarn/cache/babel-plugin-inline-react-svg-npm-2.0.1-829c5225c7-aa41d72283.zip/node_modules/babel-plugin-inline-react-svg/",\
-          "packageDependencies": [\
-            ["babel-plugin-inline-react-svg", "npm:2.0.1"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:2.0.1", {\
-          "packageLocation": "./.yarn/__virtual__/babel-plugin-inline-react-svg-virtual-754c9b7c94/0/cache/babel-plugin-inline-react-svg-npm-2.0.1-829c5225c7-aa41d72283.zip/node_modules/babel-plugin-inline-react-svg/",\
-          "packageDependencies": [\
-            ["babel-plugin-inline-react-svg", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:2.0.1"],\
-            ["@babel/core", null],\
-            ["@babel/helper-plugin-utils", "npm:7.19.0"],\
-            ["@babel/parser", "npm:7.19.0"],\
-            ["@types/babel__core", null],\
-            ["lodash.isplainobject", "npm:4.0.6"],\
-            ["resolve", "patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=07638b"],\
-            ["svgo", "npm:2.8.0"]\
-          ],\
-          "packagePeers": [\
-            "@babel/core",\
-            "@types/babel__core"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["babel-plugin-polyfill-corejs2", [\
         ["npm:0.3.3", {\
           "packageLocation": "./.yarn/cache/babel-plugin-polyfill-corejs2-npm-0.3.3-374b04c5be-7db3044993.zip/node_modules/babel-plugin-polyfill-corejs2/",\
@@ -6669,7 +6641,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/styled-components", "npm:5.1.26"],\
             ["@types/yup", "npm:0.29.14"],\
             ["axios", "npm:0.27.2"],\
-            ["babel-plugin-inline-react-svg", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:2.0.1"],\
             ["babel-plugin-styled-components", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:2.0.7"],\
             ["bcryptjs", "npm:2.4.3"],\
             ["date-fns", "npm:2.29.3"],\
