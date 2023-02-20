@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
-import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
 const Container = styled.div`
     position: absolute;
@@ -21,7 +21,7 @@ const Container = styled.div`
 
     button {
         margin-top: 16px;
-        
+
     }
 `
 
@@ -30,13 +30,7 @@ interface IProps {
     children: ReactNode;
 }
 
-interface IFallbackProps {
-    error: any;
-    resetErrorBoundary: any
-}
-
-
-const ErrorFallback: React.FC<IFallbackProps> = ({ error, resetErrorBoundary }) => {
+const ErrorFallback: React.FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
     return (
         <Container>
             <h1>에러 발생</h1>
