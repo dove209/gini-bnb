@@ -1,11 +1,12 @@
 import React, { useState, Suspense } from 'react';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
-import ErrorBoundary from '../common/ErrorBoundary';
+import MyErrorBoundary from '../common/MyErrorBoundary';
 
 import SearchRoomBar from './searchRoomBar/SearchRoomBar';
 import RoomList from './RoomList';
 import RoomMap from './RoomMap';
+
 
 
 const Container = styled.div`
@@ -50,10 +51,10 @@ const Home = () => {
         <p className="home-search-bar-label">숙소</p>
         <SearchRoomBar />
         <Suspense fallback={<div className='loading-text'>불러오는중...</div>}>
-          <ErrorBoundary>
+          <MyErrorBoundary>
             {type === 'list' && <RoomList />} 
             {type === 'map' && <RoomMap />}
-          </ErrorBoundary>
+          </MyErrorBoundary>
         </Suspense>
         <div className="list-map-toggle" onClick={toggleType}>
           {type === 'list' ? '지도 표시하기' : '목록 보기'}

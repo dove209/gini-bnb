@@ -14,7 +14,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       queries: {
         retry: 1,
         suspense: true,
-        useErrorBoundary: true,
+        useErrorBoundary: true, // 모든 에러가 throw 되로독
       },
       mutations: {
         useErrorBoundary: true

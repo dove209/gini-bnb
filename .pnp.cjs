@@ -63,6 +63,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-datepicker", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:4.8.0"],\
             ["react-dom", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:18.2.0"],\
+            ["react-error-boundary", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:3.1.4"],\
             ["react-intersection-observer", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:9.4.0"],\
             ["react-kakao-maps-sdk", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:1.1.3"],\
             ["react-outside-click-handler", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:1.3.0"],\
@@ -6655,6 +6656,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-datepicker", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:4.8.0"],\
             ["react-dom", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:18.2.0"],\
+            ["react-error-boundary", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:3.1.4"],\
             ["react-intersection-observer", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:9.4.0"],\
             ["react-kakao-maps-sdk", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:1.1.3"],\
             ["react-outside-click-handler", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:1.3.0"],\
@@ -8268,6 +8270,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["loose-envify", "npm:1.4.0"],\
             ["react", "npm:18.2.0"],\
             ["scheduler", "npm:0.23.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-error-boundary", [\
+        ["npm:3.1.4", {\
+          "packageLocation": "./.yarn/cache/react-error-boundary-npm-3.1.4-2310dba89e-f36270a5d7.zip/node_modules/react-error-boundary/",\
+          "packageDependencies": [\
+            ["react-error-boundary", "npm:3.1.4"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:3.1.4", {\
+          "packageLocation": "./.yarn/__virtual__/react-error-boundary-virtual-14d8c272fb/0/cache/react-error-boundary-npm-3.1.4-2310dba89e-f36270a5d7.zip/node_modules/react-error-boundary/",\
+          "packageDependencies": [\
+            ["react-error-boundary", "virtual:ff6254f28e6176585ef5a065acd03e417d6c8e449cc7d23ec83858691b6704b33b5f4077f0556925dd5b2fab7608f120827d8c766918ffe114666d9506f520d6#npm:3.1.4"],\
+            ["@babel/runtime", "npm:7.20.13"],\
+            ["@types/react", "npm:18.0.18"],\
+            ["react", "npm:18.2.0"]\
           ],\
           "packagePeers": [\
             "@types/react",\
