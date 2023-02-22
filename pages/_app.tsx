@@ -14,7 +14,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       queries: {
         retry: 1,
         suspense: true,
-        useErrorBoundary: true, // 모든 에러가 throw 되로독
+        useErrorBoundary: true, // suspense 옵션이 true인 경우에 useErrorBoundary의 기본값이 true로 설정된다.(모든 에러가 throw 되도록)
       },
       mutations: {
         useErrorBoundary: true

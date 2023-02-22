@@ -88,6 +88,7 @@ const MyReservation: React.FC<IProps> = ({ userId }) => {
     const cancelReservation = (e: React.MouseEvent<HTMLButtonElement>, roomId: string) => {
         e.stopPropagation()
         cancelReservationMutate(roomId, {
+            // mutate 의 추가 콜백은 useMutation 추가 콜백 다음에 실행
             onSuccess: (data) => {
                 if (data) {
                     alert('숙소 예약 취소가 성공하였습니다.');

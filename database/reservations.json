@@ -1,28 +1,15 @@
 [
   {
-    "id": "a500b71-672c-1043-ce87-edd3e06bada",
-    "userId": "2427353522",
-    "roomId": "60acce3-2678-6d68-f07d-cd657f0070e",
-    "title": "💙서울시티뷰 맛집💙빔프로젝트와 멋진 야경이 있는 숙소 서울역 도보 2분거리",
-    "checkInDate": "2022-10-25T15:00:00.000Z",
-    "checkOutDate": "2022-11-03T15:00:00.000Z",
-    "adultCount": 3,
-    "childrenCount": 1,
-    "infantsCount": 1,
-    "createdAt": "2022-10-25T03:05:14.083Z",
-    "updatedAt": "2022-10-25T03:05:14.083Z"
-  },
-  {
-    "id": "58f68af-cd40-fbf3-770a-e6ac157cc8",
-    "userId": "2427353522",
-    "roomId": "4d5d5d3-6106-6b7-a88b-de6824d56e0b",
-    "title": "해피 바이러스 휴게소(Happy Virus Shelter)",
-    "checkInDate": "2022-11-03T15:00:00.000Z",
-    "checkOutDate": "2022-11-05T15:00:00.000Z",
+    "id": "48dbfd0-a242-65e-a842-c65c34ac2061",
+    "userId": "FgsGS6gVbXUqBH4zq70m1KNC8mn7RIqsbNBUzomqfNc",
+    "roomId": "35205-54ce-4efa-00b6-58bd42872c26",
+    "title": "도심이 내려다 보이는 현대적 아파트",
+    "checkInDate": "2023-02-22T15:00:00.000Z",
+    "checkOutDate": "2023-02-28T15:00:00.000Z",
     "adultCount": 2,
     "childrenCount": 0,
     "infantsCount": 0,
-    "createdAt": "2022-10-25T03:05:48.516Z",
-    "updatedAt": "2022-10-25T03:05:48.516Z"
+    "createdAt": "2023-02-22T03:54:06.213Z",
+    "updatedAt": "2023-02-22T03:54:06.213Z"
   }
 ]

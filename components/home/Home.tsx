@@ -50,12 +50,12 @@ const Home = () => {
     <Container>
         <p className="home-search-bar-label">숙소</p>
         <SearchRoomBar />
-        <Suspense fallback={<div className='loading-text'>불러오는중...</div>}>
           <MyErrorBoundary>
-            {type === 'list' && <RoomList />} 
-            {type === 'map' && <RoomMap />}
+            <Suspense fallback={<div className='loading-text'>불러오는중...</div>}>
+                {type === 'list' && <RoomList />} 
+                {type === 'map' && <RoomMap />}
+            </Suspense>
           </MyErrorBoundary>
-        </Suspense>
         <div className="list-map-toggle" onClick={toggleType}>
           {type === 'list' ? '지도 표시하기' : '목록 보기'}
         </div>
