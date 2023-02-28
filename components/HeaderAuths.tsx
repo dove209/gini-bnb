@@ -69,4 +69,4 @@ const HeaderAuths: React.FC = () => {
   );
 };
 
-export default React.memo(HeaderAuths);
+export default HeaderAuths;
