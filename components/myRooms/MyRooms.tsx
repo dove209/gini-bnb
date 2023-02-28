@@ -98,7 +98,9 @@ interface IProps {
 const MyRooms: React.FC<IProps> = ({ userId }) => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { data, isSuccess } = useMyRooms(userId as string);
+  const { data, isSuccess } = useMyRooms(userId as string, {
+    staleTime: 30 * 1000,
+  });
   const { mutate: removeRoomMutate } = useRemoveRoom();
 
   const onClickCard = (roomId: string) => {
